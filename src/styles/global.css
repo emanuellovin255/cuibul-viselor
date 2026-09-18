@@ -18,7 +18,7 @@
   --color-brass-300: #dcc293;
   --color-brass-400: #c9a66b;
   --color-brass-500: #b38d52;
-  --color-brass-600: #926f3b;
+  --color-brass-600: #7a5a2b;
   --color-clay-500: #a14e33;
   --color-ink: #17221c;
   --color-muted: #5d6b62;
@@ -148,6 +148,31 @@
   .italic-serif {
     font-style: italic;
     font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  }
+
+  .logo-word {
+    font-variation-settings: 'opsz' 72, 'SOFT' 50;
+  }
+  .soft-serif {
+    font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  }
+
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    background: var(--color-cream-50);
+    color: var(--color-forest-900);
+    font-size: 0.875rem;
+    font-weight: 700;
+    transform: translateY(-200%);
+    transition: transform 0.3s ease;
+  }
+  .skip-link:focus {
+    transform: none;
   }
 
   .lead {

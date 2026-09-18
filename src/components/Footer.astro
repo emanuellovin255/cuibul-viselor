@@ -25,7 +25,7 @@ const year = new Date().getFullYear();
         <h3 class="eyebrow eyebrow-light font-sans">Contact</h3>
         <ul class="mt-6 space-y-4 text-[0.95rem]">
           <li>
-            <a href={mapsLink} target="_blank" rel="noopener" class="group flex gap-3 text-cream-100/80 transition-colors hover:text-cream-50">
+            <a href={mapsLink} target="_blank" rel="noopener noreferrer" class="group flex gap-3 text-cream-100/80 transition-colors hover:text-cream-50">
               <MapPin size={18} stroke-width={1.5} class="mt-1 shrink-0 text-brass-400" />
               <span>{site.address.street}<br />{site.address.city}, {site.address.county}<br />{site.address.zip}</span>
             </a>
@@ -74,24 +74,24 @@ const year = new Date().getFullYear();
             ))
           }
         </ul>
-        <p class="mt-3 text-xs text-cream-100/50">Prețuri pe persoană.</p>
+        <p class="mt-3 text-xs text-cream-100/65">Prețuri pe persoană.</p>
         <div class="mt-8 grid grid-cols-2 gap-4 text-sm">
           <div>
-            <p class="text-cream-100/50">Check-in</p>
+            <p class="text-cream-100/65">Check-in</p>
             <p class="font-serif text-lg text-cream-50">{site.checkIn}</p>
           </div>
           <div>
-            <p class="text-cream-100/50">Check-out</p>
+            <p class="text-cream-100/65">Check-out</p>
             <p class="font-serif text-lg text-cream-50">{site.checkOut}</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="mt-20 flex flex-col items-start justify-between gap-6 border-t border-cream-100/10 py-8 text-xs text-cream-100/50 md:flex-row md:items-center">
+    <div class="mt-20 flex flex-col items-start justify-between gap-6 border-t border-cream-100/10 py-8 text-xs text-cream-100/65 md:flex-row md:items-center">
       <p>© {year} {site.name} – {site.alias}. Toate drepturile rezervate.</p>
       <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-        <a href={site.bookingUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:text-cream-50">
+        <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:text-cream-50">
           Booking.com <ArrowUpRight size={13} />
         </a>
         <a href={url('/rezervare')} class="hover:text-cream-50">Condiții de rezervare</a>
@@ -100,7 +100,7 @@ const year = new Date().getFullYear();
   </div>
 
   <div aria-hidden="true" class="pointer-events-none select-none overflow-hidden">
-    <p class="whitespace-nowrap text-center font-serif text-[17vw] leading-[0.8] tracking-[-0.05em] text-cream-100/[0.05]" style="font-variation-settings: 'opsz' 144, 'SOFT' 100;">
+    <p class="whitespace-nowrap text-center font-serif text-[17vw] leading-[0.8] tracking-[-0.05em] text-cream-100/[0.05] soft-serif">
       Cuibul <span class="italic-serif">Viselor</span>
     </p>
   </div>

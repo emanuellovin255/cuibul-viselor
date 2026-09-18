@@ -2,6 +2,17 @@
 import { rating, ratingCategories, reviews, formatScore } from '../data/reviews';
 import { site } from '../data/site';
 import { ArrowUpRight } from '@lucide/astro';
+
+// Clase statice (Tailwind nu vede clase construite dinamic)
+const barWidth: Record<number, string> = {
+  10: 'w-full',
+  9.5: 'w-[95%]',
+  9: 'w-[90%]',
+  8.5: 'w-[85%]',
+  8: 'w-[80%]',
+  7.5: 'w-[75%]',
+  7: 'w-[70%]',
+};
 ---
 
 <section class="relative overflow-hidden bg-cream-50 py-28 md:py-40">
@@ -28,14 +39,14 @@ import { ArrowUpRight } from '@lucide/astro';
                   <span class="font-serif text-lg">{formatScore(c.score)}</span>
                 </div>
                 <div class="mt-2 h-[3px] overflow-hidden rounded-full bg-forest-900/10">
-                  <div class="h-full rounded-full bg-gradient-to-r from-river-500 to-brass-400" style={`width:${c.score * 10}%`} data-bar />
+                  <div class:list={['h-full rounded-full bg-gradient-to-r from-river-500 to-brass-400', barWidth[c.score] ?? 'w-full']} data-bar />
                 </div>
               </li>
             ))
           }
         </ul>
 
-        <a href={site.bookingUrl} target="_blank" rel="noopener" class="arrow-link mt-10 text-forest-800" data-reveal>
+        <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer" class="arrow-link mt-10 text-forest-800" data-reveal>
           Toate evaluările pe Booking.com <ArrowUpRight size={16} />
         </a>
       </div>

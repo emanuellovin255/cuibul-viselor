@@ -85,28 +85,11 @@ const jsonLd = {
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <script is:inline>
-      (function () {
-        var root = document.documentElement;
-        root.classList.remove('no-js');
-        root.classList.add('js');
-        try {
-          if (sessionStorage.getItem('cv-intro')) root.classList.add('no-intro');
-          else sessionStorage.setItem('cv-intro', '1');
-        } catch (e) {
-          root.classList.add('no-intro');
-        }
-        setTimeout(function () {
-          if (!window.__motionReady) root.classList.add('motion-fallback');
-        }, 3000);
-      })();
-    </script>
+    <script is:inline src={url('/init.js')}></script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
-    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-cream-50 focus:px-5 focus:py-3 focus:text-sm">
-      Sari la conținut
-    </a>
+    <a href="#main" class="skip-link">Sari la conținut</a>
 
     {
       intro && (
@@ -121,7 +104,7 @@ const jsonLd = {
     }
 
     <Header />
-    <main id="main">
+    <main id="main" tabindex="-1">
       <slot />
     </main>
     <Footer />

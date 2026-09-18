@@ -40,7 +40,7 @@ const amenities = [...new Set([...room.features, ...commonAmenities])];
     <div class="absolute inset-0 bg-gradient-to-r from-forest-950/50 to-transparent"></div>
 
     <div class="container-x relative pb-14 pt-40 md:pb-20" data-hero-fade>
-      <nav class="mb-8 flex flex-wrap items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/60" aria-label="Breadcrumb">
+      <nav class="mb-8 flex flex-wrap items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/75" aria-label="Breadcrumb">
         <a href={url('/')} class="hover:text-white">Acasă</a>
         <span aria-hidden="true">/</span>
         <a href={url('/camere')} class="hover:text-white">Camere</a>
@@ -116,9 +116,9 @@ const amenities = [...new Set([...room.features, ...commonAmenities])];
       <!-- CARD REZERVARE -->
       <aside class="lg:col-span-4 lg:col-start-9">
         <div class="sticky top-28 rounded-[1.75rem] bg-forest-900 p-8 text-cream-50 md:p-10" data-reveal>
-          <p class="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-cream-100/60">Tarif / noapte</p>
+          <p class="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-cream-100/70">Tarif / noapte</p>
           <p class="mt-2 font-serif text-6xl leading-none text-brass-300">{room.price}<span class="ml-2 text-2xl text-cream-50">RON</span></p>
-          <p class="mt-4 text-sm text-cream-100/60">Pe cameră, orientativ. Confirmăm tariful la rezervare.</p>
+          <p class="mt-4 text-sm text-cream-100/70">Pe cameră, orientativ. Confirmăm tariful la rezervare.</p>
           <div class="my-8 h-px bg-cream-100/15"></div>
           <ul class="space-y-3 text-sm text-cream-100/80">
             <li class="flex justify-between"><span>Check-in</span><span class="font-semibold text-cream-50">{site.checkIn}</span></li>
