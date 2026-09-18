@@ -1,0 +1,192 @@
+---
+import { Phone, ArrowUpRight } from '@lucide/astro';
+import Logo from './Logo.astro';
+import { nav, site, fullAddress } from '../data/site';
+import { url, isActive } from '../lib/url';
+
+const path = Astro.url.pathname;
+---
+
+<header data-header class="site-header fixed inset-x-0 top-0 z-50 text-white">
+  <div class="header-bg absolute inset-0 -z-10"></div>
+  <div class="container-x flex h-[var(--header-h)] items-center justify-between gap-6">
+    <Logo id="logo-header" />
+
+    <nav class="hidden items-center gap-9 text-[0.74rem] font-semibold uppercase tracking-[0.18em] lg:flex" aria-label="Meniu principal">
+      {
+        nav.map((item) => (
+          <a
+            href={url(item.href)}
+            class="link-underline py-1"
+            aria-current={isActive(path, url(item.href)) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <a href={site.phoneHref} class="hidden items-center gap-2 text-sm font-semibold tracking-wide xl:inline-flex">
+        <Phone size={15} stroke-width={1.8} />
+        {site.phone}
+      </a>
+      <a href={url('/rezervare')} class="btn btn-brass hidden !px-6 !py-3.5 sm:inline-flex">Rezervă</a>
+      <button
+        type="button"
+        data-menu-toggle
+        class="menu-toggle relative flex h-11 w-11 items-center justify-center rounded-full border border-current/30 lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Deschide meniul"
+      >
+        <span class="menu-line absolute h-px w-5 bg-current"></span>
+        <span class="menu-line absolute h-px w-5 bg-current"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div
+  id="mobile-menu"
+  data-mobile-menu
+  class="mobile-menu fixed inset-0 z-40 flex flex-col bg-forest-900 text-cream-50 lg:hidden"
+  aria-hidden="true"
+>
+  <div class="container-x flex flex-1 flex-col justify-between pb-10 pt-[calc(var(--header-h)+2rem)]">
+    <nav class="flex flex-col" aria-label="Meniu mobil">
+      <a href={url('/')} class="mobile-link font-serif text-[2.6rem] leading-[1.15]">Acasă</a>
+      {
+        nav.map((item) => (
+          <a
+            href={url(item.href)}
+            class="mobile-link font-serif text-[2.6rem] leading-[1.15]"
+            aria-current={isActive(path, url(item.href)) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="mobile-link mt-10 space-y-5 text-sm">
+      <div class="hairline"></div>
+      <a href={site.phoneHref} class="flex items-center gap-3 text-lg font-semibold">
+        <Phone size={18} stroke-width={1.6} />
+        {site.phone}
+      </a>
+      <p class="text-cream-100/70">{fullAddress}</p>
+      <a href={url('/rezervare')} class="btn btn-brass w-full">
+        Cere o ofertă
+        <ArrowUpRight size={16} />
+      </a>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  .site-header {
+    transition:
+      color 0.5s var(--ease-out-expo),
+      transform 0.6s var(--ease-out-expo);
+  }
+  .site-header .header-bg {
+    opacity: 0;
+    background: rgb(252 250 245 / 0.86);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border-bottom: 1px solid rgb(23 34 28 / 0.07);
+    transition: opacity 0.5s var(--ease-out-expo);
+  }
+  .site-header.is-scrolled {
+    color: var(--color-ink);
+  }
+  .site-header.is-scrolled .header-bg {
+    opacity: 1;
+  }
+  .site-header.is-hidden {
+    transform: translateY(-100%);
+  }
+  .menu-open .site-header {
+    color: var(--color-cream-50);
+    transform: none;
+  }
+  .menu-open .site-header .header-bg {
+    opacity: 0;
+  }
+  .menu-line {
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+  .menu-line:first-child {
+    transform: translateY(-3.5px);
+  }
+  .menu-line:last-child {
+    transform: translateY(3.5px);
+  }
+  .menu-open .menu-line:first-child {
+    transform: rotate(45deg);
+  }
+  .menu-open .menu-line:last-child {
+    transform: rotate(-45deg);
+  }
+  .mobile-menu {
+    clip-path: inset(0 0 100% 0);
+    visibility: hidden;
+    transition:
+      clip-path 0.8s var(--ease-in-out-quart),
+      visibility 0s linear 0.8s;
+  }
+  .menu-open .mobile-menu {
+    clip-path: inset(0 0 0 0);
+    visibility: visible;
+    transition:
+      clip-path 0.8s var(--ease-in-out-quart),
+      visibility 0s;
+  }
+  .mobile-link {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.8s var(--ease-out-expo);
+  }
+  .menu-open .mobile-link {
+    opacity: 1;
+    transform: none;
+  }
+  .mobile-link[aria-current='page'] {
+    color: var(--color-brass-300);
+    font-style: italic;
+  }
+  .menu-open .mobile-link:nth-child(1) { transition-delay: 0.25s; }
+  .menu-open .mobile-link:nth-child(2) { transition-delay: 0.3s; }
+  .menu-open .mobile-link:nth-child(3) { transition-delay: 0.35s; }
+  .menu-open .mobile-link:nth-child(4) { transition-delay: 0.4s; }
+  .menu-open .mobile-link:nth-child(5) { transition-delay: 0.45s; }
+  .menu-open .mobile-link:nth-child(6) { transition-delay: 0.5s; }
+  .menu-open .mobile-link:nth-child(7) { transition-delay: 0.55s; }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+
+  function setOpen(open: boolean) {
+    root.classList.toggle('menu-open', open);
+    toggle?.setAttribute('aria-expanded', String(open));
+    toggle?.setAttribute('aria-label', open ? 'Închide meniul' : 'Deschide meniul');
+    menu?.setAttribute('aria-hidden', String(!open));
+    const lenis = (window as any).__lenis;
+    if (lenis) open ? lenis.stop() : lenis.start();
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  toggle?.addEventListener('click', () => setOpen(!root.classList.contains('menu-open')));
+  menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && root.classList.contains('menu-open')) setOpen(false);
+  });
+  window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => {
+    if (e.matches) setOpen(false);
+  });
+</script>

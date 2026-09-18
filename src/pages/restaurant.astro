@@ -1,0 +1,126 @@
+---
+import { Image } from 'astro:assets';
+import { Coffee, Soup, UtensilsCrossed, Wine, Presentation, Flame } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Gallery from '../components/Gallery.astro';
+import VoucherBand from '../components/VoucherBand.astro';
+import CTASection from '../components/CTASection.astro';
+import { meals } from '../data/site';
+import { reviews } from '../data/reviews';
+import { photos, photo } from '../lib/photos';
+
+const mealIcons = [Coffee, Soup, UtensilsCrossed];
+const valentina = reviews.find((r) => r.name === 'Valentina');
+const gallery = photos('restaurant').map((src, i) => ({ src, alt: `Restaurantul La Johnny – fotografia ${i + 1}` }));
+---
+
+<BaseLayout
+  title="Restaurant La Johnny"
+  description="Restaurantul La Johnny al Pensiunii Cuibul Viselor din Băile Herculane: mic dejun 50 RON, prânz 85 RON, cină 75 RON de persoană. Bar și sală de conferințe."
+  image={photo('restaurant/02')}
+>
+  <PageHero
+    eyebrow="Restaurant & bar"
+    crumb="Restaurant"
+    title='Restaurantul <em class="italic-serif text-brass-300">La Johnny</em>'
+    subtitle="Micul dejun, prânzul și cina se servesc în restaurantul pensiunii, într-o sală luminoasă, cu ferestre mari."
+    image={photo('restaurant/02')}
+    alt="Sala restaurantului La Johnny, cu barul în fundal"
+  />
+
+  <!-- INTRO -->
+  <section class="bg-cream-100 py-24 md:py-36">
+    <div class="container-x grid items-center gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-6">
+        <SectionHeading
+          eyebrow="Mesele zilei"
+          title='Trei mese, <em class="italic-serif">fără grija gătitului</em>'
+          text="Luați masa la pensiune, fără să mai căutați un restaurant în stațiune. Dimineața, la prânz sau seara, vă așteaptă o masă pusă."
+          size="md"
+        />
+        {
+          valentina && (
+            <figure class="mt-12 border-l-2 border-brass-400 pl-6" data-reveal>
+              <blockquote class="font-serif text-2xl italic leading-snug text-forest-900">„Mâncarea delicioasă.”</blockquote>
+              <figcaption class="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-muted">
+                {valentina.name}, {valentina.country} · via Booking.com
+              </figcaption>
+            </figure>
+          )
+        }
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3 lg:col-span-6">
+        {
+          meals.map((m, i) => {
+            const Icon = mealIcons[i];
+            return (
+              <div
+                class:list={[
+                  'flex flex-col justify-between rounded-[1.5rem] p-7',
+                  i === 1 ? 'bg-forest-900 text-cream-50 sm:-translate-y-6' : 'border border-forest-900/10 bg-cream-50',
+                ]}
+                data-reveal
+                data-delay={i * 0.08}
+              >
+                <Icon size={28} stroke-width={1.3} class={i === 1 ? 'text-brass-300' : 'text-brass-600'} />
+                <div class="mt-16">
+                  <p class="font-serif text-2xl">{m.name}</p>
+                  <p class:list={['mt-3 font-serif text-5xl leading-none', i === 1 ? 'text-brass-300' : 'text-forest-800']}>{m.price}</p>
+                  <p class:list={['mt-2 text-[0.65rem] font-bold uppercase tracking-[0.18em]', i === 1 ? 'text-cream-100/60' : 'text-muted']}>
+                    RON / persoană
+                  </p>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- IMAGINE LATĂ -->
+  <section class="relative h-[80svh] min-h-[480px] overflow-hidden bg-forest-900">
+    <div class="absolute inset-x-0 -top-[12%] h-[124%]" data-parallax="10">
+      <Image src={photo('restaurant/05')} alt="Mese aranjate în restaurantul La Johnny, seara" widths={[768, 1280, 1920]} sizes="100vw" class="img-cover" />
+    </div>
+    <div class="absolute inset-0 bg-forest-950/35"></div>
+  </section>
+
+  <!-- BAR / CONFERINȚE / GRĂTAR -->
+  <section class="grain relative bg-forest-900 py-24 text-cream-50 md:py-36">
+    <div class="container-x">
+      <SectionHeading eyebrow="Și mai mult" title='Bar, conferințe și <em class="italic-serif text-brass-300">grătar în grădină</em>' light size="md" />
+      <div class="mt-16 grid gap-px overflow-hidden rounded-[1.75rem] bg-cream-100/10 md:grid-cols-3">
+        {
+          [
+            { icon: Wine, title: 'Bar', text: 'Barul pensiunii, pentru o băutură după cină, la final de zi.' },
+            { icon: Presentation, title: 'Sală de conferințe', text: 'Pensiunea are și o sală de conferințe, pentru întâlniri de lucru.' },
+            { icon: Flame, title: 'Grătar și bucătărie comună', text: 'În grădină aveți grătar și o bucătărie comună echipată, cu cuptor cu microunde și ceai și cafea.' },
+          ].map((f, i) => (
+            <div class="bg-forest-900 p-8 md:p-10" data-reveal data-delay={i * 0.08}>
+              <f.icon size={30} stroke-width={1.2} class="text-brass-300" />
+              <h3 class="mt-10 font-serif text-3xl">{f.title}</h3>
+              <p class="mt-4 text-cream-100/65">{f.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="bg-cream-100 py-24 md:py-36">
+    <div class="container-x">
+      <div class="mb-14 flex items-end justify-between gap-6">
+        <h2 class="display-md" data-split>Din <em class="italic-serif">restaurant</em></h2>
+        <p class="text-sm text-muted" data-reveal>{gallery.length} fotografii</p>
+      </div>
+      <Gallery items={gallery} />
+    </div>
+  </section>
+
+  <VoucherBand />
+  <CTASection image={photo('restaurant/03')} title='Rezervați cu <em class="italic-serif">masa inclusă</em>' text="Menționați în cererea de rezervare dacă doriți să luați masa la pensiune: mic dejun, prânz sau cină." />
+</BaseLayout>

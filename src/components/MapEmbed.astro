@@ -1,0 +1,29 @@
+---
+import { MapPin, Navigation } from '@lucide/astro';
+import { site, fullAddress, mapsEmbed, mapsLink } from '../data/site';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['relative overflow-hidden rounded-[1.75rem] bg-cream-200', className]}>
+  <iframe
+    src={mapsEmbed}
+    title={`Harta – ${site.name}`}
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    class="h-full min-h-[420px] w-full grayscale-[0.35] contrast-[1.05]"
+  ></iframe>
+  <div class="absolute bottom-4 left-4 right-4 flex flex-col gap-4 rounded-2xl bg-cream-50/95 p-5 shadow-xl backdrop-blur sm:right-auto sm:max-w-sm">
+    <p class="flex gap-3 text-sm leading-relaxed">
+      <MapPin size={18} stroke-width={1.5} class="mt-0.5 shrink-0 text-brass-600" />
+      {fullAddress}
+    </p>
+    <a href={mapsLink} target="_blank" rel="noopener" class="arrow-link text-forest-800">
+      <Navigation size={15} /> Deschide în Google Maps
+    </a>
+  </div>
+</div>

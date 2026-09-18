@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+import { Users, Maximize, ArrowUpRight } from '@lucide/astro';
+import type { Room } from '../data/rooms';
+import { photos } from '../lib/photos';
+import { url } from '../lib/url';
+
+interface Props {
+  room: Room;
+  index: number;
+  class?: string;
+}
+
+const { room, index, class: className = '' } = Astro.props;
+const cover = photos(room.folder)[0];
+---
+
+<a
+  href={url(`/camere/${room.slug}`)}
+  class:list={['room-card group relative block overflow-hidden rounded-[1.75rem] bg-forest-900 text-white', className]}
+>
+  <div class="relative aspect-[4/5] overflow-hidden">
+    <Image
+      src={cover}
+      alt={room.name}
+      widths={[480, 720, 960]}
+      sizes="(min-width: 1024px) 34vw, 82vw"
+      class="img-cover transition-transform duration-[1.6s] ease-[var(--ease-out-expo)] group-hover:scale-[1.06]"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-forest-950/95 via-forest-950/25 to-transparent"></div>
+  </div>
+
+  <div class="absolute left-5 right-5 top-5 flex items-start justify-between">
+    <span class="rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.18em] backdrop-blur-md">
+      {room.highlight}
+    </span>
+    <span class="font-serif text-sm italic text-white/70">{String(index + 1).padStart(2, '0')}</span>
+  </div>
+
+  <div class="absolute inset-x-0 bottom-0 p-6 md:p-7">
+    <h3 class="font-serif text-[1.9rem] leading-[1.05]">{room.name}</h3>
+    <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.8rem] text-white/75">
+      <span class="inline-flex items-center gap-1.5"><Users size={15} stroke-width={1.6} /> până la {room.guests} pers.</span>
+      <span class="inline-flex items-center gap-1.5"><Maximize size={14} stroke-width={1.6} /> {room.size} m²</span>
+    </div>
+    <div class="mt-5 flex items-end justify-between border-t border-white/15 pt-5">
+      <p class="text-[0.7rem] uppercase tracking-[0.18em] text-white/60">
+        Tarif / noapte
+        <span class="mt-1 block font-serif text-[1.7rem] normal-case tracking-normal text-brass-300">{room.price} RON</span>
+      </p>
+      <span class="flex h-12 w-12 items-center justify-center rounded-full border border-white/30 transition-all duration-500 group-hover:rotate-45 group-hover:border-brass-400 group-hover:bg-brass-400 group-hover:text-forest-900">
+        <ArrowUpRight size={20} stroke-width={1.6} />
+      </span>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,179 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowRight, ArrowLeft, Users, Maximize, BedDouble, Eye, Check, Phone, Info } from '@lucide/astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Gallery from '../../components/Gallery.astro';
+import RoomCard from '../../components/RoomCard.astro';
+import { rooms, commonAmenities, type Room } from '../../data/rooms';
+import { site } from '../../data/site';
+import { photos } from '../../lib/photos';
+import { url } from '../../lib/url';
+
+export function getStaticPaths() {
+  return rooms.map((room) => ({ params: { slug: room.slug }, props: { room } }));
+}
+
+interface Props {
+  room: Room;
+}
+
+const { room } = Astro.props;
+const imgs = photos(room.folder);
+const index = rooms.findIndex((r) => r.slug === room.slug);
+const others = rooms.filter((r) => r.slug !== room.slug).slice(0, 3);
+const prev = rooms[(index - 1 + rooms.length) % rooms.length];
+const next = rooms[(index + 1) % rooms.length];
+const amenities = [...new Set([...room.features, ...commonAmenities])];
+---
+
+<BaseLayout
+  title={room.name}
+  description={`${room.name} la Pensiunea Cuibul Viselor, Băile Herculane: ${room.size} m², până la ${room.guests} persoane, ${room.beds.join(', ').toLowerCase()}. ${room.price} RON / noapte.`}
+  image={imgs[0]}
+>
+  <!-- HERO -->
+  <section class="relative flex min-h-[88svh] items-end overflow-hidden bg-forest-900 text-white">
+    <div class="absolute inset-x-0 -top-[10%] h-[120%]" data-parallax="8">
+      <Image src={imgs[0]} alt={room.name} widths={[768, 1280, 1920]} sizes="100vw" loading="eager" fetchpriority="high" class="img-cover" />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/30 to-forest-950/35"></div>
+
+    <div class="container-x relative pb-14 pt-40 md:pb-20" data-hero-fade>
+      <nav class="mb-8 flex flex-wrap items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/60" aria-label="Breadcrumb">
+        <a href={url('/')} class="hover:text-white">Acasă</a>
+        <span aria-hidden="true">/</span>
+        <a href={url('/camere')} class="hover:text-white">Camere</a>
+        <span aria-hidden="true">/</span>
+        <span class="text-white/90">{room.short}</span>
+      </nav>
+      <p class="eyebrow eyebrow-light">{room.highlight}</p>
+      <h1 class="display-lg mt-6 max-w-5xl" data-split="hero">{room.name}</h1>
+      <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4 text-white/85" data-reveal>
+        <span class="flex items-center gap-2"><Users size={18} stroke-width={1.5} /> până la {room.guests} persoane</span>
+        <span class="flex items-center gap-2"><Maximize size={16} stroke-width={1.5} /> {room.size} m²</span>
+        <span class="flex items-center gap-2"><BedDouble size={18} stroke-width={1.5} /> {room.beds.length > 1 ? `${room.beds.length} paturi` : room.beds[0]}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONȚINUT -->
+  <section class="bg-cream-100 py-20 md:py-32">
+    <div class="container-x grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <p class="font-serif text-[clamp(1.5rem,2.6vw,2.2rem)] leading-snug text-forest-900" data-reveal>{room.intro}</p>
+        <p class="lead mt-8" data-reveal>{room.description}</p>
+        {
+          room.note && (
+            <p class="mt-6 flex gap-3 rounded-2xl bg-cream-200/70 p-5 text-sm text-forest-900/80" data-reveal>
+              <Info size={18} stroke-width={1.5} class="mt-0.5 shrink-0 text-brass-600" />
+              {room.note}
+            </p>
+          )
+        }
+
+        <div class="mt-16 grid gap-12 sm:grid-cols-2">
+          <div data-reveal>
+            <h2 class="eyebrow">Paturi</h2>
+            <ul class="mt-6 space-y-3">
+              {
+                room.beds.map((b) => (
+                  <li class="flex items-center gap-3 text-forest-900">
+                    <BedDouble size={20} stroke-width={1.3} class="shrink-0 text-brass-600" /> {b}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div data-reveal>
+            <h2 class="eyebrow">Vedere</h2>
+            <ul class="mt-6 flex flex-wrap gap-2">
+              {
+                room.views.map((v) => (
+                  <li class="inline-flex items-center gap-2 rounded-full border border-forest-900/15 px-4 py-2 text-sm">
+                    <Eye size={14} stroke-width={1.5} class="text-brass-600" /> {v}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-16" data-reveal>
+          <h2 class="eyebrow">Dotări</h2>
+          <ul class="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+            {
+              amenities.map((a) => (
+                <li class="flex items-center gap-3 border-b border-forest-900/10 pb-4 text-forest-900">
+                  <Check size={16} stroke-width={2} class="shrink-0 text-river-500" /> {a}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- CARD REZERVARE -->
+      <aside class="lg:col-span-4 lg:col-start-9">
+        <div class="sticky top-28 rounded-[1.75rem] bg-forest-900 p-8 text-cream-50 md:p-10" data-reveal>
+          <p class="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-cream-100/60">Tarif / noapte</p>
+          <p class="mt-2 font-serif text-6xl leading-none text-brass-300">{room.price}<span class="ml-2 text-2xl text-cream-50">RON</span></p>
+          <p class="mt-4 text-sm text-cream-100/60">Pe cameră, orientativ. Confirmăm tariful la rezervare.</p>
+          <div class="my-8 h-px bg-cream-100/15"></div>
+          <ul class="space-y-3 text-sm text-cream-100/80">
+            <li class="flex justify-between"><span>Check-in</span><span class="font-semibold text-cream-50">{site.checkIn}</span></li>
+            <li class="flex justify-between"><span>Check-out</span><span class="font-semibold text-cream-50">{site.checkOut}</span></li>
+            <li class="flex justify-between"><span>Avans</span><span class="font-semibold text-cream-50">min. 50%</span></li>
+          </ul>
+          <a href={url(`/rezervare?camera=${room.slug}`)} class="btn btn-brass mt-10 w-full">
+            Cere o ofertă <ArrowRight size={16} />
+          </a>
+          <a href={site.phoneHref} class="btn btn-ghost-light mt-3 w-full">
+            <Phone size={15} /> {site.phone}
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="bg-cream-100 pb-24 md:pb-36">
+    <div class="container-x">
+      <div class="mb-12 flex items-end justify-between gap-6">
+        <h2 class="display-md" data-split>Galerie <em class="italic-serif">foto</em></h2>
+        <p class="text-sm text-muted" data-reveal>{imgs.length} fotografii</p>
+      </div>
+      <Gallery items={imgs.map((src, i) => ({ src, alt: `${room.name} – fotografia ${i + 1}` }))} layout="grid" />
+    </div>
+  </section>
+
+  <!-- NAVIGARE -->
+  <section class="border-t border-forest-900/10 bg-cream-100">
+    <div class="container-x grid grid-cols-2">
+      <a href={url(`/camere/${prev.slug}`)} class="group flex flex-col gap-2 border-r border-forest-900/10 py-10 pr-4 md:py-14">
+        <span class="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted">
+          <ArrowLeft size={14} class="transition-transform duration-500 group-hover:-translate-x-1" /> Anterioara
+        </span>
+        <span class="font-serif text-xl md:text-3xl">{prev.name}</span>
+      </a>
+      <a href={url(`/camere/${next.slug}`)} class="group flex flex-col items-end gap-2 py-10 pl-4 text-right md:py-14">
+        <span class="flex items-center gap-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted">
+          Următoarea <ArrowRight size={14} class="transition-transform duration-500 group-hover:translate-x-1" />
+        </span>
+        <span class="font-serif text-xl md:text-3xl">{next.name}</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ALTE CAMERE -->
+  <section class="bg-forest-900 py-24 text-cream-50 md:py-32">
+    <div class="container-x">
+      <div class="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <h2 class="display-md" data-split>Alte <em class="italic-serif text-brass-300">camere</em></h2>
+        <a href={url('/camere')} class="arrow-link text-brass-300" data-reveal>Toate camerele <ArrowRight size={16} /></a>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+        {others.map((r) => <RoomCard room={r} index={rooms.indexOf(r)} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,42 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { url } from '../lib/url';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+  image: ImageMetadata;
+  alt: string;
+  crumb?: string;
+}
+
+const { eyebrow, title, subtitle, image, alt, crumb } = Astro.props;
+---
+
+<section class="relative flex min-h-[78svh] items-end overflow-hidden bg-forest-900 text-white">
+  <div class="absolute inset-x-0 -top-[10%] h-[120%]" data-parallax="8">
+    <Image
+      src={image}
+      alt={alt}
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      class="img-cover"
+    />
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/35 to-forest-950/30"></div>
+
+  <div class="container-x relative pb-16 pt-40 md:pb-24" data-hero-fade>
+    <nav class="mb-8 flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-white/60" aria-label="Breadcrumb">
+      <a href={url('/')} class="hover:text-white">Acasă</a>
+      <span aria-hidden="true">/</span>
+      <span class="text-white/90">{crumb ?? eyebrow}</span>
+    </nav>
+    <p class="eyebrow eyebrow-light">{eyebrow}</p>
+    <h1 class="display-lg mt-6 max-w-5xl" data-split="hero" set:html={title} />
+    {subtitle && <p class="mt-8 max-w-xl text-lg leading-relaxed text-white/80" data-reveal>{subtitle}</p>}
+  </div>
+</section>

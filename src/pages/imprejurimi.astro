@@ -1,0 +1,185 @@
+---
+import { Image } from 'astro:assets';
+import { MapPin, Mountain, Droplets, Landmark } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Gallery from '../components/Gallery.astro';
+import CTASection from '../components/CTASection.astro';
+import { nearby, excursions, timeline, resortFacts } from '../data/nearby';
+import { photos, photo } from '../lib/photos';
+
+const alts = [
+  'Stațiunea Băile Herculane, văzută de sus',
+  'Munți și Dunărea, în împrejurimi',
+  'Valea Cernei, văzută de sus',
+  'Stânci de calcar în împrejurimi',
+  'Chipul lui Decebal, sculptat în stâncă, pe malul Dunării',
+  'Mănăstire pe malul Dunării',
+  'Dunărea printre munți',
+  'Dunărea printre stânci',
+  'Dunărea, văzută de sus',
+  'Ruine de turnuri în apele Dunării',
+  'Barcă la intrarea într-o peșteră',
+  'Mănăstire cu vedere spre Dunăre',
+  'Inscripție romană săpată în stâncă',
+  'Bazin natural în stâncă',
+  'Cruce albă pe vârf de munte',
+  'Peșteră în munții din împrejurimi',
+  'Intrare de peșteră',
+  'Peșteră cu deschidere spre pădure',
+];
+const gallery = photos('imprejurimi').map((src, i) => ({ src, alt: alts[i] ?? 'Împrejurimile Băilor Herculane' }));
+---
+
+<BaseLayout
+  title="Împrejurimi – Băile Herculane"
+  description="Băile Herculane, una dintre cele mai vechi stațiuni balneare ale lumii: istorie, izvoare termale, excursii și distanțe față de Pensiunea Cuibul Viselor."
+  image={photo('imprejurimi/01')}
+>
+  <PageHero
+    eyebrow="Împrejurimi"
+    crumb="Împrejurimi"
+    title='Băile Herculane, <em class="italic-serif text-brass-300">stațiunea lui Hercule</em>'
+    subtitle="Una dintre cele mai vechi stațiuni balneare ale lumii, atestată documentar de peste 1850 de ani, la poalele munților Parcului Național Domogled – Valea Cernei."
+    image={photo('imprejurimi/01')}
+    alt="Stațiunea Băile Herculane, văzută de sus"
+  />
+
+  <!-- REPERE -->
+  <section class="bg-cream-100 py-24 md:py-32">
+    <div class="container-x">
+      <div class="grid gap-16 lg:grid-cols-12">
+        <div class="lg:col-span-6">
+          <SectionHeading
+            eyebrow="Despre stațiune"
+            title='Între munți, <em class="italic-serif">pe Valea Cernei</em>'
+            size="md"
+          />
+        </div>
+        <div class="space-y-5 text-muted lg:col-span-6" data-reveal>
+          <p class="lead !text-forest-900">
+            Stațiunea se află în sud-vestul României, la 168 m altitudine, la 8 km de granița cu județul Mehedinți și la doar 25 km de frontiera cu Serbia. Face parte din Parcul Național Domogled – Valea Cernei.
+          </p>
+          <p>
+            Izvoarele termale, tratamentele variate și peisajul unei văi adăpostite de munți au ținut stațiunea vie timp de două milenii. Aici găsiți cure balneare clasice, fizioterapie, masaj, bazine cu apă termală și saună, dar și restaurante, terase de vară și trasee de drumeție pe Valea Cernei.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-20 grid grid-cols-2 gap-px overflow-hidden rounded-[1.75rem] bg-forest-900/10 lg:grid-cols-4">
+        {
+          resortFacts.map((f, i) => (
+            <div class="bg-cream-100 px-5 py-10 md:px-10 md:py-12" data-reveal data-delay={i * 0.06}>
+              <p class="font-serif text-[clamp(2.2rem,4.5vw,3.8rem)] leading-none tracking-[-0.03em] text-forest-800">{f.value}</p>
+              <p class="mt-3 text-sm text-muted">{f.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ISTORIE -->
+  <section class="grain relative bg-forest-900 py-24 text-cream-50 md:py-36">
+    <div class="container-x grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <div class="lg:sticky lg:top-32">
+          <SectionHeading eyebrow="Istorie" title='Două milenii de <em class="italic-serif text-brass-300">ape tămăduitoare</em>' light size="md" />
+          <div class="mt-12 hidden aspect-[4/5] overflow-hidden rounded-[1.5rem] lg:block" data-reveal-img>
+            <Image src={photo('imprejurimi/13')} alt="Inscripție romană săpată în stâncă" widths={[400, 700]} sizes="30vw" class="img-cover" />
+          </div>
+        </div>
+      </div>
+      <ol class="relative lg:col-span-7 lg:col-start-6">
+        <span class="absolute bottom-2 left-[0.45rem] top-2 w-px bg-cream-100/15" aria-hidden="true"></span>
+        {
+          timeline.map((t) => (
+            <li class="relative pb-14 pl-12 last:pb-0" data-reveal>
+              <span class="absolute left-0 top-2 h-[0.95rem] w-[0.95rem] rounded-full border-2 border-brass-400 bg-forest-900" />
+              <p class="font-serif text-lg italic text-brass-300">{t.year}</p>
+              <h3 class="mt-2 font-serif text-3xl">{t.title}</h3>
+              <p class="mt-4 max-w-xl text-cream-100/70">{t.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- APE TERMALE -->
+  <section class="bg-cream-100 py-24 md:py-36">
+    <div class="container-x grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <SectionHeading eyebrow="Tratament" title='Izvoare de <em class="italic-serif">38–60 °C</em>' size="md" />
+        <p class="lead mt-8" data-reveal>
+          Clima este de depresiune intramontană, cu influențe submediteraneene. Apele minerale sunt izotermale și hipertermale, slab radioactive și hipotone.
+        </p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
+        <div class="rounded-[1.5rem] border border-forest-900/10 bg-cream-50 p-8" data-reveal>
+          <Droplets size={28} stroke-width={1.2} class="text-brass-600" />
+          <h3 class="mt-8 font-serif text-2xl">Tipuri de ape</h3>
+          <ul class="mt-4 space-y-2 text-muted">
+            <li>sulfuroase, clorurate, calcice, sodice</li>
+            <li>clorurate, sodice, calcice</li>
+            <li>oligominerale</li>
+          </ul>
+        </div>
+        <div class="rounded-[1.5rem] border border-forest-900/10 bg-cream-50 p-8" data-reveal data-delay="0.08">
+          <Landmark size={28} stroke-width={1.2} class="text-brass-600" />
+          <h3 class="mt-8 font-serif text-2xl">Tratamente</h3>
+          <p class="mt-4 text-muted">
+            Băi termale sulfuroase și sărate, în bazine descoperite sau acoperite, cură internă cu ape minerale, hidrotermoterapie și saună, electroterapie, kinetoterapie, inhaloterapie și cură de teren.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXCURSII + DISTANȚE -->
+  <section class="bg-cream-50 py-24 md:py-36">
+    <div class="container-x grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <SectionHeading eyebrow="Excursii" title='Trasee din <em class="italic-serif">stațiune</em>' size="md" />
+        <ul class="mt-12 space-y-4">
+          {
+            excursions.map((e) => (
+              <li class="flex items-center gap-4 rounded-2xl border border-forest-900/10 bg-cream-100 px-6 py-5 font-serif text-xl" data-reveal>
+                <Mountain size={22} stroke-width={1.3} class="shrink-0 text-brass-600" />
+                {e}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        <SectionHeading eyebrow="Distanțe" title='Cât de <em class="italic-serif">aproape</em>' size="md" />
+        <ul class="mt-12 border-t border-forest-900/10">
+          {
+            nearby.map((n) => (
+              <li class="flex items-baseline justify-between gap-6 border-b border-forest-900/10 py-5" data-reveal>
+                <span class="flex items-center gap-3">
+                  <MapPin size={16} stroke-width={1.5} class="shrink-0 text-brass-600" />
+                  {n.name}
+                </span>
+                <span class="shrink-0 font-serif text-2xl text-forest-800">{n.km} km</span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-5 text-xs text-muted" data-reveal>Distanțe aproximative față de pensiune.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="bg-cream-100 py-24 md:py-36">
+    <div class="container-x">
+      <SectionHeading eyebrow="Imagini" title='Peisaje din <em class="italic-serif">împrejurimi</em>' size="md" class="mb-14" />
+      <Gallery items={gallery} />
+    </div>
+  </section>
+
+  <CTASection image={photo('imprejurimi/03')} title='Explorați Valea Cernei <em class="italic-serif">din Cuibul Viselor</em>' />
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowLeft } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { photo } from '../lib/photos';
+import { url } from '../lib/url';
+---
+
+<BaseLayout title="Pagina nu există">
+  <section class="relative flex min-h-[100svh] items-center overflow-hidden bg-forest-900 text-white">
+    <Image src={photo('gradina/09')} alt="" widths={[768, 1280, 1920]} sizes="100vw" loading="eager" class="img-cover absolute inset-0 opacity-40" />
+    <div class="container-x relative py-40">
+      <p class="eyebrow eyebrow-light">Eroare 404</p>
+      <h1 class="display-xl mt-6" data-split="hero">Pagina <em class="italic-serif text-brass-300">s-a rătăcit</em></h1>
+      <p class="mt-8 max-w-md text-lg text-white/80" data-reveal>Pagina căutată nu există sau a fost mutată. Întoarceți-vă acasă, în cuib.</p>
+      <a href={url('/')} class="btn btn-brass mt-10" data-reveal><ArrowLeft size={16} /> Înapoi acasă</a>
+    </div>
+  </section>
+</BaseLayout>

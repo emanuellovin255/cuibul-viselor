@@ -1,0 +1,76 @@
+---
+import { rating, ratingCategories, reviews, formatScore } from '../data/reviews';
+import { site } from '../data/site';
+import { ArrowUpRight } from '@lucide/astro';
+---
+
+<section class="relative overflow-hidden bg-cream-50 py-28 md:py-40">
+  <div class="container-x">
+    <div class="grid gap-16 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow" data-reveal>Ce spun oaspeții</p>
+        <div class="mt-8 flex items-end gap-5" data-reveal>
+          <span class="font-serif text-[clamp(6rem,14vw,11rem)] leading-[0.8] tracking-[-0.05em] text-forest-800" data-count={rating.score} data-decimals="1">
+            {formatScore(rating.score)}
+          </span>
+          <span class="pb-3">
+            <span class="block font-serif text-3xl italic text-brass-600">{rating.label}</span>
+            <span class="mt-1 block text-sm text-muted">{rating.count} evaluări pe {rating.source}</span>
+          </span>
+        </div>
+
+        <ul class="mt-12 space-y-5" data-reveal>
+          {
+            ratingCategories.map((c) => (
+              <li>
+                <div class="flex items-baseline justify-between text-sm">
+                  <span class="font-semibold text-forest-800">{c.label}</span>
+                  <span class="font-serif text-lg">{formatScore(c.score)}</span>
+                </div>
+                <div class="mt-2 h-[3px] overflow-hidden rounded-full bg-forest-900/10">
+                  <div class="h-full rounded-full bg-gradient-to-r from-river-500 to-brass-400" style={`width:${c.score * 10}%`} data-bar />
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <a href={site.bookingUrl} target="_blank" rel="noopener" class="arrow-link mt-10 text-forest-800" data-reveal>
+          Toate evaluările pe Booking.com <ArrowUpRight size={16} />
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-6 lg:col-span-7 lg:pl-8">
+        {
+          reviews.map((r, i) => (
+            <figure
+              class:list={[
+                'relative rounded-[1.75rem] border border-forest-900/10 bg-cream-100 p-8 md:p-10',
+                i === 1 && 'lg:ml-16',
+                i === 2 && 'lg:ml-8',
+              ]}
+              data-reveal
+              data-delay={i * 0.08}
+            >
+              <svg viewBox="0 0 48 36" class="h-8 w-10 text-brass-400" fill="currentColor" aria-hidden="true">
+                <path d="M0 36V21.6C0 9.6 6.4 2.4 19.2 0l2.2 4.6C14.6 6.6 11 10.4 10.6 16H19v20H0Zm27 0V21.6C27 9.6 33.4 2.4 46.2 0l1.8 4.6C41.6 6.6 38 10.4 37.6 16H46v20H27Z" />
+              </svg>
+              <blockquote class="mt-6 font-serif text-[clamp(1.35rem,2vw,1.75rem)] leading-[1.35] text-forest-900">
+                „{r.text}”
+              </blockquote>
+              <figcaption class="mt-8 flex items-center gap-4">
+                <span class="flex h-11 w-11 items-center justify-center rounded-full bg-forest-800 font-serif text-lg text-cream-50">
+                  {r.name.charAt(0)}
+                </span>
+                <span>
+                  <span class="block font-semibold">{r.name}</span>
+                  <span class="block text-xs uppercase tracking-[0.16em] text-muted">{r.country} · via Booking.com</span>
+                </span>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

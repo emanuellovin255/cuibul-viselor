@@ -1,0 +1,33 @@
+import {
+  Utensils,
+  Wine,
+  Presentation,
+  Sparkles,
+  Flower2,
+  WavesHorizontal,
+  Fish,
+  HeartPulse,
+  Baby,
+  Flame,
+  SquareParking,
+  ConciergeBell,
+  Wifi,
+  CigaretteOff,
+} from '@lucide/astro';
+
+export const facilities = [
+  { icon: Utensils, title: 'Restaurant La Johnny', text: 'Mic dejun, prânz și cină, în restaurantul pensiunii.' },
+  { icon: Sparkles, title: 'Mini-piscină și spa', text: 'Spa cu hidromasaj, pentru relaxare după o zi de drumeții.' },
+  { icon: Flower2, title: 'Magic Garden', text: 'Grădină îngrijită, cu foișor și bănci-leagăn.' },
+  { icon: WavesHorizontal, title: 'Plajă pe malul Cernei', text: 'Zonă de plajă pe râul care trece la câțiva metri de grădină.' },
+  { icon: Fish, title: 'Loc de pescuit', text: 'Pe malul râului Cerna, chiar lângă pensiune.' },
+  { icon: Flame, title: 'Grătar și bucătărie comună', text: 'Bucătărie echipată, cu cuptor cu microunde și ceai și cafea, plus grătar în grădină.' },
+  { icon: Wine, title: 'Bar', text: 'Pentru o seară liniștită, după cină.' },
+  { icon: Presentation, title: 'Sală de conferințe', text: 'Pentru întâlniri de lucru și prezentări.' },
+  { icon: HeartPulse, title: 'Bază de tratament', text: 'Chiar în Băile Herculane, una dintre cele mai vechi stațiuni balneare ale lumii.' },
+  { icon: Baby, title: 'Loc de joacă', text: 'Spațiu de joacă pentru copii, iar copiii de orice vârstă sunt bineveniți.' },
+  { icon: SquareParking, title: 'Parcare privată', text: 'Parcare proprie, iluminată pe timpul nopții.' },
+  { icon: ConciergeBell, title: 'Recepție nonstop', text: 'Vorbim română, engleză și germană.' },
+  { icon: Wifi, title: 'WiFi gratuit', text: 'Internet gratuit în toată pensiunea.' },
+  { icon: CigaretteOff, title: 'Camere pentru nefumători', text: 'Aer curat, în toate camerele.' },
+];

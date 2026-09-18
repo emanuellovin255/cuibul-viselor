@@ -1,0 +1,193 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowRight, Users, Maximize, BedDouble, Check, Info } from '@lucide/astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import VoucherBand from '../../components/VoucherBand.astro';
+import CTASection from '../../components/CTASection.astro';
+import { rooms, commonAmenities } from '../../data/rooms';
+import { bookingRules } from '../../data/site';
+import { photos, photo } from '../../lib/photos';
+import { url } from '../../lib/url';
+---
+
+<BaseLayout
+  title="Camere și tarife"
+  description="Camere și apartamente la Pensiunea Cuibul Viselor din Băile Herculane: Royal cu jacuzzi, dublă Deluxe, cameră de familie, apartamente cu 2 și 3 camere. Tarife de la 300 RON / noapte."
+  image={photo('camere/royal/01')}
+>
+  <PageHero
+    eyebrow="Camere & tarife"
+    crumb="Camere"
+    title='Camere în care <em class="italic-serif text-brass-300">visele</em> au loc'
+    subtitle="Șase tipuri de camere și apartamente, pentru cupluri, familii și grupuri de prieteni. Toate au baie proprie, aer condiționat și WiFi gratuit."
+    image={photo('camere/royal/01')}
+    alt="Camera Royal a pensiunii Cuibul Viselor"
+  />
+
+  <section class="bg-cream-100 py-24 md:py-36">
+    <div class="container-x space-y-24 md:space-y-40">
+      {
+        rooms.map((room, i) => {
+          const imgs = photos(room.folder);
+          const reverse = i % 2 === 1;
+          return (
+            <article class="grid items-center gap-10 lg:grid-cols-12 lg:gap-16" id={room.slug}>
+              <a
+                href={url(`/camere/${room.slug}`)}
+                class:list={['group relative block lg:col-span-7', reverse && 'lg:order-2']}
+                aria-label={`Detalii ${room.name}`}
+              >
+                <div class="aspect-[4/3] overflow-hidden rounded-[1.75rem]" data-reveal-img>
+                  <Image
+                    src={imgs[0]}
+                    alt={room.name}
+                    widths={[640, 1024, 1400]}
+                    sizes="(min-width: 1024px) 56vw, 100vw"
+                    class="img-cover transition-transform duration-[1.6s] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
+                  />
+                </div>
+                {imgs[1] && (
+                  <div
+                    class:list={[
+                      'absolute -bottom-8 hidden w-[34%] overflow-hidden rounded-[1.25rem] border-[6px] border-cream-100 shadow-xl md:block',
+                      reverse ? '-left-6' : '-right-6',
+                    ]}
+                    data-reveal-img
+                    data-delay="0.2"
+                  >
+                    <div class="aspect-square">
+                      <Image src={imgs[1]} alt="" widths={[360, 600]} sizes="20vw" class="img-cover" />
+                    </div>
+                  </div>
+                )}
+              </a>
+
+              <div class:list={['lg:col-span-5', reverse ? 'lg:order-1 lg:pr-6' : 'lg:pl-6']}>
+                <p class="font-serif text-lg italic text-brass-600" data-reveal>
+                  {String(i + 1).padStart(2, '0')} — {room.highlight}
+                </p>
+                <h2 class="display-md mt-4" data-split>{room.name}</h2>
+                <p class="lead mt-6" data-reveal>{room.intro}</p>
+
+                <dl class="mt-8 grid grid-cols-3 gap-4 border-y border-forest-900/10 py-6" data-reveal>
+                  <div>
+                    <dt class="flex items-center gap-1.5 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-muted">
+                      <Users size={13} /> Persoane
+                    </dt>
+                    <dd class="mt-2 font-serif text-2xl">{room.guests}</dd>
+                  </div>
+                  <div>
+                    <dt class="flex items-center gap-1.5 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-muted">
+                      <Maximize size={12} /> Suprafață
+                    </dt>
+                    <dd class="mt-2 font-serif text-2xl">{room.size} m²</dd>
+                  </div>
+                  <div>
+                    <dt class="flex items-center gap-1.5 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-muted">
+                      <BedDouble size={13} /> Paturi
+                    </dt>
+                    <dd class="mt-2 text-sm leading-snug">{room.beds.map((b) => b.replace(/^Dormitorul \d: /, '')).join(', ')}</dd>
+                  </div>
+                </dl>
+
+                <div class="mt-8 flex flex-wrap items-center justify-between gap-6" data-reveal>
+                  <p>
+                    <span class="block text-[0.65rem] font-bold uppercase tracking-[0.18em] text-muted">Tarif / noapte</span>
+                    <span class="font-serif text-4xl text-forest-800">{room.price} <span class="text-xl">RON</span></span>
+                  </p>
+                  <div class="flex flex-wrap gap-3">
+                    <a href={url(`/camere/${room.slug}`)} class="btn btn-dark">
+                      Detalii <ArrowRight size={16} />
+                    </a>
+                    <a href={url(`/rezervare?camera=${room.slug}`)} class="btn btn-ghost-dark">
+                      Rezervă
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <!-- TARIFE -->
+  <section id="tarife" class="bg-forest-900 py-24 text-cream-50 md:py-36">
+    <div class="container-x grid gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+        <SectionHeading eyebrow="Tarife" title='Prețuri <em class="italic-serif text-brass-300">pe noapte</em>' light size="md" />
+        <p class="mt-8 flex gap-3 text-sm leading-relaxed text-cream-100/60" data-reveal>
+          <Info size={18} stroke-width={1.5} class="mt-0.5 shrink-0 text-brass-400" />
+          Tarifele sunt pe cameră sau apartament, pentru o noapte, și sunt orientative. Vă rugăm să le confirmați la rezervare.
+        </p>
+      </div>
+      <div class="lg:col-span-8">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b border-cream-100/15 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-cream-100/50">
+              <th class="pb-5 font-bold">Cameră</th>
+              <th class="hidden pb-5 font-bold sm:table-cell">Persoane</th>
+              <th class="pb-5 text-right font-bold">Preț / noapte</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rooms.map((room) => (
+                <tr class="group border-b border-cream-100/10" data-reveal>
+                  <td class="py-6">
+                    <a href={url(`/camere/${room.slug}`)} class="font-serif text-xl transition-colors group-hover:text-brass-300 md:text-2xl">
+                      {room.name}
+                    </a>
+                  </td>
+                  <td class="hidden py-6 text-cream-100/70 sm:table-cell">până la {room.guests}</td>
+                  <td class="py-6 text-right font-serif text-2xl text-brass-300 md:text-3xl">{room.price} RON</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOTĂRI + CONDIȚII -->
+  <section class="bg-cream-100 py-24 md:py-36">
+    <div class="container-x grid gap-20 lg:grid-cols-2 lg:gap-24">
+      <div>
+        <SectionHeading eyebrow="În fiecare cameră" title="Dotări standard" size="md" />
+        <ul class="mt-12 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+          {
+            commonAmenities.map((a) => (
+              <li class="flex items-center gap-4 border-b border-forest-900/10 pb-5" data-reveal>
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-forest-800 text-cream-50">
+                  <Check size={15} stroke-width={2} />
+                </span>
+                {a}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <SectionHeading eyebrow="Bine de știut" title="Condiții de rezervare" size="md" />
+        <ol class="mt-12 space-y-6">
+          {
+            bookingRules.map((rule, i) => (
+              <li class="flex gap-5" data-reveal>
+                <span class="font-serif text-3xl italic leading-none text-brass-500">{i + 1}</span>
+                <p class="pt-1 text-forest-900/80">{rule}</p>
+              </li>
+            ))
+          }
+        </ol>
+        <a href={url('/rezervare')} class="arrow-link mt-10 text-forest-800" data-reveal>Procedura completă de rezervare <ArrowRight size={16} /></a>
+      </div>
+    </div>
+  </section>
+
+  <VoucherBand />
+  <CTASection image={photo('exterior/11')} />
+</BaseLayout>

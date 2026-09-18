@@ -1,0 +1,80 @@
+---
+import { ArrowRight } from '@lucide/astro';
+import { url } from '../lib/url';
+---
+
+<form
+  action={url('/rezervare')}
+  method="get"
+  data-booking-bar
+  class="booking-bar grid w-full grid-cols-2 overflow-hidden rounded-[1.5rem] border border-white/15 bg-forest-950/45 text-white backdrop-blur-xl md:grid-cols-[1fr_1fr_0.8fr_auto] md:rounded-full"
+>
+  <label class="bar-field border-b border-r border-white/10 md:border-b-0">
+    <span>Sosire</span>
+    <input type="date" name="sosire" required data-date-in />
+  </label>
+  <label class="bar-field border-b border-white/10 md:border-b-0 md:border-r">
+    <span>Plecare</span>
+    <input type="date" name="plecare" required data-date-out />
+  </label>
+  <label class="bar-field col-span-2 md:col-span-1">
+    <span>Oaspeți</span>
+    <select name="adulti">
+      {[1, 2, 3, 4, 5, 6].map((n) => <option value={n} selected={n === 2}>{n} {n === 1 ? 'adult' : 'adulți'}</option>)}
+    </select>
+  </label>
+  <div class="col-span-2 p-2 md:col-span-1">
+    <button type="submit" class="btn btn-brass h-full w-full md:!px-8">
+      Verifică disponibilitatea <ArrowRight size={16} />
+    </button>
+  </div>
+</form>
+
+<style>
+  .bar-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.9rem 1.5rem;
+    cursor: pointer;
+  }
+  @media (min-width: 768px) {
+    .bar-field {
+      padding: 0.85rem 1.75rem;
+    }
+  }
+  .bar-field span {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.6);
+  }
+  .bar-field input,
+  .bar-field select {
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    color-scheme: dark;
+    padding: 0;
+    width: 100%;
+    appearance: none;
+  }
+  .bar-field input:focus,
+  .bar-field select:focus {
+    outline: none;
+  }
+  .bar-field select option {
+    color: #17221c;
+  }
+  .bar-field:focus-within {
+    background: rgb(255 255 255 / 0.06);
+  }
+</style>
+
+<script>
+  import { wireDates } from '../scripts/dates';
+  document.querySelectorAll<HTMLFormElement>('[data-booking-bar]').forEach((form) => wireDates(form));
+</script>

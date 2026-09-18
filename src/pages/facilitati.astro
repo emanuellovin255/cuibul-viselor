@@ -1,0 +1,134 @@
+---
+import { Image } from 'astro:assets';
+import { Sparkles, WavesHorizontal, Fish, Baby, SquareParking, ConciergeBell, Wifi, PawPrint, CigaretteOff, Flower2 } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import FacilityGrid from '../components/FacilityGrid.astro';
+import CTASection from '../components/CTASection.astro';
+import { photo } from '../lib/photos';
+---
+
+<BaseLayout
+  title="Facilități"
+  description="Facilitățile Pensiunii Cuibul Viselor: mini-piscină, spa și hidromasaj, Magic Garden cu foișor, plajă pe malul Cernei, loc de pescuit, loc de joacă, parcare privată, recepție nonstop."
+  image={photo('gradina/01')}
+>
+  <PageHero
+    eyebrow="Facilități"
+    crumb="Facilități"
+    title='Spa, grădină și <em class="italic-serif text-brass-300">râul la doi pași</em>'
+    subtitle="Tot ce vă trebuie pentru un sejur liniștit găsiți chiar în curtea pensiunii."
+    image={photo('gradina/01')}
+    alt="Grădina pensiunii văzută de sus, lângă râul Cerna"
+  />
+
+  <!-- LISTA COMPLETĂ -->
+  <section class="bg-cream-100 py-24 md:py-36">
+    <div class="container-x">
+      <SectionHeading eyebrow="Pe scurt" title='Toate <em class="italic-serif">facilitățile</em>' size="md" class="mb-16" />
+      <FacilityGrid />
+    </div>
+  </section>
+
+  <!-- SPA -->
+  <section class="grain relative overflow-hidden bg-forest-900 py-24 text-cream-50 md:py-36">
+    <div class="container-x grid items-center gap-16 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <p class="eyebrow eyebrow-light" data-reveal>Relaxare</p>
+        <h2 class="display-lg mt-6" data-split>Mini-piscină, spa <em class="italic-serif text-brass-300">& hidromasaj</em></h2>
+        <p class="mt-8 max-w-xl text-lg text-cream-100/70" data-reveal>
+          După o zi pe Valea Cernei, spa-ul pensiunii e locul potrivit pentru relaxare. Pentru cine vrea hidromasaj chiar în cameră, Camera Royal are jacuzzi propriu.
+        </p>
+      </div>
+      <div class="lg:col-span-4 lg:col-start-9" data-reveal>
+        <div class="relative flex aspect-square flex-col items-center justify-center rounded-full border border-cream-100/15 text-center">
+          <Sparkles size={30} stroke-width={1.2} class="text-brass-300" />
+          <p class="mt-6 font-serif text-7xl leading-none">50</p>
+          <p class="mt-2 font-serif text-2xl italic text-brass-300">RON / oră</p>
+          <p class="mt-3 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-cream-100/60">de persoană</p>
+          <span class="absolute inset-4 rounded-full border border-dashed border-cream-100/10"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAGIC GARDEN -->
+  <section class="bg-cream-100 py-24 md:py-36">
+    <div class="container-x grid items-center gap-16 lg:grid-cols-12">
+      <div class="grid grid-cols-2 gap-4 lg:col-span-7">
+        <div class="col-span-2 aspect-[16/10] overflow-hidden rounded-[1.5rem]" data-reveal-img>
+          <Image src={photo('exterior/12')} alt="Aleea din grădina Magic Garden, cu brazi și flori" widths={[640, 1024, 1400]} sizes="(min-width: 1024px) 56vw, 100vw" class="img-cover" />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-[1.5rem]" data-reveal-img data-delay="0.1">
+          <Image src={photo('gradina/02')} alt="Bancă-leagăn în grădină" widths={[400, 700]} sizes="(min-width: 1024px) 28vw, 50vw" class="img-cover" />
+        </div>
+        <div class="aspect-square overflow-hidden rounded-[1.5rem]" data-reveal-img data-delay="0.2">
+          <Image src={photo('gradina/05')} alt="Mese din lemn pe peluza grădinii" widths={[400, 700]} sizes="(min-width: 1024px) 28vw, 50vw" class="img-cover" />
+        </div>
+      </div>
+      <div class="lg:col-span-5 lg:pl-8">
+        <p class="eyebrow" data-reveal><Flower2 size={14} /> Grădina</p>
+        <h2 class="display-md mt-6" data-split>Magic <em class="italic-serif">Garden</em></h2>
+        <p class="lead mt-8" data-reveal>
+          Grădina e locul în care vă veți petrece multe ore. Are foișor, bănci-leagăn, peluze îngrijite și colțuri umbrite de salcii.
+        </p>
+        <p class="mt-5 text-muted" data-reveal>
+          În foișor găsiți o bucătărie comună bine echipată, cu cuptor cu microunde și ceai și cafea, iar alături este grătarul. Pentru serile petrecute afară, cu familia sau cu prietenii.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÂUL CERNA -->
+  <section class="bg-cream-100 pb-24 md:pb-36">
+    <div class="container-x grid items-center gap-16 lg:grid-cols-12">
+      <div class="order-2 lg:order-1 lg:col-span-5 lg:pr-8">
+        <p class="eyebrow" data-reveal>Pe malul Cernei</p>
+        <h2 class="display-md mt-6" data-split>Plajă și <em class="italic-serif">loc de pescuit</em></h2>
+        <p class="lead mt-8" data-reveal>
+          La câțiva metri de grădină trece râul Cerna. Pensiunea are pe mal o zonă de plajă cu șezlonguri și un loc de pescuit.
+        </p>
+        <ul class="mt-10 space-y-4" data-reveal>
+          <li class="flex items-center gap-4"><WavesHorizontal size={22} stroke-width={1.3} class="text-brass-600" /> Zonă de plajă pe râu</li>
+          <li class="flex items-center gap-4"><Fish size={22} stroke-width={1.3} class="text-brass-600" /> Loc de pescuit</li>
+        </ul>
+      </div>
+      <div class="order-1 grid grid-cols-5 gap-4 lg:order-2 lg:col-span-7">
+        <div class="col-span-3 aspect-[3/4] overflow-hidden rounded-[1.5rem]" data-reveal-img>
+          <Image src={photo('rau/03')} alt="Zona de plajă de pe malul Cernei, cu pensiunea în fundal" widths={[480, 800]} sizes="(min-width: 1024px) 34vw, 60vw" class="img-cover" />
+        </div>
+        <div class="col-span-2 mt-20 aspect-[3/4] overflow-hidden rounded-[1.5rem]" data-reveal-img data-delay="0.15">
+          <Image src={photo('rau/02')} alt="Șezlonguri pe malul râului" widths={[360, 600]} sizes="(min-width: 1024px) 22vw, 40vw" class="img-cover" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTIC -->
+  <section class="border-t border-forest-900/10 bg-cream-50 py-24 md:py-36">
+    <div class="container-x">
+      <SectionHeading eyebrow="Practic" title='Pentru un sejur <em class="italic-serif">fără griji</em>' size="md" />
+      <div class="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          [
+            { icon: Baby, title: 'Familii cu copii', text: 'Copiii de orice vârstă sunt bineveniți, iar pensiunea are un loc de joacă și camere de familie.' },
+            { icon: SquareParking, title: 'Parcare privată', text: 'Parcare proprie, iluminată pe timpul nopții.' },
+            { icon: ConciergeBell, title: 'Recepție nonstop', text: 'La recepție vorbim română, engleză și germană.' },
+            { icon: Wifi, title: 'WiFi gratuit', text: 'Internet wireless gratuit în toată pensiunea.' },
+            { icon: PawPrint, title: 'Animale de companie', text: 'Sunt acceptate la cerere. Se pot percepe taxe.' },
+            { icon: CigaretteOff, title: 'Nefumători', text: 'Fumatul nu este permis. Toate camerele sunt pentru nefumători.' },
+          ].map((f, i) => (
+            <div class="border-t border-forest-900/15 pt-8" data-reveal data-delay={(i % 3) * 0.07}>
+              <f.icon size={28} stroke-width={1.2} class="text-brass-600" />
+              <h3 class="mt-6 font-serif text-2xl">{f.title}</h3>
+              <p class="mt-3 text-muted">{f.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTASection image={photo('exterior/13')} />
+</BaseLayout>

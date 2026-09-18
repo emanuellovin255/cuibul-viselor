@@ -1,0 +1,375 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowRight, ArrowUpRight, Star, Phone } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookingBar from '../components/BookingBar.astro';
+import Marquee from '../components/Marquee.astro';
+import RoomCard from '../components/RoomCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import FacilityGrid from '../components/FacilityGrid.astro';
+import ReviewScores from '../components/ReviewScores.astro';
+import VoucherBand from '../components/VoucherBand.astro';
+import CTASection from '../components/CTASection.astro';
+import { rooms, minPrice } from '../data/rooms';
+import { meals, site } from '../data/site';
+import { nearby } from '../data/nearby';
+import { rating, formatScore } from '../data/reviews';
+import { photo } from '../lib/photos';
+import { url } from '../lib/url';
+
+const slides = [
+  { src: photo('exterior/01'), alt: 'Curtea pensiunii Cuibul Viselor, cu munții Văii Cernei în fundal' },
+  { src: photo('exterior/02'), alt: 'Pensiunea Cuibul Viselor și stâncile de calcar de deasupra' },
+  { src: photo('rau/01'), alt: 'Zona de plajă de pe râul Cerna, lângă pensiune' },
+  { src: photo('exterior/03'), alt: 'Curtea interioară cu foișor, la poalele munților' },
+];
+---
+
+<BaseLayout intro image={photo('exterior/01')}>
+  <!-- HERO -->
+  <section class="relative flex min-h-[100svh] flex-col overflow-hidden bg-forest-950 text-white" data-hero>
+    <div class="absolute inset-0">
+      {
+        slides.map((s, i) => (
+          <div class:list={['hero-slide absolute inset-0 overflow-hidden', i === 0 && 'is-active']} data-slide>
+            <Image
+              src={s.src}
+              alt={s.alt}
+              widths={[768, 1280, 1920]}
+              sizes="100vw"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={i === 0 ? 'high' : 'auto'}
+              class="img-cover"
+            />
+          </div>
+        ))
+      }
+      <div class="absolute inset-0 bg-gradient-to-b from-forest-950/55 via-forest-950/15 to-forest-950/85"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-forest-950/50 to-transparent"></div>
+    </div>
+
+    <div class="container-x relative flex flex-1 flex-col justify-end pb-10 pt-36 md:pb-14" data-hero-fade>
+      <div class="flex items-center gap-3 text-[0.7rem] font-bold uppercase tracking-[0.26em] text-white/85" data-reveal>
+        <span class="flex gap-0.5 text-brass-300">
+          {Array.from({ length: site.stars }).map(() => <Star size={12} fill="currentColor" stroke-width={0} />)}
+        </span>
+        Pensiune · Băile Herculane
+      </div>
+
+      <h1 class="display-xl mt-6 max-w-[14ch]" data-split="hero">
+        Cuibul <em class="italic-serif text-brass-300">Viselor</em>
+      </h1>
+
+      <div class="mt-8 grid items-end gap-10 lg:grid-cols-12">
+        <p class="max-w-lg text-lg leading-relaxed text-white/85 md:text-xl lg:col-span-5" data-reveal>
+          Pe malul Cernei, la poalele munților, un loc în care vă liniștiți din prima seară. Cazare, restaurant și grădină, la La Johnny.
+        </p>
+        <div class="hidden items-center justify-end gap-6 lg:col-span-7 lg:flex" data-reveal>
+          <div class="text-right">
+            <p class="font-serif text-4xl leading-none">{formatScore(rating.score)}</p>
+            <p class="mt-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/70">{rating.label} · Booking.com</p>
+          </div>
+          <span class="h-12 w-px bg-white/25"></span>
+          <div>
+            <p class="font-serif text-4xl leading-none"><span class="text-lg italic">de la</span> {minPrice} <span class="text-lg">RON</span></p>
+            <p class="mt-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/70">Pe noapte, pe cameră</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10" data-reveal>
+        <BookingBar />
+      </div>
+
+      <div class="mt-8 flex items-center justify-between text-[0.7rem] font-bold uppercase tracking-[0.22em] text-white/70">
+        <a href="#despre" class="flex items-center gap-3">
+          <span class="scroll-cue relative block h-10 w-px overflow-hidden bg-white/25"></span>
+          Descoperiți
+        </a>
+        <div class="flex items-center gap-4" aria-hidden="true">
+          <span data-slide-current>01</span>
+          <span class="relative block h-px w-16 overflow-hidden bg-white/25">
+            <span class="absolute inset-0 origin-left bg-white" data-slide-progress></span>
+          </span>
+          <span>{String(slides.length).padStart(2, '0')}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESPRE -->
+  <section id="despre" class="relative bg-cream-100 pb-28 pt-28 md:pb-40 md:pt-40">
+    <div class="container-x">
+      <p class="eyebrow" data-reveal>Bine ați venit</p>
+      <p class="mt-10 max-w-6xl font-serif text-[clamp(1.9rem,4.4vw,4.1rem)] leading-[1.12] tracking-[-0.02em] text-forest-900" data-scrub-words>
+        Munții, susurul apei, cântecul păsărilor și șoaptele vântului vă liniștesc sufletul. Un colț de rai de unde nu v-ați mai dori să plecați.
+      </p>
+
+      <div class="mt-24 grid items-center gap-16 md:mt-32 lg:grid-cols-12 lg:gap-10">
+        <div class="relative lg:col-span-7">
+          <div class="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] md:aspect-[5/4]" data-reveal-img>
+            <Image src={photo('exterior/04')} alt="Fațada pensiunii, cu balcoane din lemn și flori" widths={[640, 1024, 1400]} sizes="(min-width: 1024px) 55vw, 100vw" class="img-cover" />
+          </div>
+          <div class="absolute -bottom-10 right-4 hidden w-[38%] overflow-hidden rounded-[1.25rem] border-[6px] border-cream-100 shadow-2xl md:block lg:-right-10" data-reveal-img data-delay="0.2">
+            <div class="aspect-[3/4]">
+              <Image src={photo('exterior/09')} alt="Terasă cu mușcate roșii, cu vedere spre dealuri" widths={[400, 700]} sizes="25vw" class="img-cover" />
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 lg:pl-10">
+          <h2 class="display-md" data-split>
+            Pe malul Cernei, la câteva sute de metri de <em class="italic-serif">centrul stațiunii</em>
+          </h2>
+          <p class="lead mt-8" data-reveal>
+            Pensiunea Cuibul Viselor – La Johnny vă oferă în Băile Herculane un concediu de neuitat alături de cei dragi. Munții și apa sunt atât de aproape, încât peisajul spune totul.
+          </p>
+          <p class="mt-5 text-muted" data-reveal>
+            Aveți de ales între camere Vip, suite și apartamente cu două sau trei camere, toate la standarde europene. Iar pentru răsfăț, pensiunea are restaurant, bar, spa și o grădină care v-ar putea ține acasă toată ziua.
+          </p>
+          <div class="mt-10 flex flex-wrap gap-4" data-reveal>
+            <a href={url('/camere')} class="btn btn-dark">Vezi camerele <ArrowRight size={16} /></a>
+            <a href={url('/facilitati')} class="btn btn-ghost-dark">Facilități</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIFRE -->
+  <section class="bg-cream-100">
+    <div class="container-x">
+      <div class="grid grid-cols-2 gap-px overflow-hidden rounded-[1.75rem] bg-forest-900/10 lg:grid-cols-4">
+        {
+          [
+            { value: rating.score, decimals: 1, suffix: '', label: `Scor ${rating.label} pe Booking.com` },
+            { value: 6, decimals: 0, suffix: '', label: 'Tipuri de camere și apartamente' },
+            { value: 24, decimals: 0, suffix: '/7', label: 'Recepție deschisă nonstop' },
+            { value: 5, decimals: 0, suffix: ' km', label: 'Până la Parcul Național Domogled – Valea Cernei' },
+          ].map((s, i) => (
+            <div class="bg-cream-100 px-5 py-10 md:px-10 md:py-14" data-reveal data-delay={i * 0.06}>
+              <p class="font-serif text-[clamp(2.8rem,6vw,5.2rem)] leading-none tracking-[-0.04em] text-forest-800">
+                <span data-count={s.value} data-decimals={s.decimals}>{s.decimals ? formatScore(s.value) : s.value}</span><span class="text-brass-500">{s.suffix}</span>
+              </p>
+              <p class="mt-4 max-w-[16rem] text-sm leading-snug text-muted">{s.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Marquee words={['Munți', 'Râul Cerna', 'Liniște', 'Magic Garden', 'Izvoare termale']} class="bg-cream-100 text-forest-800" />
+
+  <!-- CAMERE (scroll orizontal pe desktop) -->
+  <section class="relative bg-forest-900 text-cream-50 lg:h-[100svh]" data-hscroll>
+    <div class="flex h-full flex-col justify-center py-24 lg:py-0">
+      <div class="container-x flex flex-col justify-between gap-8 md:flex-row md:items-end">
+        <div class="max-w-2xl">
+          <p class="eyebrow eyebrow-light" data-reveal>Cazare</p>
+          <h2 class="display-lg mt-6" data-split>Camere & <em class="italic-serif text-brass-300">apartamente</em></h2>
+        </div>
+        <div class="max-w-sm" data-reveal>
+          <p class="text-cream-100/70">Șase tipuri de camere, de la camera dublă Deluxe până la apartamentul cu trei camere, pentru șase persoane.</p>
+          <a href={url('/camere')} class="arrow-link mt-6 text-brass-300">Toate camerele și tarifele <ArrowRight size={16} /></a>
+        </div>
+      </div>
+
+      <div class="h-scroll mt-12 overflow-x-auto lg:mt-14 lg:overflow-hidden" data-hscroll-viewport>
+        <div class="flex w-max gap-5 px-[var(--gutter)] md:gap-7" data-hscroll-track>
+          {rooms.map((room, i) => <RoomCard room={room} index={i} class="w-[80vw] shrink-0 sm:w-[26rem] lg:w-[29vw] lg:max-w-[27rem]" />)}
+          <a
+            href={url('/camere')}
+            class="group flex w-[80vw] shrink-0 flex-col justify-between rounded-[1.75rem] border border-cream-100/15 p-8 transition-colors duration-500 hover:border-brass-400 sm:w-[20rem] lg:w-[22vw]"
+          >
+            <span class="eyebrow eyebrow-light">Tarife</span>
+            <span>
+              <span class="block font-serif text-4xl leading-tight">Vedeți toate tarifele</span>
+              <span class="mt-6 flex h-14 w-14 items-center justify-center rounded-full bg-brass-400 text-forest-900 transition-transform duration-500 group-hover:rotate-45">
+                <ArrowUpRight size={22} />
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="container-x mt-10 hidden lg:block">
+        <div class="h-px w-full bg-cream-100/15">
+          <div class="h-px origin-left scale-x-0 bg-brass-400" data-hscroll-bar></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAGIC GARDEN -->
+  <section class="relative overflow-hidden bg-cream-100">
+    <div class="relative h-[90svh] min-h-[560px] overflow-hidden">
+      <div class="absolute inset-x-0 -top-[12%] h-[124%]" data-parallax="10">
+        <Image src={photo('exterior/10')} alt="Grădina Magic Garden, cu alei, brazi și foișor" widths={[768, 1280, 1920]} sizes="100vw" class="img-cover" />
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-forest-950/10 to-transparent"></div>
+      <div class="container-x relative flex h-full flex-col justify-end pb-16 text-white md:pb-24">
+        <p class="eyebrow eyebrow-light" data-reveal>Grădina</p>
+        <h2 class="display-xl mt-5" data-split>Magic <em class="italic-serif text-brass-300">Garden</em></h2>
+      </div>
+    </div>
+
+    <div class="container-x py-24 md:py-32">
+      <div class="grid gap-14 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <p class="lead !text-forest-900 !text-[clamp(1.3rem,2vw,1.7rem)] font-serif !leading-snug" data-reveal>
+            O grădină îngrijită, gândită pentru odihnă: foișor, bănci-leagăn, grătar și o bucătărie comună, toate la umbra copacilor.
+          </p>
+          <p class="mt-6 text-muted" data-reveal>
+            La câțiva metri de grădină curge râul Cerna. Pe mal aveți zonă de plajă și loc de pescuit, iar seara parcarea pensiunii rămâne luminată.
+          </p>
+          <a href={url('/facilitati')} class="arrow-link mt-10 text-forest-800" data-reveal>Descoperă facilitățile <ArrowRight size={16} /></a>
+        </div>
+        <div class="grid grid-cols-2 gap-4 md:gap-6 lg:col-span-7">
+          <div class="aspect-[3/4] overflow-hidden rounded-[1.5rem]" data-reveal-img>
+            <Image src={photo('rau/02')} alt="Șezlonguri pe malul râului Cerna" widths={[400, 700]} sizes="(min-width: 1024px) 28vw, 50vw" class="img-cover" />
+          </div>
+          <div class="mt-16 aspect-[3/4] overflow-hidden rounded-[1.5rem] md:mt-28" data-reveal-img data-delay="0.15">
+            <Image src={photo('gradina/02')} alt="Bancă-leagăn în grădina pensiunii" widths={[400, 700]} sizes="(min-width: 1024px) 28vw, 50vw" class="img-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACILITĂȚI -->
+  <section class="bg-cream-100 pb-28 md:pb-40">
+    <div class="container-x">
+      <div class="mb-16 flex flex-col justify-between gap-8 md:flex-row md:items-end">
+        <SectionHeading eyebrow="Facilități" title='Tot ce vă trebuie, <em class="italic-serif">într-un singur loc</em>' size="md" />
+        <a href={url('/facilitati')} class="btn btn-ghost-dark shrink-0" data-reveal>Toate facilitățile <ArrowRight size={16} /></a>
+      </div>
+      <FacilityGrid limit={8} />
+    </div>
+  </section>
+
+  <!-- RESTAURANT -->
+  <section class="grain relative overflow-hidden bg-forest-900 py-28 text-cream-50 md:py-40">
+    <div class="container-x grid items-center gap-16 lg:grid-cols-12 lg:gap-12">
+      <div class="relative lg:col-span-6">
+        <div class="aspect-[4/5] overflow-hidden rounded-[1.75rem]" data-reveal-img>
+          <Image src={photo('restaurant/01')} alt="Sala restaurantului La Johnny, cu mese aranjate" widths={[640, 1000, 1400]} sizes="(min-width: 1024px) 48vw, 100vw" class="img-cover" />
+        </div>
+        <div class="absolute -bottom-8 -right-4 hidden h-40 w-40 items-center justify-center rounded-full bg-brass-400 text-center text-forest-900 md:flex lg:-right-10" data-reveal>
+          <span class="font-serif text-lg italic leading-tight">Restaurant<br />La Johnny</span>
+        </div>
+      </div>
+      <div class="lg:col-span-5 lg:col-start-8">
+        <p class="eyebrow eyebrow-light" data-reveal>Restaurant & bar</p>
+        <h2 class="display-lg mt-6" data-split>La masă, <em class="italic-serif text-brass-300">la Johnny</em></h2>
+        <p class="mt-8 text-lg text-cream-100/70" data-reveal>
+          Restaurantul pensiunii vă așteaptă la micul dejun, la prânz și la cină. Mai aveți un bar și o sală de conferințe, toate sub același acoperiș.
+        </p>
+        <ul class="mt-12 space-y-5" data-reveal>
+          {
+            meals.map((m) => (
+              <li class="flex items-baseline gap-4">
+                <span class="font-serif text-2xl">{m.name}</span>
+                <span class="flex-1 translate-y-[-4px] border-b border-dotted border-cream-100/25" />
+                <span class="font-serif text-2xl text-brass-300">{m.price} RON</span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-4 text-sm text-cream-100/50" data-reveal>Prețuri pe persoană.</p>
+        <a href={url('/restaurant')} class="btn btn-brass mt-12" data-reveal>Despre restaurant <ArrowRight size={16} /></a>
+      </div>
+    </div>
+  </section>
+
+  <ReviewScores />
+
+  <!-- ÎMPREJURIMI -->
+  <section class="bg-cream-100 py-28 md:py-40">
+    <div class="container-x">
+      <div class="grid gap-16 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <SectionHeading
+            eyebrow="Împrejurimi"
+            title='Stațiunea lui <em class="italic-serif">Hercule</em>'
+            text="Băile Herculane este una dintre cele mai vechi stațiuni balneare ale lumii, atestată documentar de peste 1850 de ani. Izvoare termale, baroc austriac și munții Văii Cernei, toate aproape de pensiune."
+            size="md"
+          />
+          <ul class="mt-12 border-t border-forest-900/10" data-reveal>
+            {
+              nearby.slice(0, 7).map((n) => (
+                <li class="flex items-baseline justify-between gap-6 border-b border-forest-900/10 py-4">
+                  <span class="text-forest-900">{n.name}</span>
+                  <span class="shrink-0 font-serif text-xl text-brass-600">{n.km} km</span>
+                </li>
+              ))
+            }
+          </ul>
+          <a href={url('/imprejurimi')} class="arrow-link mt-10 text-forest-800" data-reveal>Descoperă împrejurimile <ArrowRight size={16} /></a>
+        </div>
+        <div class="grid grid-cols-6 grid-rows-[repeat(6,minmax(0,1fr))] gap-4 lg:col-span-7 lg:h-[46rem]">
+          <div class="col-span-6 row-span-3 aspect-[16/10] overflow-hidden rounded-[1.5rem] lg:aspect-auto" data-reveal-img>
+            <Image src={photo('imprejurimi/01')} alt="Stațiunea Băile Herculane, văzută de sus" widths={[640, 1000, 1400]} sizes="(min-width: 1024px) 55vw, 100vw" class="img-cover" />
+          </div>
+          <div class="col-span-3 row-span-3 aspect-square overflow-hidden rounded-[1.5rem] lg:aspect-auto" data-reveal-img data-delay="0.1">
+            <Image src={photo('imprejurimi/03')} alt="Valea Cernei, văzută de sus" widths={[400, 700]} sizes="(min-width: 1024px) 27vw, 50vw" class="img-cover" />
+          </div>
+          <div class="col-span-3 row-span-3 aspect-square overflow-hidden rounded-[1.5rem] lg:aspect-auto" data-reveal-img data-delay="0.2">
+            <Image src={photo('imprejurimi/04')} alt="Stânci de calcar în împrejurimi" widths={[400, 700]} sizes="(min-width: 1024px) 27vw, 50vw" class="img-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <VoucherBand />
+
+  <CTASection />
+</BaseLayout>
+
+<script>
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  if (hero) {
+    const slides = Array.from(hero.querySelectorAll<HTMLElement>('[data-slide]'));
+    const current = hero.querySelector<HTMLElement>('[data-slide-current]');
+    const progress = hero.querySelector<HTMLElement>('[data-slide-progress]');
+    const DURATION = 6500;
+    let index = 0;
+    let timer: number | undefined;
+
+    const animateProgress = () => {
+      progress?.animate([{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], {
+        duration: DURATION,
+        easing: 'linear',
+        fill: 'forwards',
+      });
+    };
+
+    const show = (i: number) => {
+      slides[index].classList.remove('is-active');
+      index = (i + slides.length) % slides.length;
+      const next = slides[index];
+      next.querySelector('img')?.setAttribute('loading', 'eager');
+      next.classList.add('is-active');
+      if (current) current.textContent = String(index + 1).padStart(2, '0');
+      animateProgress();
+    };
+
+    const start = () => {
+      stop();
+      timer = window.setInterval(() => show(index + 1), DURATION);
+    };
+    const stop = () => window.clearInterval(timer);
+
+    // Preîncarcă slide-urile următoare după ce pagina s-a încărcat
+    window.addEventListener('load', () => {
+      slides.slice(1).forEach((s) => s.querySelector('img')?.setAttribute('loading', 'eager'));
+    });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && slides.length > 1) {
+      animateProgress();
+      start();
+      document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    }
+  }
+</script>

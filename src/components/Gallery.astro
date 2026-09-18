@@ -1,0 +1,162 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image, getImage } from 'astro:assets';
+
+export interface GalleryItem {
+  src: ImageMetadata;
+  alt: string;
+  cat?: string;
+}
+
+interface Props {
+  items: GalleryItem[];
+  filters?: { id: string; label: string }[];
+  layout?: 'masonry' | 'grid';
+}
+
+const { items, filters, layout = 'masonry' } = Astro.props;
+
+const prepared = await Promise.all(
+  items.map(async (item) => {
+    const full = await getImage({ src: item.src, width: Math.min(item.src.width, 1920), format: 'webp', quality: 82 });
+    return { ...item, full };
+  }),
+);
+---
+
+<div data-gallery-root>
+  {
+    filters && (
+      <div class="mb-12 flex flex-wrap gap-2.5" role="tablist" aria-label="Filtrează galeria" data-reveal>
+        <button type="button" class="filter-chip is-active" data-filter="all" role="tab" aria-selected="true">
+          Toate <span class="opacity-50">{items.length}</span>
+        </button>
+        {filters.map((f) => (
+          <button type="button" class="filter-chip" data-filter={f.id} role="tab" aria-selected="false">
+            {f.label} <span class="opacity-50">{items.filter((i) => i.cat === f.id).length}</span>
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  <div
+    data-pswp-gallery
+    class:list={[layout === 'masonry' ? 'masonry' : 'grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4']}
+  >
+    {
+      prepared.map((item, i) => (
+        <a
+          href={item.full.src}
+          data-pswp-width={item.full.attributes.width}
+          data-pswp-height={item.full.attributes.height}
+          data-cat={item.cat}
+          class:list={[
+            'gallery-item group relative block overflow-hidden rounded-2xl bg-cream-200',
+            layout === 'grid' && i === 0 && 'col-span-2 row-span-2',
+            layout === 'grid' && 'aspect-[4/3]',
+            layout === 'grid' && i === 0 && '!aspect-auto',
+          ]}
+          aria-label={`Mărește: ${item.alt}`}
+        >
+          <Image
+            src={item.src}
+            alt={item.alt}
+            widths={[400, 700, 1000]}
+            sizes={layout === 'grid' && i === 0 ? '(min-width: 768px) 66vw, 100vw' : '(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw'}
+            class:list={[
+              'w-full transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-[1.05]',
+              layout === 'grid' ? 'h-full object-cover' : 'h-auto',
+            ]}
+          />
+          <span class="pointer-events-none absolute inset-0 bg-forest-950/0 transition-colors duration-500 group-hover:bg-forest-950/20" />
+          <span class="pointer-events-none absolute bottom-4 right-4 flex h-11 w-11 scale-75 items-center justify-center rounded-full bg-cream-50/90 text-forest-900 opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+            </svg>
+          </span>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style is:global>
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid rgb(23 34 28 / 0.18);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: all 0.4s var(--ease-out-expo);
+  }
+  .filter-chip:hover {
+    border-color: var(--color-forest-800);
+  }
+  .filter-chip.is-active {
+    background: var(--color-forest-800);
+    border-color: var(--color-forest-800);
+    color: var(--color-cream-50);
+  }
+  .pswp {
+    --pswp-bg: #0f1713;
+  }
+</style>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  document.querySelectorAll<HTMLElement>('[data-gallery-root]').forEach((root) => {
+    const gallery = root.querySelector<HTMLElement>('[data-pswp-gallery]');
+    if (!gallery) return;
+
+    const lightbox = new PhotoSwipeLightbox({
+      gallery,
+      children: 'a[data-pswp-width]:not([hidden])',
+      pswpModule: () => import('photoswipe'),
+      bgOpacity: 0.95,
+      showHideAnimationType: 'zoom',
+      wheelToZoom: true,
+      closeTitle: 'Închide',
+      zoomTitle: 'Mărește',
+      arrowPrevTitle: 'Anterioara',
+      arrowNextTitle: 'Următoarea',
+      errorMsg: 'Imaginea nu a putut fi încărcată.',
+    });
+    lightbox.init();
+
+    const chips = root.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const items = gallery.querySelectorAll<HTMLElement>('a[data-cat]');
+    chips.forEach((chip) =>
+      chip.addEventListener('click', () => {
+        const filter = chip.dataset.filter;
+        chips.forEach((c) => {
+          const active = c === chip;
+          c.classList.toggle('is-active', active);
+          c.setAttribute('aria-selected', String(active));
+        });
+        items.forEach((item) => {
+          const show = filter === 'all' || item.dataset.cat === filter;
+          item.hidden = !show;
+          if (show) {
+            item.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], {
+              duration: 600,
+              easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            });
+          }
+        });
+        requestAnimationFrame(() => {
+          window.__lenis?.resize();
+          ScrollTrigger.refresh();
+        });
+      }),
+    );
+  });
+</script>

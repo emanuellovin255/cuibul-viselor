@@ -1,0 +1,107 @@
+---
+import { Phone, Mail, MapPin, ArrowUpRight, Ticket } from '@lucide/astro';
+import Logo from './Logo.astro';
+import { nav, site, meals, mapsLink } from '../data/site';
+import { url } from '../lib/url';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="grain relative overflow-hidden bg-forest-950 pb-28 text-cream-100 lg:pb-0">
+  <div class="container-x relative pt-24 lg:pt-32">
+    <div class="grid gap-14 lg:grid-cols-12 lg:gap-10">
+      <div class="lg:col-span-4">
+        <Logo id="logo-footer" class="text-cream-50" />
+        <p class="mt-7 max-w-sm text-[0.95rem] leading-relaxed text-cream-100/65">
+          Pensiune de trei stele pe malul Cernei, în Băile Herculane. Camere și apartamente, restaurant propriu, spa și o grădină în care timpul trece altfel.
+        </p>
+        <div class="mt-8 inline-flex items-start gap-3 rounded-2xl border border-cream-100/10 bg-cream-100/[0.04] p-4 text-sm text-cream-100/80">
+          <Ticket size={20} stroke-width={1.5} class="mt-0.5 shrink-0 text-brass-400" />
+          <span>Acceptăm plata cu tichete de vacanță și card de vacanță.</span>
+        </div>
+      </div>
+
+      <div class="lg:col-span-3">
+        <h3 class="eyebrow eyebrow-light font-sans">Contact</h3>
+        <ul class="mt-6 space-y-4 text-[0.95rem]">
+          <li>
+            <a href={mapsLink} target="_blank" rel="noopener" class="group flex gap-3 text-cream-100/80 transition-colors hover:text-cream-50">
+              <MapPin size={18} stroke-width={1.5} class="mt-1 shrink-0 text-brass-400" />
+              <span>{site.address.street}<br />{site.address.city}, {site.address.county}<br />{site.address.zip}</span>
+            </a>
+          </li>
+          <li>
+            <a href={site.phoneHref} class="flex items-center gap-3 text-cream-100/80 transition-colors hover:text-cream-50">
+              <Phone size={18} stroke-width={1.5} class="shrink-0 text-brass-400" />
+              {site.phone}
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${site.email}`} class="flex items-center gap-3 break-all text-cream-100/80 transition-colors hover:text-cream-50">
+              <Mail size={18} stroke-width={1.5} class="shrink-0 text-brass-400" />
+              {site.email}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-2">
+        <h3 class="eyebrow eyebrow-light font-sans">Explorați</h3>
+        <ul class="mt-6 space-y-3 text-[0.95rem]">
+          <li><a href={url('/')} class="link-underline text-cream-100/80 hover:text-cream-50">Acasă</a></li>
+          {
+            nav.map((item) => (
+              <li>
+                <a href={url(item.href)} class="link-underline text-cream-100/80 hover:text-cream-50">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="lg:col-span-3">
+        <h3 class="eyebrow eyebrow-light font-sans">Restaurant</h3>
+        <ul class="mt-6 space-y-3 text-[0.95rem]">
+          {
+            meals.map((m) => (
+              <li class="flex items-baseline gap-3">
+                <span class="text-cream-100/80">{m.name}</span>
+                <span class="flex-1 border-b border-dotted border-cream-100/20" />
+                <span class="font-serif text-lg text-cream-50">{m.price} RON</span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-3 text-xs text-cream-100/50">Prețuri pe persoană.</p>
+        <div class="mt-8 grid grid-cols-2 gap-4 text-sm">
+          <div>
+            <p class="text-cream-100/50">Check-in</p>
+            <p class="font-serif text-lg text-cream-50">{site.checkIn}</p>
+          </div>
+          <div>
+            <p class="text-cream-100/50">Check-out</p>
+            <p class="font-serif text-lg text-cream-50">{site.checkOut}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-20 flex flex-col items-start justify-between gap-6 border-t border-cream-100/10 py-8 text-xs text-cream-100/50 md:flex-row md:items-center">
+      <p>© {year} {site.name} – {site.alias}. Toate drepturile rezervate.</p>
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <a href={site.bookingUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-1 hover:text-cream-50">
+          Booking.com <ArrowUpRight size={13} />
+        </a>
+        <a href={url('/rezervare')} class="hover:text-cream-50">Condiții de rezervare</a>
+      </div>
+    </div>
+  </div>
+
+  <div aria-hidden="true" class="pointer-events-none select-none overflow-hidden">
+    <p class="whitespace-nowrap text-center font-serif text-[21vw] leading-[0.78] tracking-[-0.05em] text-cream-100/[0.05]" style="font-variation-settings: 'opsz' 144, 'SOFT' 100;">
+      Cuibul <span class="italic-serif">Viselor</span>
+    </p>
+  </div>
+</footer>

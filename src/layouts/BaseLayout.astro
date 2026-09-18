@@ -1,0 +1,131 @@
+---
+import '../styles/global.css';
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileCTA from '../components/MobileCTA.astro';
+import { site } from '../data/site';
+import { minPrice } from '../data/rooms';
+import { photo } from '../lib/photos';
+import { url } from '../lib/url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: ImageMetadata;
+  intro?: boolean;
+}
+
+const { title, description = site.description, image = photo('exterior/01'), intro = false } = Astro.props;
+
+const fullTitle = title
+  ? `${title} · ${site.shortName} – ${site.alias}, Băile Herculane`
+  : `${site.name} – ${site.alias} *** | Cazare pe malul Cernei, Băile Herculane`;
+
+const og = await getImage({ src: image, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(og.src, Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  name: `${site.name} – ${site.alias}`,
+  description: site.description,
+  url: new URL(url('/'), Astro.site).href,
+  image: ogImage.href,
+  telephone: '+40756063377',
+  email: site.email,
+  priceRange: `de la ${minPrice} RON / noapte`,
+  starRating: { '@type': 'Rating', ratingValue: String(site.stars) },
+  checkinTime: '16:00',
+  checkoutTime: '10:30',
+  petsAllowed: 'La cerere',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.county,
+    postalCode: site.address.zip,
+    addressCountry: 'RO',
+  },
+  amenityFeature: ['Parcare privată', 'WiFi gratuit', 'Restaurant', 'Bar', 'Spa', 'Grădină', 'Recepție nonstop'].map((name) => ({
+    '@type': 'LocationFeatureSpecification',
+    name,
+    value: true,
+  })),
+  knowsLanguage: ['ro', 'en', 'de'],
+  sameAs: [site.bookingUrl],
+};
+---
+
+<!doctype html>
+<html lang="ro" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+    <meta name="theme-color" content="#17221c" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        root.classList.remove('no-js');
+        root.classList.add('js');
+        try {
+          if (sessionStorage.getItem('cv-intro')) root.classList.add('no-intro');
+          else sessionStorage.setItem('cv-intro', '1');
+        } catch (e) {
+          root.classList.add('no-intro');
+        }
+        setTimeout(function () {
+          if (!window.__motionReady) root.classList.add('motion-fallback');
+        }, 3000);
+      })();
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-cream-50 focus:px-5 focus:py-3 focus:text-sm">
+      Sari la conținut
+    </a>
+
+    {
+      intro && (
+        <div class="intro-curtain fixed inset-0 z-[90] flex items-center justify-center bg-forest-900 text-cream-50" aria-hidden="true">
+          <div class="overflow-hidden">
+            <p class="intro-word font-serif text-5xl tracking-[-0.03em] md:text-7xl">
+              Cuibul <span class="italic-serif text-brass-300">Viselor</span>
+            </p>
+          </div>
+        </div>
+      )
+    }
+
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <MobileCTA />
+
+    <script>
+      import '../scripts/motion.ts';
+    </script>
+  </body>
+</html>

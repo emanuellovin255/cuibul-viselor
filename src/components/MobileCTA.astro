@@ -1,0 +1,29 @@
+---
+import { Phone, CalendarDays } from '@lucide/astro';
+import { site } from '../data/site';
+import { url } from '../lib/url';
+---
+
+<div data-mobile-cta class="mobile-cta fixed inset-x-3 bottom-3 z-30 lg:hidden">
+  <div class="grid grid-cols-2 gap-2 rounded-full border border-white/10 bg-forest-900/90 p-1.5 shadow-2xl shadow-forest-950/30 backdrop-blur-xl">
+    <a href={site.phoneHref} class="flex items-center justify-center gap-2 rounded-full py-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-cream-50">
+      <Phone size={15} stroke-width={1.8} /> Sună
+    </a>
+    <a href={url('/rezervare')} class="flex items-center justify-center gap-2 rounded-full bg-brass-400 py-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-forest-900">
+      <CalendarDays size={15} stroke-width={1.8} /> Rezervă
+    </a>
+  </div>
+</div>
+
+<style>
+  .mobile-cta {
+    transform: translateY(140%);
+    transition: transform 0.7s var(--ease-out-expo);
+  }
+  :global(.cta-visible) .mobile-cta {
+    transform: none;
+  }
+  :global(.menu-open) .mobile-cta {
+    transform: translateY(140%);
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { ArrowUpRight, Phone } from '@lucide/astro';
+import { site } from '../data/site';
+import { url } from '../lib/url';
+import { photo } from '../lib/photos';
+
+interface Props {
+  image?: ImageMetadata;
+  title?: string;
+  text?: string;
+}
+
+const {
+  image = photo('exterior/05'),
+  title = 'Vă așteptăm în <em class="italic-serif">Cuibul Viselor</em>',
+  text = 'Trimiteți-ne perioada dorită și numărul de persoane și revenim cu disponibilitatea și oferta.',
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-forest-900 text-white">
+  <div class="absolute inset-x-0 -top-[15%] h-[130%]" data-parallax="10">
+    <Image src={image} alt="" widths={[768, 1280, 1920]} sizes="100vw" class="img-cover" />
+  </div>
+  <div class="absolute inset-0 bg-forest-950/60"></div>
+  <div class="container-x relative flex min-h-[80svh] flex-col items-center justify-center py-32 text-center">
+    <p class="eyebrow eyebrow-light justify-center" data-reveal>Rezervări</p>
+    <h2 class="display-lg mt-7 max-w-4xl" data-split set:html={title} />
+    <p class="mt-8 max-w-xl text-lg text-white/80" data-reveal>{text}</p>
+    <div class="mt-12 flex flex-col items-center gap-4 sm:flex-row" data-reveal>
+      <a href={url('/rezervare')} class="btn btn-brass">
+        Cere o ofertă <ArrowUpRight size={16} />
+      </a>
+      <a href={site.phoneHref} class="btn btn-ghost-light">
+        <Phone size={15} /> {site.phone}
+      </a>
+    </div>
+  </div>
+</section>
