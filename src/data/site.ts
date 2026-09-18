@@ -4,7 +4,7 @@ export const site = {
   alias: 'La Johnny',
   stars: 3,
   description:
-    'Pensiunea Cuibul Viselor – La Johnny ***, pe malul Cernei, în Băile Herculane. Camere și apartamente, restaurant, spa, grădină cu foișor și zonă de plajă pe râu.',
+    'Pensiune de 3 stele pe malul Cernei, în Băile Herculane: camere și apartamente, restaurant La Johnny, spa, grădină cu foișor și plajă pe râu.',
   phone: '0756 06 33 77',
   phoneHref: 'tel:+40756063377',
   email: 'cuibulviselor@yahoo.com',

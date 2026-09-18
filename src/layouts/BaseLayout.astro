@@ -19,9 +19,12 @@ interface Props {
 
 const { title, description = site.description, image = photo('exterior/01'), intro = false } = Astro.props;
 
+const longTitle = `${title} | ${site.shortName}, Băile Herculane`;
 const fullTitle = title
-  ? `${title} · ${site.shortName} – ${site.alias}, Băile Herculane`
-  : `${site.name} – ${site.alias} *** | Cazare pe malul Cernei, Băile Herculane`;
+  ? longTitle.length <= 60
+    ? longTitle
+    : `${title} | ${site.shortName}`
+  : `${site.name} – Cazare în Băile Herculane`;
 
 const og = await getImage({ src: image, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -68,7 +71,7 @@ const jsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
-    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+    <link rel="sitemap" href={url('/sitemap.xml')} />
     <meta name="theme-color" content="#17221c" />
 
     <meta property="og:type" content="website" />

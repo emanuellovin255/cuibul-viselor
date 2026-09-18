@@ -9,17 +9,17 @@ import { url } from '../lib/url';
   data-booking-bar
   class="booking-bar grid w-full grid-cols-2 overflow-hidden rounded-[1.5rem] border border-white/15 bg-forest-950/45 text-white backdrop-blur-xl md:grid-cols-[1fr_1fr_0.8fr_auto] md:rounded-full"
 >
-  <label class="bar-field border-b border-r border-white/10 md:border-b-0">
+  <label for="bar-sosire" class="bar-field border-b border-r border-white/10 md:border-b-0">
     <span>Sosire</span>
-    <input type="date" name="sosire" required data-date-in />
+    <input id="bar-sosire" type="date" name="sosire" required aria-label="Data sosirii" data-date-in />
   </label>
-  <label class="bar-field border-b border-white/10 md:border-b-0 md:border-r">
+  <label for="bar-plecare" class="bar-field border-b border-white/10 md:border-b-0 md:border-r">
     <span>Plecare</span>
-    <input type="date" name="plecare" required data-date-out />
+    <input id="bar-plecare" type="date" name="plecare" required aria-label="Data plecării" data-date-out />
   </label>
-  <label class="bar-field col-span-2 md:col-span-1">
+  <label for="bar-adulti" class="bar-field col-span-2 md:col-span-1">
     <span>Oaspeți</span>
-    <select name="adulti">
+    <select id="bar-adulti" name="adulti" aria-label="Număr de adulți">
       {[1, 2, 3, 4, 5, 6].map((n) => <option value={n} selected={n === 2}>{n} {n === 1 ? 'adult' : 'adulți'}</option>)}
     </select>
   </label>
