@@ -5,3 +5,4 @@ src/assets/photos/_raw/
 .DS_Store
 *.log
 .env
+.claude/

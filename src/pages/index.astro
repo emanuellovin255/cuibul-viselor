@@ -44,8 +44,8 @@ const slides = [
           </div>
         ))
       }
-      <div class="absolute inset-0 bg-gradient-to-b from-forest-950/55 via-forest-950/15 to-forest-950/85"></div>
-      <div class="absolute inset-0 bg-gradient-to-r from-forest-950/50 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-forest-950/60 via-forest-950/35 to-forest-950/90"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-forest-950/60 via-forest-950/20 to-transparent"></div>
     </div>
 
     <div class="container-x relative flex flex-1 flex-col justify-end pb-10 pt-36 md:pb-14" data-hero-fade>
@@ -177,10 +177,10 @@ const slides = [
 
       <div class="h-scroll mt-12 overflow-x-auto lg:mt-14 lg:overflow-hidden" data-hscroll-viewport>
         <div class="flex w-max gap-5 px-[var(--gutter)] md:gap-7" data-hscroll-track>
-          {rooms.map((room, i) => <RoomCard room={room} index={i} class="w-[80vw] shrink-0 sm:w-[26rem] lg:w-[29vw] lg:max-w-[27rem]" />)}
+          {rooms.map((room, i) => <RoomCard room={room} index={i} class="w-[80vw] shrink-0 sm:w-[24rem] lg:w-[min(26vw,calc((100svh-21rem)*0.8))]" />)}
           <a
             href={url('/camere')}
-            class="group flex w-[80vw] shrink-0 flex-col justify-between rounded-[1.75rem] border border-cream-100/15 p-8 transition-colors duration-500 hover:border-brass-400 sm:w-[20rem] lg:w-[22vw]"
+            class="group flex w-[80vw] shrink-0 flex-col justify-between rounded-[1.75rem] border border-cream-100/15 p-8 transition-colors duration-500 hover:border-brass-400 sm:w-[20rem] lg:w-[18vw]"
           >
             <span class="eyebrow eyebrow-light">Tarife</span>
             <span>

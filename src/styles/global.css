@@ -347,6 +347,12 @@
   visibility: visible !important;
 }
 
+/* Măștile de linie create de SplitText: loc pentru descendente (g, y, ș) și italice */
+[data-split] > .split-line-mask {
+  padding: 0.06em 0.12em 0.16em;
+  margin: -0.06em -0.12em -0.16em;
+}
+
 /* Hero Ken Burns */
 .hero-slide {
   opacity: 0;
