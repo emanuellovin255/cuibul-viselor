@@ -39,10 +39,15 @@ export const nav = [
 ];
 
 export const meals = [
-  { name: 'Mic dejun', price: 50 },
-  { name: 'Prânz', price: 85 },
-  { name: 'Cină', price: 75 },
+  { name: 'Mic dejun', text: 'Ouă, brânzeturi și legume proaspete, la început de zi.' },
+  { name: 'Prânz', text: 'Ciorbe în vas de lut și feluri principale, gătite pe loc.' },
+  { name: 'Cină', text: 'Grătar, păstrăv sau preparate la ceaun, după poftă.' },
 ];
+
+/** Cum se servește masa la restaurantul pensiunii. */
+export const mealNote = 'à la carte';
+export const mealNoteLong =
+  'Alegeți din meniu ce vă poftește, iar bucătăria pregătește la comandă. Nu servim meniu fix.';
 
 export const bookingSteps = [
   {
@@ -86,7 +91,7 @@ export const faq = [
   },
   {
     q: 'Se servește mic dejun?',
-    a: 'Da, în restaurantul La Johnny al pensiunii. Micul dejun costă 50 RON de persoană, prânzul 85 RON, iar cina 75 RON.',
+    a: 'Da, în restaurantul La Johnny al pensiunii, unde se servesc micul dejun, prânzul și cina. Serviciul este à la carte: comandați din meniu ce doriți, iar bucătăria pregătește la comandă. Prețurile le găsiți în meniul de la restaurant.',
   },
   {
     q: 'Există spa?',

@@ -2,7 +2,7 @@
 import { Phone, Mail, MapPin, ArrowUpRight, Ticket } from '@lucide/astro';
 import Logo from './Logo.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
-import { nav, site, meals, mapsLink } from '../data/site';
+import { nav, site, meals, mealNote, mapsLink } from '../data/site';
 import { url } from '../lib/url';
 
 const year = new Date().getFullYear();
@@ -73,15 +73,11 @@ const year = new Date().getFullYear();
         <ul class="mt-6 space-y-3 text-[0.95rem]">
           {
             meals.map((m) => (
-              <li class="flex items-baseline gap-3">
-                <span class="text-cream-100/80">{m.name}</span>
-                <span class="flex-1 border-b border-dotted border-cream-100/20" />
-                <span class="font-serif text-lg text-cream-50">{m.price} RON</span>
-              </li>
+              <li class="text-cream-100/80">{m.name}</li>
             ))
           }
         </ul>
-        <p class="mt-3 text-xs text-cream-100/65">Prețuri pe persoană.</p>
+        <p class="mt-3 text-xs text-cream-100/65">Serviciu {mealNote}, gătit la comandă.</p>
         <div class="mt-8 grid grid-cols-2 gap-4 text-sm">
           <div>
             <p class="text-cream-100/65">Check-in</p>

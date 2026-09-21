@@ -7,7 +7,7 @@ import SectionHeading from '../components/SectionHeading.astro';
 import Gallery from '../components/Gallery.astro';
 import VoucherBand from '../components/VoucherBand.astro';
 import CTASection from '../components/CTASection.astro';
-import { meals } from '../data/site';
+import { meals, mealNoteLong } from '../data/site';
 import { reviews } from '../data/reviews';
 import { dishes } from '../data/dishes';
 import { photos, photo } from '../lib/photos';
@@ -20,14 +20,14 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
 
 <BaseLayout
   title="Restaurant La Johnny"
-  description="Restaurantul La Johnny al Pensiunii Cuibul Viselor din Băile Herculane: bucătărie românească de casă, ciorbe în vas de lut, păstrăv și grătar. Mic dejun 50 RON, prânz 85 RON, cină 75 RON."
+  description="Restaurantul La Johnny al Pensiunii Cuibul Viselor din Băile Herculane: bucătărie românească de casă, à la carte. Ciorbe în vas de lut, păstrăv, grătar și preparate la ceaun, gătite la comandă."
   image={photo('restaurant/02')}
 >
   <PageHero
     eyebrow="Restaurant & bar"
     crumb="Restaurant"
     title='Restaurantul <em class="italic-serif text-brass-300">La Johnny</em>'
-    subtitle="Micul dejun, prânzul și cina se servesc în restaurantul pensiunii, într-o sală luminoasă, cu ferestre mari."
+    subtitle="Micul dejun, prânzul și cina se servesc à la carte, în restaurantul pensiunii: alegeți din meniu, iar noi gătim pe loc."
     image={photo('restaurant/02')}
     alt="Sala restaurantului La Johnny, cu barul în fundal"
   />
@@ -42,6 +42,11 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
           text="Luați masa la pensiune, fără să mai căutați un restaurant în stațiune. Dimineața, la prânz sau seara, vă așteaptă o masă pusă."
           size="md"
         />
+
+        <p class="mt-8 inline-flex items-center gap-3 rounded-full border border-brass-500/40 bg-brass-300/15 px-5 py-2.5 text-sm font-semibold text-brass-600" data-reveal>
+          <UtensilsCrossed size={16} stroke-width={1.6} /> Serviciu à la carte
+        </p>
+        <p class="mt-5 max-w-md text-muted" data-reveal>{mealNoteLong}</p>
         {
           valentina && (
             <figure class="mt-12 border-l-2 border-brass-400 pl-6" data-reveal>
@@ -53,26 +58,30 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
           )
         }
       </div>
-      <div class="grid gap-4 sm:grid-cols-3 lg:col-span-6">
+      <div class="grid gap-4 lg:col-span-6">
         {
           meals.map((m, i) => {
             const Icon = mealIcons[i];
             return (
               <div
                 class:list={[
-                  'flex flex-col justify-between rounded-[1.5rem] p-7',
-                  i === 1 ? 'bg-forest-900 text-cream-50 sm:-translate-y-6' : 'border border-forest-900/10 bg-cream-50',
+                  'flex items-start gap-6 rounded-[1.5rem] p-7 md:p-8',
+                  i === 1 ? 'bg-forest-900 text-cream-50 lg:translate-x-8' : 'border border-forest-900/10 bg-cream-50',
                 ]}
                 data-reveal
                 data-delay={i * 0.08}
               >
-                <Icon size={28} stroke-width={1.3} class={i === 1 ? 'text-brass-300' : 'text-brass-600'} />
-                <div class="mt-16">
-                  <p class="font-serif text-2xl">{m.name}</p>
-                  <p class:list={['mt-3 font-serif text-5xl leading-none', i === 1 ? 'text-brass-300' : 'text-forest-800']}>{m.price}</p>
-                  <p class:list={['mt-2 text-[0.65rem] font-bold uppercase tracking-[0.18em]', i === 1 ? 'text-cream-100/70' : 'text-muted']}>
-                    RON / persoană
-                  </p>
+                <span
+                  class:list={[
+                    'flex h-14 w-14 shrink-0 items-center justify-center rounded-full',
+                    i === 1 ? 'bg-brass-300/15 text-brass-300' : 'bg-brass-400/12 text-brass-600',
+                  ]}
+                >
+                  <Icon size={26} stroke-width={1.3} />
+                </span>
+                <div>
+                  <p class:list={['font-serif text-2xl md:text-3xl', i === 1 ? 'text-brass-300' : 'text-forest-800']}>{m.name}</p>
+                  <p class:list={['mt-2.5 text-[0.95rem] leading-relaxed', i === 1 ? 'text-cream-100/70' : 'text-muted']}>{m.text}</p>
                 </div>
               </div>
             );
@@ -115,7 +124,7 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
       </div>
 
       <p class="mt-10 max-w-2xl text-sm text-muted" data-reveal>
-        Meniul se schimbă de la o zi la alta, în funcție de sezon și de ce găsim proaspăt. Spuneți-ne din timp dacă aveți
+        Comandați din meniu ce vă poftește, iar bucătăria pregătește la comandă. Spuneți-ne din timp dacă aveți
         preferințe sau restricții alimentare și gătim pe măsură.
       </p>
     </div>
@@ -155,5 +164,5 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
   </section>
 
   <VoucherBand />
-  <CTASection image={photo('restaurant/03')} title='Rezervați cu <em class="italic-serif">masa inclusă</em>' text="Menționați în cererea de rezervare dacă doriți să luați masa la pensiune: mic dejun, prânz sau cină." />
+  <CTASection image={photo('restaurant/03')} title='Luați masa <em class="italic-serif">la noi</em>' text="Menționați în cererea de rezervare dacă doriți să luați masa la pensiune, ca să știm să vă așteptăm. Comandați apoi din meniu, iar bucătăria pregătește la comandă." />
 </BaseLayout>
