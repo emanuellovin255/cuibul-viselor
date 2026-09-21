@@ -3,6 +3,7 @@ import { Phone, ArrowUpRight } from '@lucide/astro';
 import Logo from './Logo.astro';
 import { nav, site, fullAddress } from '../data/site';
 import { url, isActive } from '../lib/url';
+import WhatsAppIcon from './WhatsAppIcon.astro';
 
 const path = Astro.url.pathname;
 ---
@@ -73,6 +74,10 @@ const path = Astro.url.pathname;
       <a href={site.phoneHref} class="flex items-center gap-3 text-lg font-semibold">
         <Phone size={18} stroke-width={1.6} />
         {site.phone}
+      </a>
+      <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-lg font-semibold">
+        <WhatsAppIcon size={18} />
+        WhatsApp
       </a>
       <p class="text-cream-100/70">{fullAddress}</p>
       <a href={url('/rezervare')} class="btn btn-brass w-full">

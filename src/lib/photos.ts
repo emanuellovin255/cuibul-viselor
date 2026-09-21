@@ -15,7 +15,7 @@ export function photos(folder: string): ImageMetadata[] {
     .map(([, mod]) => mod.default);
 }
 
-/** O poză anume, ex. photo('exterior/01'). */
+/** O poză anume, ex. photo('exterior/02'). */
 export function photo(path: string): ImageMetadata {
   const mod = modules[`${ROOT}${path}.jpg`];
   if (!mod) throw new Error(`Poza lipsește: ${path}`);

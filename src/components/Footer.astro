@@ -1,6 +1,7 @@
 ---
 import { Phone, Mail, MapPin, ArrowUpRight, Ticket } from '@lucide/astro';
 import Logo from './Logo.astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
 import { nav, site, meals, mapsLink } from '../data/site';
 import { url } from '../lib/url';
 
@@ -34,6 +35,12 @@ const year = new Date().getFullYear();
             <a href={site.phoneHref} class="flex items-center gap-3 text-cream-100/80 transition-colors hover:text-cream-50">
               <Phone size={18} stroke-width={1.5} class="shrink-0 text-brass-400" />
               {site.phone}
+            </a>
+          </li>
+          <li>
+            <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-cream-100/80 transition-colors hover:text-cream-50">
+              <WhatsAppIcon size={18} class="shrink-0 text-brass-400" />
+              WhatsApp: {site.whatsapp}
             </a>
           </li>
           <li>

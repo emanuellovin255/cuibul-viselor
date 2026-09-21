@@ -5,6 +5,7 @@ import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import MapEmbed from '../components/MapEmbed.astro';
 import VoucherBand from '../components/VoucherBand.astro';
+import WhatsAppIcon from '../components/WhatsAppIcon.astro';
 import { rooms } from '../data/rooms';
 import { site, fullAddress, bookingSteps, bookingRules, policies, faq } from '../data/site';
 import { photo } from '../lib/photos';
@@ -31,7 +32,8 @@ import { photo } from '../lib/photos';
         <p class="eyebrow" data-reveal>Cerere de rezervare</p>
         <h2 class="display-md mt-6" data-split>Trimiteți-ne <em class="italic-serif">cererea</em></h2>
         <p class="mt-6 max-w-xl text-muted" data-reveal>
-          Completați formularul și apăsați „Trimite cererea”. Se va deschide aplicația de email cu mesajul gata scris, către {site.email}. Detaliile rezervării rămân astfel în scris.
+          Completați formularul și apăsați „Trimite cererea”. Cererea ajunge direct la noi, pe {site.email}, și vă răspundem cu
+          disponibilitatea și oferta. Dacă vă grăbiți, scrieți-ne pe WhatsApp sau sunați.
         </p>
 
         <form class="mt-12 grid gap-x-8 gap-y-9 sm:grid-cols-2" data-booking-form novalidate data-reveal>
@@ -71,25 +73,40 @@ import { photo } from '../lib/photos';
             <input id="f-telefon" name="telefon" type="tel" autocomplete="tel" required placeholder="07xx xxx xxx" />
           </div>
           <div class="field sm:col-span-2">
+            <label for="f-email">Email <span class="font-normal text-muted">(ca să vă putem răspunde în scris)</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="numele@exemplu.ro" />
+          </div>
+
+          <div class="field sm:col-span-2" aria-hidden="true" hidden>
+            <label for="f-website">Nu completați acest câmp</label>
+            <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="field sm:col-span-2">
             <label for="f-mesaj">Mesaj</label>
             <textarea id="f-mesaj" name="mesaj" rows="4" placeholder="Masă inclusă, ora sosirii, alte cerințe…"></textarea>
           </div>
 
           <div class="sm:col-span-2">
             <p class="hidden rounded-2xl bg-clay-500/10 p-4 text-sm text-clay-500" data-form-error role="alert"></p>
-            <div class="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <button type="submit" class="btn btn-dark">
-                Trimite cererea <Send size={15} />
+            <div class="mt-2 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+              <button type="submit" class="btn btn-dark" data-submit>
+                <span data-submit-label>Trimite cererea</span>
+                <Send size={15} />
               </button>
+              <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" class="btn btn-ghost-dark">
+                <WhatsAppIcon size={16} /> WhatsApp
+              </a>
               <a href={site.phoneHref} class="btn btn-ghost-dark">
-                <Phone size={15} /> Sau sunați: {site.phone}
+                <Phone size={15} /> {site.phone}
               </a>
             </div>
             <div class="mt-6 hidden items-start gap-3 rounded-2xl bg-river-500/10 p-5 text-sm text-forest-900" data-form-success role="status">
               <CircleCheck size={20} stroke-width={1.5} class="mt-0.5 shrink-0 text-river-500" />
-              <p>
-                Mesajul s-a deschis în aplicația de email. Dacă nu s-a deschis, scrieți-ne direct la
-                <a href={`mailto:${site.email}`} class="font-semibold underline">{site.email}</a> sau sunați la {site.phone}.
+              <p data-success-text>
+                Am primit cererea dumneavoastră. Vă răspundem în cel mai scurt timp. Dacă vă grăbiți, scrieți-ne pe
+                <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" class="font-semibold underline">WhatsApp</a>
+                sau sunați la {site.phone}.
               </p>
             </div>
           </div>
@@ -104,6 +121,13 @@ import { photo } from '../lib/photos';
             <span>
               <span class="block text-[0.65rem] font-bold uppercase tracking-[0.2em] text-cream-100/70">Telefon</span>
               <span class="font-serif text-2xl">{site.phone}</span>
+            </span>
+          </a>
+          <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" class="group flex items-center gap-5 rounded-[1.5rem] border border-forest-900/10 bg-cream-50 p-6 transition-colors hover:border-brass-500" data-reveal>
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25d366] text-white"><WhatsAppIcon size={22} /></span>
+            <span>
+              <span class="block text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted">WhatsApp</span>
+              <span class="font-serif text-2xl">{site.whatsapp}</span>
             </span>
           </a>
           <a href={`mailto:${site.email}`} class="group flex items-center gap-5 rounded-[1.5rem] border border-forest-900/10 bg-cream-50 p-6 transition-colors hover:border-brass-500" data-reveal>
@@ -231,9 +255,14 @@ import { photo } from '../lib/photos';
 
 <script>
   import { wireDates } from '../scripts/dates';
+  import { rezervareEndpoint, supabaseAnonKey, hasSupabase } from '../lib/supabase';
+
+  const EMAIL = 'cuibulviselor@yahoo.com';
+  const TELEFON = '0756 06 33 77';
 
   const form = document.querySelector<HTMLFormElement>('[data-booking-form]');
   if (form) {
+    // Preia datele din bara de căutare de pe homepage.
     const params = new URLSearchParams(window.location.search);
     const set = (name: string, value: string | null) => {
       const el = form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | null;
@@ -247,61 +276,164 @@ import { photo } from '../lib/photos';
 
     const errorBox = form.querySelector<HTMLElement>('[data-form-error]');
     const successBox = form.querySelector<HTMLElement>('[data-form-success]');
-    const EMAIL = 'cuibulviselor@yahoo.com';
+    const successText = form.querySelector<HTMLElement>('[data-success-text]');
+    const button = form.querySelector<HTMLButtonElement>('[data-submit]');
+    const buttonLabel = form.querySelector<HTMLElement>('[data-submit-label]');
 
     const fmt = (iso: string) => {
       const [y, m, d] = iso.split('-');
       return `${d}.${m}.${y}`;
     };
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-      const get = (k: string) => String(data.get(k) ?? '').trim();
+    const showError = (msg: string) => {
+      if (!errorBox) return;
+      errorBox.textContent = msg;
+      errorBox.classList.remove('hidden');
+      errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
 
-      const errors: string[] = [];
-      if (!get('sosire') || !get('plecare')) errors.push('alegeți datele de sosire și plecare');
-      else if (get('plecare') <= get('sosire')) errors.push('data plecării trebuie să fie după data sosirii');
-      if (!get('nume')) errors.push('completați numele');
-      if (!get('telefon')) errors.push('completați numărul de telefon');
-
-      if (errors.length) {
-        if (errorBox) {
-          errorBox.textContent = `Vă rugăm să ${errors.join(', ')}.`;
-          errorBox.classList.remove('hidden');
-        }
-        return;
-      }
+    const showSuccess = (html?: string) => {
       errorBox?.classList.add('hidden');
+      if (html && successText) successText.innerHTML = html;
+      successBox?.classList.remove('hidden');
+      successBox?.classList.add('flex');
+      successBox?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
 
-      const cameraSelect = form.elements.namedItem('camera') as HTMLSelectElement;
-      const camera = get('camera') ? cameraSelect.selectedOptions[0]?.textContent?.trim() : 'Oricare';
+    const setBusy = (busy: boolean) => {
+      if (button) button.disabled = busy;
+      if (buttonLabel) buttonLabel.textContent = busy ? 'Se trimite…' : 'Trimite cererea';
+    };
 
-      const nights = Math.round(
-        (new Date(get('plecare')).getTime() - new Date(get('sosire')).getTime()) / 86400000,
-      );
-      const subject = `Cerere rezervare ${fmt(get('sosire'))} – ${fmt(get('plecare'))} – ${get('nume')}`;
+    /** Plasă de siguranță: dacă serverul nu răspunde, deschidem clientul de email. */
+    const mailtoFallback = (d: Record<string, string>, nights: number) => {
+      const subject = `Cerere rezervare ${fmt(d.sosire)} – ${fmt(d.plecare)} – ${d.nume}`;
       const body = [
         'Bună ziua,',
         '',
         'Aș dori o rezervare la Pensiunea Cuibul Viselor:',
         '',
-        `Sosire: ${fmt(get('sosire'))}`,
-        `Plecare: ${fmt(get('plecare'))} (${nights} ${nights === 1 ? 'noapte' : 'nopți'})`,
-        `Adulți: ${get('adulti')}`,
-        `Copii: ${get('copii') || '0'}`,
-        `Camera: ${camera}`,
+        `Sosire: ${fmt(d.sosire)}`,
+        `Plecare: ${fmt(d.plecare)} (${nights} ${nights === 1 ? 'noapte' : 'nopți'})`,
+        `Adulți: ${d.adulti}`,
+        `Copii: ${d.copii || '0'}`,
+        `Camera: ${d.camera_nume}`,
         '',
-        `Nume: ${get('nume')}`,
-        `Telefon: ${get('telefon')}`,
-        get('mesaj') ? `\nMesaj:\n${get('mesaj')}` : '',
+        `Nume: ${d.nume}`,
+        `Telefon: ${d.telefon}`,
+        d.email ? `Email: ${d.email}` : '',
+        d.mesaj ? `\nMesaj:\n${d.mesaj}` : '',
         '',
         'Vă mulțumesc!',
-      ].join('\n');
+      ].filter(Boolean).join('\n');
 
       window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      successBox?.classList.remove('hidden');
-      successBox?.classList.add('flex');
+      showSuccess(
+        `Nu am putut trimite cererea automat, așa că am deschis aplicația dumneavoastră de email. ` +
+          `Dacă nu s-a deschis, scrieți-ne la <a href="mailto:${EMAIL}" class="font-semibold underline">${EMAIL}</a> ` +
+          `sau sunați la ${TELEFON}.`,
+      );
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (button?.disabled) return;
+
+      const data = new FormData(form);
+      const get = (k: string) => String(data.get(k) ?? '').trim();
+
+      // Validare în browser, dublată de cea de pe server.
+      const errors: string[] = [];
+      if (!get('sosire') || !get('plecare')) errors.push('alegeți datele de sosire și plecare');
+      else if (get('plecare') <= get('sosire')) errors.push('data plecării trebuie să fie după data sosirii');
+      if (!get('nume')) errors.push('completați numele');
+      if (!get('telefon')) errors.push('completați numărul de telefon');
+      if (get('email') && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(get('email'))) errors.push('verificați adresa de email');
+
+      if (errors.length) {
+        showError(`Vă rugăm să ${errors.join(', ')}.`);
+        return;
+      }
+      errorBox?.classList.add('hidden');
+
+      const cameraSelect = form.elements.namedItem('camera') as HTMLSelectElement;
+      const cameraNume = get('camera')
+        ? (cameraSelect.selectedOptions[0]?.textContent?.trim() ?? 'Oricare')
+        : 'Oricare';
+
+      const nights = Math.round(
+        (new Date(get('plecare')).getTime() - new Date(get('sosire')).getTime()) / 86400000,
+      );
+
+      const payload = {
+        tip: 'rezervare',
+        sosire: get('sosire'),
+        plecare: get('plecare'),
+        adulti: get('adulti'),
+        copii: get('copii'),
+        camera_slug: get('camera'),
+        camera_nume: cameraNume,
+        nume: get('nume'),
+        telefon: get('telefon'),
+        email: get('email'),
+        mesaj: get('mesaj'),
+        website: get('website'), // capcană anti-robot
+        pagina: window.location.pathname,
+      };
+
+      const flat: Record<string, string> = {
+        ...payload,
+        adulti: String(payload.adulti),
+        copii: String(payload.copii),
+      };
+
+      if (!hasSupabase) {
+        mailtoFallback(flat, nights);
+        return;
+      }
+
+      setBusy(true);
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 15000);
+
+        const res = await fetch(rezervareEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: supabaseAnonKey,
+            Authorization: `Bearer ${supabaseAnonKey}`,
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+        });
+        clearTimeout(timer);
+
+        const result = await res.json().catch(() => ({}) as Record<string, unknown>);
+
+        if (res.ok && result.ok) {
+          form.reset();
+          showSuccess(
+            result.duplicat
+              ? `Am primit deja cererea dumneavoastră. Vă răspundem în cel mai scurt timp.`
+              : `Am primit cererea dumneavoastră. Vă răspundem în cel mai scurt timp. Dacă vă grăbiți, ` +
+                  `scrieți-ne pe <a href="https://wa.me/40756063377" target="_blank" rel="noopener noreferrer" class="font-semibold underline">WhatsApp</a> ` +
+                  `sau sunați la ${TELEFON}.`,
+          );
+          return;
+        }
+
+        if (res.status === 422 && typeof result.error === 'string') {
+          showError(result.error);
+          return;
+        }
+
+        mailtoFallback(flat, nights);
+      } catch {
+        mailtoFallback(flat, nights);
+      } finally {
+        setBusy(false);
+      }
     });
   }
 </script>

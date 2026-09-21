@@ -6,6 +6,8 @@ export interface GalleryItem {
   src: ImageMetadata;
   alt: string;
   cat?: string;
+  /** Text afișat peste imagine, în colțul din stânga-jos. */
+  caption?: string;
 }
 
 interface Props {
@@ -70,6 +72,11 @@ const prepared = await Promise.all(
             ]}
           />
           <span class="pointer-events-none absolute inset-0 bg-forest-950/0 transition-colors duration-500 group-hover:bg-forest-950/20" />
+          {item.caption && (
+            <span class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-950/85 via-forest-950/45 to-transparent p-5 pr-16 pt-14">
+              <span class="block font-serif text-lg leading-snug text-cream-50 md:text-xl">{item.caption}</span>
+            </span>
+          )}
           <span class="pointer-events-none absolute bottom-4 right-4 flex h-11 w-11 scale-75 items-center justify-center rounded-full bg-cream-50/90 text-forest-900 opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
               <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />

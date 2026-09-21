@@ -1,15 +1,25 @@
 ---
 import { Phone, CalendarDays } from '@lucide/astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
 import { site } from '../data/site';
 import { url } from '../lib/url';
 ---
 
 <div data-mobile-cta class="mobile-cta fixed inset-x-3 bottom-3 z-30 lg:hidden">
-  <div class="grid grid-cols-2 gap-2 rounded-full border border-white/10 bg-forest-900/90 p-1.5 shadow-2xl shadow-forest-950/30 backdrop-blur-xl">
-    <a href={site.phoneHref} class="flex items-center justify-center gap-2 rounded-full py-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-cream-50">
+  <div class="grid grid-cols-[1fr_1fr_1.2fr] gap-1.5 rounded-full border border-white/10 bg-forest-900/90 p-1.5 shadow-2xl shadow-forest-950/30 backdrop-blur-xl">
+    <a href={site.phoneHref} aria-label={`Sună la ${site.phone}`} class="flex items-center justify-center gap-1.5 rounded-full py-3 text-[0.68rem] font-bold uppercase tracking-[0.12em] text-cream-50">
       <Phone size={15} stroke-width={1.8} /> Sună
     </a>
-    <a href={url('/rezervare')} class="flex items-center justify-center gap-2 rounded-full bg-brass-400 py-3 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-forest-900">
+    <a
+      href={site.whatsappHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Scrie pe WhatsApp la ${site.whatsapp}`}
+      class="flex items-center justify-center gap-1.5 rounded-full py-3 text-[0.68rem] font-bold uppercase tracking-[0.12em] text-cream-50"
+    >
+      <WhatsAppIcon size={15} /> WhatsApp
+    </a>
+    <a href={url('/rezervare')} class="flex items-center justify-center gap-1.5 rounded-full bg-brass-400 py-3 text-[0.68rem] font-bold uppercase tracking-[0.12em] text-forest-900">
       <CalendarDays size={15} stroke-width={1.8} /> Rezervă
     </a>
   </div>

@@ -9,16 +9,18 @@ import VoucherBand from '../components/VoucherBand.astro';
 import CTASection from '../components/CTASection.astro';
 import { meals } from '../data/site';
 import { reviews } from '../data/reviews';
+import { dishes } from '../data/dishes';
 import { photos, photo } from '../lib/photos';
 
 const mealIcons = [Coffee, Soup, UtensilsCrossed];
 const valentina = reviews.find((r) => r.name === 'Valentina');
 const gallery = photos('restaurant').map((src, i) => ({ src, alt: `Restaurantul La Johnny – fotografia ${i + 1}` }));
+const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }));
 ---
 
 <BaseLayout
   title="Restaurant La Johnny"
-  description="Restaurantul La Johnny al Pensiunii Cuibul Viselor din Băile Herculane: mic dejun 50 RON, prânz 85 RON, cină 75 RON de persoană. Bar și sală de conferințe."
+  description="Restaurantul La Johnny al Pensiunii Cuibul Viselor din Băile Herculane: bucătărie românească de casă, ciorbe în vas de lut, păstrăv și grătar. Mic dejun 50 RON, prânz 85 RON, cină 75 RON."
   image={photo('restaurant/02')}
 >
   <PageHero
@@ -88,6 +90,37 @@ const gallery = photos('restaurant').map((src, i) => ({ src, alt: `Restaurantul 
     <div class="absolute inset-0 bg-forest-950/35"></div>
   </section>
 
+  <!-- PREPARATE -->
+  <section class="bg-cream-100 py-24 md:py-36">
+    <div class="container-x">
+      <SectionHeading
+        eyebrow="Din bucătărie"
+        title='Bucătărie <em class="italic-serif">românească, de casă</em>'
+        text="Ciorbe în vase de lut, mămăligă cu brânză și smântână, păstrăv de munte și tocănițe gătite pe loc. Preparate așa cum se gătesc în Valea Cernei."
+        size="md"
+      />
+
+      <ul class="mt-14 grid gap-3 sm:grid-cols-3 lg:grid-cols-6" data-reveal>
+        {
+          ['Ciorbe în vas de lut', 'Mămăligă cu brânză', 'Păstrăv de munte', 'Grătar', 'Preparate la ceaun', 'Deserturi de casă'].map((t) => (
+            <li class="rounded-full border border-forest-900/12 bg-cream-50 px-5 py-3 text-center text-[0.8rem] font-semibold text-forest-800">
+              {t}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-14">
+        <Gallery items={dishItems} />
+      </div>
+
+      <p class="mt-10 max-w-2xl text-sm text-muted" data-reveal>
+        Meniul se schimbă de la o zi la alta, în funcție de sezon și de ce găsim proaspăt. Spuneți-ne din timp dacă aveți
+        preferințe sau restricții alimentare și gătim pe măsură.
+      </p>
+    </div>
+  </section>
+
   <!-- BAR / CONFERINȚE / GRĂTAR -->
   <section class="grain relative bg-forest-900 py-24 text-cream-50 md:py-36">
     <div class="container-x">
@@ -114,7 +147,7 @@ const gallery = photos('restaurant').map((src, i) => ({ src, alt: `Restaurantul 
   <section class="bg-cream-100 py-24 md:py-36">
     <div class="container-x">
       <div class="mb-14 flex items-end justify-between gap-6">
-        <h2 class="display-md" data-split>Din <em class="italic-serif">restaurant</em></h2>
+        <h2 class="display-md" data-split>Sala și <em class="italic-serif">barul</em></h2>
         <p class="text-sm text-muted" data-reveal>{gallery.length} fotografii</p>
       </div>
       <Gallery items={gallery} />

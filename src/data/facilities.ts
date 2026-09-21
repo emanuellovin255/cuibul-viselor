@@ -18,7 +18,7 @@ import {
 export const facilities = [
   { icon: Utensils, title: 'Restaurant La Johnny', text: 'Mic dejun, prânz și cină, în restaurantul pensiunii.' },
   { icon: Sparkles, title: 'Mini-piscină și spa', text: 'Spa cu hidromasaj, pentru relaxare după o zi de drumeții.' },
-  { icon: Flower2, title: 'Magic Garden', text: 'Grădină îngrijită, cu foișor și bănci-leagăn.' },
+  { icon: Flower2, title: 'Magic Garden', text: 'Grădină îngrijită, cu bănci-leagăn și peluze umbrite.' },
   { icon: WavesHorizontal, title: 'Plajă pe malul Cernei', text: 'Zonă de plajă pe râul care trece la câțiva metri de grădină.' },
   { icon: Fish, title: 'Loc de pescuit', text: 'Pe malul râului Cerna, chiar lângă pensiune.' },
   { icon: Flame, title: 'Grătar și bucătărie comună', text: 'Bucătărie echipată, cu cuptor cu microunde și ceai și cafea, plus grătar în grădină.' },

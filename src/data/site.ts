@@ -4,9 +4,11 @@ export const site = {
   alias: 'La Johnny',
   stars: 3,
   description:
-    'Pensiune de 3 stele pe malul Cernei, în Băile Herculane: camere și apartamente, restaurant La Johnny, spa, grădină cu foișor și plajă pe râu.',
+    'Pensiune de 3 stele pe malul Cernei, în Băile Herculane: camere și apartamente, restaurant La Johnny, spa, grădină și plajă pe râu.',
   phone: '0756 06 33 77',
   phoneHref: 'tel:+40756063377',
+  whatsapp: '0756 06 33 77',
+  whatsappHref: 'https://wa.me/40756063377',
   email: 'cuibulviselor@yahoo.com',
   address: {
     street: 'Strada Pecinisca nr. 2',
@@ -109,5 +111,9 @@ export const faq = [
   {
     q: 'Ce limbi se vorbesc la recepție?',
     a: 'Română, engleză și germană.',
+  },
+  {
+    q: 'Cum vă pot contacta cel mai repede?',
+    a: `Pe WhatsApp, la ${site.whatsapp}, sau telefonic la același număr. Pentru cereri scrise, folosiți formularul de pe pagina de contact ori scrieți-ne la ${site.email}.`,
   },
 ];

@@ -12,20 +12,21 @@ import VoucherBand from '../components/VoucherBand.astro';
 import CTASection from '../components/CTASection.astro';
 import { rooms, minPrice } from '../data/rooms';
 import { meals, site } from '../data/site';
+import { dishes } from '../data/dishes';
 import { nearby } from '../data/nearby';
 import { rating, formatScore } from '../data/reviews';
 import { photo } from '../lib/photos';
 import { url } from '../lib/url';
 
 const slides = [
-  { src: photo('exterior/01'), alt: 'Curtea pensiunii Cuibul Viselor, cu munții Văii Cernei în fundal' },
   { src: photo('exterior/02'), alt: 'Pensiunea Cuibul Viselor și stâncile de calcar de deasupra' },
+  { src: photo('exterior/06'), alt: 'Grădina pensiunii, cu sălcii și mușcate roșii' },
   { src: photo('rau/01'), alt: 'Zona de plajă de pe râul Cerna, lângă pensiune' },
-  { src: photo('exterior/03'), alt: 'Curtea interioară cu foișor, la poalele munților' },
+  { src: photo('exterior/15'), alt: 'Curtea pensiunii, cu sălciile de pe malul Cernei' },
 ];
 ---
 
-<BaseLayout intro image={photo('exterior/01')}>
+<BaseLayout intro image={photo('exterior/02')}>
   <!-- HERO -->
   <section class="relative flex min-h-[100svh] flex-col overflow-hidden bg-forest-950 text-white" data-hero>
     <div class="absolute inset-0">
@@ -205,7 +206,7 @@ const slides = [
   <section class="relative overflow-hidden bg-cream-100">
     <div class="relative h-[90svh] min-h-[560px] overflow-hidden">
       <div class="absolute inset-x-0 -top-[12%] h-[124%]" data-parallax="10">
-        <Image src={photo('exterior/10')} alt="Grădina Magic Garden, cu alei, brazi și foișor" widths={[768, 1280, 1920]} sizes="100vw" class="img-cover" />
+        <Image src={photo('gradina/03')} alt="Grădina Magic Garden, cu peluze și sălcii pe malul Cernei" widths={[768, 1280, 1920]} sizes="100vw" class="img-cover" />
       </div>
       <div class="absolute inset-0 bg-gradient-to-t from-forest-950/80 via-forest-950/10 to-transparent"></div>
       <div class="container-x relative flex h-full flex-col justify-end pb-16 text-white md:pb-24">
@@ -218,7 +219,7 @@ const slides = [
       <div class="grid gap-14 lg:grid-cols-12">
         <div class="lg:col-span-5">
           <p class="lead !text-forest-900 !text-[clamp(1.3rem,2vw,1.7rem)] font-serif !leading-snug" data-reveal>
-            O grădină îngrijită, gândită pentru odihnă: foișor, bănci-leagăn, grătar și o bucătărie comună, toate la umbra copacilor.
+            O grădină îngrijită, gândită pentru odihnă: bănci-leagăn, grătar și o bucătărie comună, toate la umbra copacilor.
           </p>
           <p class="mt-6 text-muted" data-reveal>
             La câțiva metri de grădină curge râul Cerna. Pe mal aveți zonă de plajă și loc de pescuit, iar seara parcarea pensiunii rămâne luminată.
@@ -263,8 +264,17 @@ const slides = [
         <p class="eyebrow eyebrow-light" data-reveal>Restaurant & bar</p>
         <h2 class="display-lg mt-6" data-split>La masă, <em class="italic-serif text-brass-300">la Johnny</em></h2>
         <p class="mt-8 text-lg text-cream-100/70" data-reveal>
-          Restaurantul pensiunii vă așteaptă la micul dejun, la prânz și la cină. Mai aveți un bar și o sală de conferințe, toate sub același acoperiș.
+          Restaurantul pensiunii vă așteaptă la micul dejun, la prânz și la cină, cu bucătărie românească de casă. Mai aveți un bar și o sală de conferințe, toate sub același acoperiș.
         </p>
+        <div class="mt-8 grid grid-cols-3 gap-3">
+          {
+            [dishes[1], dishes[9], dishes[10]].map((d, i) => (
+              <div class="aspect-square overflow-hidden rounded-2xl" data-reveal-img data-delay={i * 0.08}>
+                <Image src={d.src} alt={d.alt} widths={[240, 420]} sizes="(min-width: 1024px) 14vw, 30vw" class="img-cover" />
+              </div>
+            ))
+          }
+        </div>
         <ul class="mt-12 space-y-5" data-reveal>
           {
             meals.map((m) => (

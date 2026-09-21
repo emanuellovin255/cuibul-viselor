@@ -4,6 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Gallery, { type GalleryItem } from '../components/Gallery.astro';
 import CTASection from '../components/CTASection.astro';
 import { rooms } from '../data/rooms';
+import { dishes } from '../data/dishes';
 import { photos, photo } from '../lib/photos';
 
 const items: GalleryItem[] = [
@@ -14,6 +15,7 @@ const items: GalleryItem[] = [
   ...rooms.flatMap((r) => photos(r.folder).map((src) => ({ src, alt: r.name, cat: 'camere' }))),
   ...photos('camere/altele').map((src) => ({ src, alt: 'Cameră la Pensiunea Cuibul Viselor', cat: 'camere' })),
   ...photos('restaurant').map((src) => ({ src, alt: 'Restaurantul La Johnny', cat: 'restaurant' })),
+  ...dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name, cat: 'restaurant' })),
   ...photos('imprejurimi').map((src) => ({ src, alt: 'Împrejurimile Băilor Herculane', cat: 'imprejurimi' })),
 ];
 
@@ -46,15 +48,15 @@ const filters = [
 <BaseLayout
   title="Galerie foto a pensiunii"
   description="Galerie foto Pensiunea Cuibul Viselor din Băile Herculane: camere, restaurant, grădina Magic Garden, râul Cerna și împrejurimi."
-  image={photo('exterior/03')}
+  image={photo('exterior/02')}
 >
   <PageHero
     eyebrow="Galerie"
     crumb="Galerie"
     title='Priviți <em class="italic-serif text-brass-300">înainte să veniți</em>'
     subtitle={`${mixed.length} ${de(mixed.length)}fotografii cu pensiunea, camerele, grădina și împrejurimile Băilor Herculane.`}
-    image={photo('exterior/03')}
-    alt="Curtea interioară a pensiunii, cu munții în fundal"
+    image={photo('exterior/02')}
+    alt="Pensiunea Cuibul Viselor, cu munții Văii Cernei în fundal"
   />
 
   <section class="bg-cream-100 py-20 md:py-28">
@@ -63,5 +65,5 @@ const filters = [
     </div>
   </section>
 
-  <CTASection image={photo('exterior/05')} />
+  <CTASection image={photo('exterior/14')} />
 </BaseLayout>

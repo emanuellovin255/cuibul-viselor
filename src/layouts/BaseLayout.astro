@@ -17,7 +17,7 @@ interface Props {
   intro?: boolean;
 }
 
-const { title, description = site.description, image = photo('exterior/01'), intro = false } = Astro.props;
+const { title, description = site.description, image = photo('exterior/02'), intro = false } = Astro.props;
 
 const longTitle = `${title} | ${site.shortName}, Băile Herculane`;
 const fullTitle = title
@@ -58,7 +58,23 @@ const jsonLd = {
     value: true,
   })),
   knowsLanguage: ['ro', 'en', 'de'],
-  sameAs: [site.bookingUrl],
+  sameAs: [site.bookingUrl, site.whatsappHref],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'reservations',
+      telephone: '+40756063377',
+      email: site.email,
+      availableLanguage: ['ro', 'en', 'de'],
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      url: site.whatsappHref,
+      name: 'WhatsApp',
+      availableLanguage: ['ro', 'en', 'de'],
+    },
+  ],
 };
 ---
 
