@@ -77,7 +77,7 @@
     posterVideo: ['Imaginea afișată până pornește videoul'], textPret: ['Textul de sub preț'],
     despre: ['Secțiunea „Bine ați venit”'], citat: ['Citat mare'], text1: ['Primul paragraf'], text2: ['Al doilea paragraf'],
     pozaMare: ['Poza mare'], pozaMica: ['Poza mică'], cifre: ['Cifre'], valoare: ['Valoare'], sufix: ['După cifră', 'Ex. „ km” sau „/7”'],
-    film: ['Videoul de prezentare (după Camere)'], fisierVideo: ['Fișierul video', 'Calea videoului, ex. /video/prezentare.mp4. Se vede întreg, cu sonor la apăsare.'],
+    film: ['Videoul de prezentare (sub citatul de la „Bine ați venit”)'], fisierVideo: ['Fișierul video', 'Calea videoului, ex. /video/prezentare.mp4. Se vede întreg, cu sonor la apăsare.'],
     copertaVideo: ['Imaginea afișată înainte de pornire'],
     cuvinteBanda: ['Cuvintele care defilează'], camere: ['Camere'], gradina: ['Grădina'], textMare: ['Textul mare'],
     poza1: ['Poza 1'], poza2: ['Poza 2'], poza3: ['Poza 3'], facilitati: ['Facilități'], restaurant: ['Restaurant'],
