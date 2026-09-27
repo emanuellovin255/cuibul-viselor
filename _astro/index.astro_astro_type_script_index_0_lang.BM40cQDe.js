@@ -1,0 +1,1 @@
+var e=document.querySelector(`[data-hero-video]`);e&&(window.matchMedia(`(prefers-reduced-motion: reduce)`).matches?(e.removeAttribute(`autoplay`),e.pause()):(e.muted=!0,e.play().catch(()=>{}),document.addEventListener(`visibilitychange`,()=>document.hidden?e.pause():e.play().catch(()=>{}))));

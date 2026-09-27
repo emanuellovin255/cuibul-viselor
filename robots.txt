@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /cuibul-viselor/admin
+Disallow: /api/
 
 Sitemap: https://emanuellovin255.github.io/cuibul-viselor/sitemap.xml
