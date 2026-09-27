@@ -58,6 +58,14 @@
     "text": "Șase tipuri de camere, de la camera dublă Deluxe până la apartamentul cu trei camere, pentru șase persoane.",
     "link": "Toate camerele și tarifele"
   },
+  "film": {
+    "afiseaza": true,
+    "eticheta": "Prezentare video",
+    "titlu": "Cuibul Viselor, *în mișcare*",
+    "text": "Apăsați pe video ca să-l porniți cu sonor.",
+    "fisierVideo": "/video/prezentare.mp4",
+    "copertaVideo": "/video/prezentare-poster.jpg"
+  },
   "gradina": {
     "eticheta": "Grădina",
     "titlu": "Magic *Garden*",

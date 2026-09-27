@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { ArrowRight, ArrowUpRight, Star, BadgePercent } from '@lucide/astro';
+import { ArrowRight, ArrowUpRight, Star, BadgePercent, Play } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookingBar from '../components/BookingBar.astro';
 import Marquee from '../components/Marquee.astro';
@@ -19,6 +19,7 @@ import { photo } from '../lib/photos';
 import { url } from '../lib/url';
 
 const hero = a.hero;
+const film = a.film;
 const dishNames = new Map(restaurant.preparate.map((d) => [d.poza, d.nume]));
 const featuredDishes = a.restaurant.preparate.filter(Boolean).slice(0, 3);
 
@@ -210,6 +211,41 @@ const stats = a.cifre.map((s) => {
     </div>
   </section>
 
+  <!-- VIDEO DE PREZENTARE (format original, cu sonor la apăsare) -->
+  {
+    film?.afiseaza && film.fisierVideo && (
+      <section class="bg-cream-100 py-28 md:py-40">
+        <div class="container-x">
+          <div class="mx-auto max-w-[53rem]">
+            <p class="eyebrow" data-reveal>{film.eticheta}</p>
+            <h2 class="display-md mt-6" data-split set:html={em(film.titlu)} />
+            <div class="relative mt-12 overflow-hidden rounded-[1.75rem] bg-forest-950 shadow-2xl shadow-forest-950/20" data-reveal>
+              <video
+                class="block h-auto w-full"
+                src={url(film.fisierVideo)}
+                poster={film.copertaVideo ? url(film.copertaVideo) : undefined}
+                preload="none"
+                playsinline
+                data-film-video
+              ></video>
+              <button
+                type="button"
+                class="group absolute inset-0 flex items-center justify-center bg-forest-950/25 transition-colors duration-500 hover:bg-forest-950/10"
+                aria-label="Pornește videoul cu sonor"
+                data-film-play
+              >
+                <span class="flex h-20 w-20 items-center justify-center rounded-full bg-brass-400 text-forest-900 shadow-2xl transition-transform duration-500 group-hover:scale-110 md:h-24 md:w-24">
+                  <Play size={34} fill="currentColor" stroke-width={0} class="ml-1" />
+                </span>
+              </button>
+            </div>
+            {film.text && <p class="mt-5 text-sm text-muted" data-reveal>{film.text}</p>}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   <!-- MAGIC GARDEN -->
   <section class="relative overflow-hidden bg-cream-100">
     <div class="relative h-[90svh] min-h-[560px] overflow-hidden">
@@ -351,5 +387,17 @@ const stats = a.cifre.map((s) => {
       video.play().catch(() => {});
       document.addEventListener('visibilitychange', () => (document.hidden ? video.pause() : video.play().catch(() => {})));
     }
+  }
+
+  // Videoul de prezentare: la apăsare pornește cu sonor și primește controalele browserului.
+  const film = document.querySelector<HTMLVideoElement>('[data-film-video]');
+  const filmPlay = document.querySelector<HTMLButtonElement>('[data-film-play]');
+  if (film && filmPlay) {
+    filmPlay.addEventListener('click', () => {
+      filmPlay.remove();
+      film.controls = true;
+      film.muted = false;
+      film.play().catch(() => {});
+    });
   }
 </script>
