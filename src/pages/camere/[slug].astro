@@ -1,12 +1,14 @@
 ---
 import { Image } from 'astro:assets';
-import { ArrowRight, ArrowLeft, Users, Maximize, BedDouble, Eye, Check, Phone, Info } from '@lucide/astro';
+import { ArrowRight, ArrowLeft, Users, Maximize, BedDouble, Eye, Check, Mail, Info } from '@lucide/astro';
+import WhatsAppIcon from '../../components/WhatsAppIcon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Gallery from '../../components/Gallery.astro';
 import RoomCard from '../../components/RoomCard.astro';
 import { rooms, commonAmenities, type Room } from '../../data/rooms';
 import { site } from '../../data/site';
-import { photos } from '../../lib/photos';
+import { photos, cover } from '../../lib/photos';
+import { camere } from '../../lib/continut';
 import { url } from '../../lib/url';
 
 export function getStaticPaths() {
@@ -18,7 +20,8 @@ interface Props {
 }
 
 const { room } = Astro.props;
-const imgs = photos(room.folder);
+const found = photos(room.folder);
+const imgs = found.length ? found : [cover(room.folder)];
 const index = rooms.findIndex((r) => r.slug === room.slug);
 const others = rooms.filter((r) => r.slug !== room.slug).slice(0, 3);
 const prev = rooms[(index - 1 + rooms.length) % rooms.length];
@@ -28,7 +31,7 @@ const amenities = [...new Set([...room.features, ...commonAmenities])];
 
 <BaseLayout
   title={room.name}
-  description={`${room.name} la Pensiunea Cuibul Viselor, Băile Herculane: ${room.size} m², până la ${room.guests} persoane, ${room.price} RON / noapte. Rezervări: 0756 06 33 77.`}
+  description={`${room.name} la ${site.name}, ${site.address.city}: ${room.size} m², până la ${room.guests} persoane, ${room.price} RON / noapte. Rezervări pe WhatsApp: ${site.whatsapp}.`}
   image={imgs[0]}
 >
   <!-- HERO -->
@@ -118,18 +121,21 @@ const amenities = [...new Set([...room.features, ...commonAmenities])];
         <div class="sticky top-28 rounded-[1.75rem] bg-forest-900 p-8 text-cream-50 md:p-10" data-reveal>
           <p class="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-cream-100/70">Tarif / noapte</p>
           <p class="mt-2 font-serif text-6xl leading-none text-brass-300">{room.price}<span class="ml-2 text-2xl text-cream-50">RON</span></p>
-          <p class="mt-4 text-sm text-cream-100/70">Pe cameră, orientativ. Confirmăm tariful la rezervare.</p>
+          <p class="mt-4 text-sm text-cream-100/70">{camere.pagina.notaCamera}</p>
           <div class="my-8 h-px bg-cream-100/15"></div>
           <ul class="space-y-3 text-sm text-cream-100/80">
             <li class="flex justify-between"><span>Check-in</span><span class="font-semibold text-cream-50">{site.checkIn}</span></li>
             <li class="flex justify-between"><span>Check-out</span><span class="font-semibold text-cream-50">{site.checkOut}</span></li>
             <li class="flex justify-between"><span>Avans</span><span class="font-semibold text-cream-50">min. 50%</span></li>
           </ul>
-          <a href={url(`/rezervare?camera=${room.slug}`)} class="btn btn-brass mt-10 w-full">
-            Cere o ofertă <ArrowRight size={16} />
+          <a href={`${site.whatsappHref}?text=${encodeURIComponent(`Bună ziua! Aș dori o ofertă pentru ${room.name}. Perioada: `)}`} target="_blank" rel="noopener noreferrer" class="btn btn-brass mt-10 w-full">
+            <WhatsAppIcon size={16} /> Rezervă pe WhatsApp
           </a>
-          <a href={site.phoneHref} class="btn btn-ghost-light mt-3 w-full">
-            <Phone size={15} /> {site.phone}
+          <a href={`mailto:${site.email}?subject=${encodeURIComponent(`Cerere rezervare – ${room.name}`)}`} class="btn btn-ghost-light mt-3 w-full">
+            <Mail size={15} /> Rezervă pe email
+          </a>
+          <a href={url(`/rezervare?camera=${room.slug}`)} class="btn btn-ghost-light mt-3 w-full">
+            Formular de rezervare <ArrowRight size={16} />
           </a>
         </div>
       </aside>

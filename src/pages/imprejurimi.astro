@@ -8,42 +8,22 @@ import Gallery from '../components/Gallery.astro';
 import CTASection from '../components/CTASection.astro';
 import { nearby, excursions, timeline, resortFacts } from '../data/nearby';
 import { photos, photo } from '../lib/photos';
+import { imprejurimi as im, em } from '../lib/continut';
 
-const alts = [
-  'Stațiunea Băile Herculane, văzută de sus',
-  'Munți și Dunărea, în împrejurimi',
-  'Valea Cernei, văzută de sus',
-  'Stânci de calcar în împrejurimi',
-  'Chipul lui Decebal, sculptat în stâncă, pe malul Dunării',
-  'Mănăstire pe malul Dunării',
-  'Dunărea printre munți',
-  'Dunărea printre stânci',
-  'Dunărea, văzută de sus',
-  'Ruine de turnuri în apele Dunării',
-  'Barcă la intrarea într-o peșteră',
-  'Mănăstire cu vedere spre Dunăre',
-  'Inscripție romană săpată în stâncă',
-  'Bazin natural în stâncă',
-  'Cruce albă pe vârf de munte',
-  'Peșteră în munții din împrejurimi',
-  'Intrare de peșteră',
-  'Peșteră cu deschidere spre pădure',
-];
+const p = im.pagina;
+const alts = im.descrieriPoze;
+
 const gallery = photos('imprejurimi').map((src, i) => ({ src, alt: alts[i] ?? 'Împrejurimile Băilor Herculane' }));
 ---
 
-<BaseLayout
-  title="Ce vizitați în împrejurimi"
-  description="Băile Herculane, una dintre cele mai vechi stațiuni balneare ale lumii: istorie, izvoare termale, excursii și distanțe față de Pensiunea Cuibul Viselor."
-  image={photo('imprejurimi/01')}
->
+<BaseLayout title={p.titluSeo} description={p.descriereSeo} image={photo(p.poza)}>
   <PageHero
-    eyebrow="Împrejurimi"
+    eyebrow={p.eticheta}
     crumb="Împrejurimi"
-    title='Băile Herculane, <em class="italic-serif text-brass-300">stațiunea lui Hercule</em>'
-    subtitle="Una dintre cele mai vechi stațiuni balneare ale lumii, atestată documentar de peste 1850 de ani, la poalele munților Parcului Național Domogled – Valea Cernei."
-    image={photo('imprejurimi/01')}
-    alt="Stațiunea Băile Herculane, văzută de sus"
+    title={em(p.titlu, 'text-brass-300')}
+    subtitle={p.subtitlu}
+    image={photo(p.poza)}
+    alt="Stațiunea Băile Herculane"
   />
 
   <!-- REPERE -->
@@ -51,19 +31,11 @@ const gallery = photos('imprejurimi').map((src, i) => ({ src, alt: alts[i] ?? '�
     <div class="container-x">
       <div class="grid gap-16 lg:grid-cols-12">
         <div class="lg:col-span-6">
-          <SectionHeading
-            eyebrow="Despre stațiune"
-            title='Între munți, <em class="italic-serif">pe Valea Cernei</em>'
-            size="md"
-          />
+          <SectionHeading eyebrow="Despre stațiune" title={em(im.despre.titlu)} size="md" />
         </div>
         <div class="space-y-5 text-muted lg:col-span-6" data-reveal>
-          <p class="lead !text-forest-900">
-            Stațiunea se află în sud-vestul României, la 168 m altitudine, la 8 km de granița cu județul Mehedinți și la doar 25 km de frontiera cu Serbia. Face parte din Parcul Național Domogled – Valea Cernei.
-          </p>
-          <p>
-            Izvoarele termale, tratamentele variate și peisajul unei văi adăpostite de munți au ținut stațiunea vie timp de două milenii. Aici găsiți cure balneare clasice, fizioterapie, masaj, bazine cu apă termală și saună, dar și restaurante, terase de vară și trasee de drumeție pe Valea Cernei.
-          </p>
+          <p class="lead !text-forest-900">{im.despre.textMare}</p>
+          <p>{im.despre.text}</p>
         </div>
       </div>
 
@@ -85,9 +57,9 @@ const gallery = photos('imprejurimi').map((src, i) => ({ src, alt: alts[i] ?? '�
     <div class="container-x grid gap-16 lg:grid-cols-12">
       <div class="lg:col-span-4">
         <div class="lg:sticky lg:top-32">
-          <SectionHeading eyebrow="Istorie" title='Două milenii de <em class="italic-serif text-brass-300">ape tămăduitoare</em>' light size="md" />
+          <SectionHeading eyebrow="Istorie" title={em(im.istorie.titlu, 'text-brass-300')} light size="md" />
           <div class="mt-12 hidden aspect-[4/5] overflow-hidden rounded-[1.5rem] lg:block" data-reveal-img>
-            <Image src={photo('imprejurimi/13')} alt="Inscripție romană săpată în stâncă" widths={[400, 700]} sizes="30vw" class="img-cover" />
+            <Image src={photo(im.istorie.poza)} alt="Istoria Băilor Herculane" widths={[400, 700]} sizes="30vw" class="img-cover" />
           </div>
         </div>
       </div>
@@ -111,27 +83,21 @@ const gallery = photos('imprejurimi').map((src, i) => ({ src, alt: alts[i] ?? '�
   <section class="bg-cream-100 py-24 md:py-36">
     <div class="container-x grid gap-16 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <SectionHeading eyebrow="Tratament" title='Izvoare de <em class="italic-serif">38–60 °C</em>' size="md" />
-        <p class="lead mt-8" data-reveal>
-          Clima este de depresiune intramontană, cu influențe submediteraneene. Apele minerale sunt izotermale și hipertermale, slab radioactive și hipotone.
-        </p>
+        <SectionHeading eyebrow="Tratament" title={em(im.tratament.titlu)} size="md" />
+        <p class="lead mt-8" data-reveal>{im.tratament.text}</p>
       </div>
       <div class="grid gap-6 sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
         <div class="rounded-[1.5rem] border border-forest-900/10 bg-cream-50 p-8" data-reveal>
           <Droplets size={28} stroke-width={1.2} class="text-brass-600" />
           <h3 class="mt-8 font-serif text-2xl">Tipuri de ape</h3>
           <ul class="mt-4 space-y-2 text-muted">
-            <li>sulfuroase, clorurate, calcice, sodice</li>
-            <li>clorurate, sodice, calcice</li>
-            <li>oligominerale</li>
+            {im.tratament.tipuriApe.filter(Boolean).map((t) => <li>{t}</li>)}
           </ul>
         </div>
         <div class="rounded-[1.5rem] border border-forest-900/10 bg-cream-50 p-8" data-reveal data-delay="0.08">
           <Landmark size={28} stroke-width={1.2} class="text-brass-600" />
           <h3 class="mt-8 font-serif text-2xl">Tratamente</h3>
-          <p class="mt-4 text-muted">
-            Băi termale sulfuroase și sărate, în bazine descoperite sau acoperite, cură internă cu ape minerale, hidrotermoterapie și saună, electroterapie, kinetoterapie, inhaloterapie și cură de teren.
-          </p>
+          <p class="mt-4 text-muted">{im.tratament.tratamente}</p>
         </div>
       </div>
     </div>
@@ -181,5 +147,5 @@ const gallery = photos('imprejurimi').map((src, i) => ({ src, alt: alts[i] ?? '�
     </div>
   </section>
 
-  <CTASection image={photo('imprejurimi/03')} title='Explorați Valea Cernei <em class="italic-serif">din Cuibul Viselor</em>' />
+  <CTASection image={photo(p.pozaFinal)} title={em(p.titluFinal)} />
 </BaseLayout>

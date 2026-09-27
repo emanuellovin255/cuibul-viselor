@@ -1,0 +1,67 @@
+{
+  "seo": {
+    "descriere": "Pensiune de 3 stele pe malul Cernei, în Băile Herculane: camere și apartamente, restaurant La Johnny, spa, grădină și plajă pe râu."
+  },
+  "hero": {
+    "eticheta": "Pensiune · Băile Herculane",
+    "titlu": "Cuibul *Viselor*",
+    "oferta": {
+      "afiseaza": true,
+      "text": "Ofertă 10% reducere în perioada 15 oct – 15 dec"
+    },
+    "subtitlu": "Pe malul Cernei, la poalele munților, un loc în care vă liniștiți din prima seară. Cazare, restaurant și grădină, la La Johnny.",
+    "video": "/video/hero.mp4",
+    "posterVideo": "/video/hero-poster.jpg",
+    "textPret": "Pe noapte, pe cameră"
+  },
+  "despre": {
+    "eticheta": "Bine ați venit",
+    "citat": "Munții, susurul apei, cântecul păsărilor și șoaptele vântului vă liniștesc sufletul. Un colț de rai de unde nu v-ați mai dori să plecați.",
+    "titlu": "Pe malul Cernei, la câteva sute de metri de *centrul stațiunii*",
+    "text1": "Pensiunea Cuibul Viselor – La Johnny vă oferă în Băile Herculane un concediu de neuitat alături de cei dragi. Munții și apa sunt atât de aproape, încât peisajul spune totul.",
+    "text2": "Aveți de ales între camere Vip, suite și apartamente cu două sau trei camere, toate la standarde europene. Iar pentru răsfăț, pensiunea are restaurant, bar, spa și o grădină care v-ar putea ține acasă toată ziua.",
+    "pozaMare": "exterior/04",
+    "pozaMica": "exterior/09"
+  },
+  "cifre": [
+    { "valoare": "9,0", "sufix": "", "text": "Scor Superb din recenziile oaspeților" },
+    { "valoare": "6", "sufix": "", "text": "Tipuri de camere și apartamente" },
+    { "valoare": "24", "sufix": "/7", "text": "Recepție deschisă nonstop" },
+    { "valoare": "5", "sufix": " km", "text": "Până la Parcul Național Domogled – Valea Cernei" }
+  ],
+  "cuvinteBanda": ["Munți", "Râul Cerna", "Liniște", "Magic Garden", "Izvoare termale"],
+  "camere": {
+    "eticheta": "Cazare",
+    "titlu": "Camere & *apartamente*",
+    "text": "Șase tipuri de camere, de la camera dublă Deluxe până la apartamentul cu trei camere, pentru șase persoane.",
+    "link": "Toate camerele și tarifele"
+  },
+  "gradina": {
+    "eticheta": "Grădina",
+    "titlu": "Magic *Garden*",
+    "pozaMare": "gradina/03",
+    "textMare": "O grădină îngrijită, gândită pentru odihnă: bănci-leagăn, grătar și o bucătărie comună, toate la umbra copacilor.",
+    "text": "La câțiva metri de grădină curge râul Cerna. Pe mal aveți zonă de plajă și loc de pescuit, iar seara parcarea pensiunii rămâne luminată.",
+    "poza1": "rau/02",
+    "poza2": "gradina/02"
+  },
+  "facilitati": {
+    "eticheta": "Facilități",
+    "titlu": "Tot ce vă trebuie, *într-un singur loc*"
+  },
+  "restaurant": {
+    "eticheta": "Restaurant & bar",
+    "titlu": "La masă, *la Johnny*",
+    "text": "Restaurantul pensiunii vă așteaptă la micul dejun, la prânz și la cină, cu bucătărie românească de casă. Mai aveți un bar și o sală de conferințe, toate sub același acoperiș.",
+    "poza": "restaurant/01",
+    "preparate": ["preparate/02", "preparate/10", "preparate/11"]
+  },
+  "imprejurimi": {
+    "eticheta": "Împrejurimi",
+    "titlu": "Stațiunea lui *Hercule*",
+    "text": "Băile Herculane este una dintre cele mai vechi stațiuni balneare ale lumii, atestată documentar de peste 1850 de ani. Izvoare termale, baroc austriac și munții Văii Cernei, toate aproape de pensiune.",
+    "poza1": "imprejurimi/01",
+    "poza2": "imprejurimi/03",
+    "poza3": "imprejurimi/04"
+  }
+}

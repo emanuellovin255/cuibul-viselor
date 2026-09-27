@@ -6,24 +6,23 @@ import CTASection from '../components/CTASection.astro';
 import { rooms } from '../data/rooms';
 import { dishes } from '../data/dishes';
 import { photos, photo } from '../lib/photos';
+import { galerie, em } from '../lib/continut';
 
+const cats = galerie.categorii.filter((c) => c.id && c.eticheta);
+const byId = new Map(cats.map((c) => [c.id, c]));
 const items: GalleryItem[] = [
-  ...photos('exterior').map((src) => ({ src, alt: 'Pensiunea Cuibul Viselor, la poalele munților', cat: 'exterior' })),
-  ...photos('terasa').map((src) => ({ src, alt: 'Terasă cu vedere spre grădină', cat: 'exterior' })),
-  ...photos('gradina').map((src) => ({ src, alt: 'Grădina Magic Garden', cat: 'gradina' })),
-  ...photos('rau').map((src) => ({ src, alt: 'Râul Cerna, lângă pensiune', cat: 'gradina' })),
-  ...rooms.flatMap((r) => photos(r.folder).map((src) => ({ src, alt: r.name, cat: 'camere' }))),
-  ...photos('camere/altele').map((src) => ({ src, alt: 'Cameră la Pensiunea Cuibul Viselor', cat: 'camere' })),
-  ...photos('restaurant').map((src) => ({ src, alt: 'Restaurantul La Johnny', cat: 'restaurant' })),
-  ...dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name, cat: 'restaurant' })),
-  ...photos('imprejurimi').map((src) => ({ src, alt: 'Împrejurimile Băilor Herculane', cat: 'imprejurimi' })),
+  ...cats.flatMap((c) =>
+    (c.foldere ?? []).filter(Boolean).flatMap((folder) => photos(folder).map((src) => ({ src, alt: c.descriere || c.eticheta, cat: c.id }))),
+  ),
+  ...(byId.has('camere') ? rooms.flatMap((r) => photos(r.folder).map((src) => ({ src, alt: r.name, cat: 'camere' }))) : []),
+  ...(byId.has('restaurant') ? dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name, cat: 'restaurant' })) : []),
 ];
 
 // Amestecă determinist categoriile pentru „Toate”, ca galeria să nu înceapă cu 20 de poze de exterior la rând.
-const order = ['exterior', 'camere', 'gradina', 'restaurant', 'camere', 'imprejurimi'];
+const order = cats.map((c) => c.id);
 const buckets = new Map<string, GalleryItem[]>();
 items.forEach((it) => {
-  const key = it.cat ?? 'exterior';
+  const key = it.cat ?? order[0];
   buckets.set(key, [...(buckets.get(key) ?? []), it]);
 });
 const mixed: GalleryItem[] = [];
@@ -36,26 +35,17 @@ while ([...buckets.values()].some((b) => b.length)) {
 
 const de = (n: number) => (n % 100 === 0 || n % 100 >= 20 ? 'de ' : '');
 
-const filters = [
-  { id: 'exterior', label: 'Pensiunea' },
-  { id: 'camere', label: 'Camere' },
-  { id: 'gradina', label: 'Grădina & râul' },
-  { id: 'restaurant', label: 'Restaurant' },
-  { id: 'imprejurimi', label: 'Împrejurimi' },
-];
+const filters = cats.map((c) => ({ id: c.id, label: c.eticheta }));
+const p = galerie.pagina;
 ---
 
-<BaseLayout
-  title="Galerie foto a pensiunii"
-  description="Galerie foto Pensiunea Cuibul Viselor din Băile Herculane: camere, restaurant, grădina Magic Garden, râul Cerna și împrejurimi."
-  image={photo('exterior/02')}
->
+<BaseLayout title={p.titluSeo} description={p.descriereSeo} image={photo(p.poza)}>
   <PageHero
-    eyebrow="Galerie"
+    eyebrow={p.eticheta}
     crumb="Galerie"
-    title='Priviți <em class="italic-serif text-brass-300">înainte să veniți</em>'
-    subtitle={`${mixed.length} ${de(mixed.length)}fotografii cu pensiunea, camerele, grădina și împrejurimile Băilor Herculane.`}
-    image={photo('exterior/02')}
+    title={em(p.titlu, 'text-brass-300')}
+    subtitle={`${mixed.length} ${de(mixed.length)}${p.subtitlu}`}
+    image={photo(p.poza)}
     alt="Pensiunea Cuibul Viselor, cu munții Văii Cernei în fundal"
   />
 
@@ -65,5 +55,5 @@ const filters = [
     </div>
   </section>
 
-  <CTASection image={photo('exterior/14')} />
+  <CTASection image={photo(p.pozaFinal)} />
 </BaseLayout>

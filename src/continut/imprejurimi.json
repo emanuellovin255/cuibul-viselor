@@ -1,0 +1,73 @@
+{
+  "pagina": {
+    "titluSeo": "Ce vizitați în împrejurimi",
+    "descriereSeo": "Băile Herculane, una dintre cele mai vechi stațiuni balneare ale lumii: istorie, izvoare termale, excursii și distanțe față de Pensiunea Cuibul Viselor.",
+    "eticheta": "Împrejurimi",
+    "titlu": "Băile Herculane, *stațiunea lui Hercule*",
+    "subtitlu": "Una dintre cele mai vechi stațiuni balneare ale lumii, atestată documentar de peste 1850 de ani, la poalele munților Parcului Național Domogled – Valea Cernei.",
+    "poza": "imprejurimi/01",
+    "pozaFinal": "imprejurimi/03",
+    "titluFinal": "Explorați Valea Cernei *din Cuibul Viselor*"
+  },
+  "despre": {
+    "titlu": "Între munți, *pe Valea Cernei*",
+    "textMare": "Stațiunea se află în sud-vestul României, la 168 m altitudine, la 8 km de granița cu județul Mehedinți și la doar 25 km de frontiera cu Serbia. Face parte din Parcul Național Domogled – Valea Cernei.",
+    "text": "Izvoarele termale, tratamentele variate și peisajul unei văi adăpostite de munți au ținut stațiunea vie timp de două milenii. Aici găsiți cure balneare clasice, fizioterapie, masaj, bazine cu apă termală și saună, dar și restaurante, terase de vară și trasee de drumeție pe Valea Cernei."
+  },
+  "cifre": [
+    { "valoare": "168 m", "text": "altitudine" },
+    { "valoare": "1850+", "text": "ani de istorie atestată" },
+    { "valoare": "38–60 °C", "text": "temperatura izvoarelor termale" },
+    { "valoare": "25 km", "text": "până la granița cu Serbia" }
+  ],
+  "istorie": {
+    "titlu": "Două milenii de *ape tămăduitoare*",
+    "poza": "imprejurimi/13",
+    "momente": [
+      { "an": "153 d.Hr.", "titlu": "Prima atestare", "text": "O tăbliță votivă găsită în băi, ridicată de delegați romani drept mulțumire zeilor apelor, este cea mai veche mărturie scrisă despre stațiune." },
+      { "an": "Epoca romană", "titlu": "Apele lui Hercule", "text": "Romanii au fost impresionați de puterea tămăduitoare a apelor de pe Valea Cernei și le-au închinat un adevărat cult balnear, sub ocrotirea lui Hercule. De atunci au rămas apeducte, băi, statui, monede și tăblițe votive." },
+      { "an": "1718", "titlu": "Începe istoria modernă", "text": "După Pacea de la Passarovitz, stațiunea intră în Imperiul Austriac." },
+      { "an": "1736", "titlu": "Renașterea barocă", "text": "Generalul Andreas Hamilton, guvernatorul Banatului, reclădește băile. Grănicerii bănățeni ridică majoritatea edificiilor, în stilul baroc austriac pe care îl vedeți și astăzi." },
+      { "an": "1852", "titlu": "Stațiunea împăraților", "text": "Împăratul Austriei numește Băile Herculane „cea mai frumoasă stațiune de pe continent”, iar împărăteasa Elisabeta (Sissi) o pomenește în jurnalul ei intim." },
+      { "an": "1922", "titlu": "Muzeul Nicolae Cena", "text": "Încep să se strângă colecțiile muzeului din stațiune." },
+      { "an": "1999", "titlu": "Termele Romane, redeschise", "text": "După 2000 de ani, Termele Romane din clădirea Hotelului Roman sunt redate circuitului turistic." }
+    ]
+  },
+  "tratament": {
+    "titlu": "Izvoare de *38–60 °C*",
+    "text": "Clima este de depresiune intramontană, cu influențe submediteraneene. Apele minerale sunt izotermale și hipertermale, slab radioactive și hipotone.",
+    "tipuriApe": ["sulfuroase, clorurate, calcice, sodice", "clorurate, sodice, calcice", "oligominerale"],
+    "tratamente": "Băi termale sulfuroase și sărate, în bazine descoperite sau acoperite, cură internă cu ape minerale, hidrotermoterapie și saună, electroterapie, kinetoterapie, inhaloterapie și cură de teren."
+  },
+  "excursii": ["Ruinele băilor romane", "Peștera Hoților (Grota Haiducilor)", "Grota cu Aburi", "Crucea Albă"],
+  "distante": [
+    { "loc": "Ștrandul Termal Hercules", "km": "1,7" },
+    { "loc": "Parcul Vicol", "km": "1,9" },
+    { "loc": "Gara Băile Herculane", "km": "2,1" },
+    { "loc": "Izvorul Conteselor", "km": "2,5" },
+    { "loc": "Izvorul Neptun nr. 3", "km": "3,2" },
+    { "loc": "Parcul Central", "km": "3,5" },
+    { "loc": "Parcul Național Domogled – Valea Cernei", "km": "5" },
+    { "loc": "Aeroportul Internațional Craiova", "km": "164" }
+  ],
+  "descrieriPoze": [
+    "Stațiunea Băile Herculane, văzută de sus",
+    "Munți și Dunărea, în împrejurimi",
+    "Valea Cernei, văzută de sus",
+    "Stânci de calcar în împrejurimi",
+    "Chipul lui Decebal, sculptat în stâncă, pe malul Dunării",
+    "Mănăstire pe malul Dunării",
+    "Dunărea printre munți",
+    "Dunărea printre stânci",
+    "Dunărea, văzută de sus",
+    "Ruine de turnuri în apele Dunării",
+    "Barcă la intrarea într-o peșteră",
+    "Mănăstire cu vedere spre Dunăre",
+    "Inscripție romană săpată în stâncă",
+    "Bazin natural în stâncă",
+    "Cruce albă pe vârf de munte",
+    "Peșteră în munții din împrejurimi",
+    "Intrare de peșteră",
+    "Peșteră cu deschidere spre pădure"
+  ]
+}

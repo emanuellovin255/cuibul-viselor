@@ -1,0 +1,64 @@
+{
+  "pagina": {
+    "titluSeo": "Rezervare și contact",
+    "descriereSeo": "Rezervați la Pensiunea Cuibul Viselor din Băile Herculane pe WhatsApp sau pe email: 0756 06 33 77, cuibulviselor@yahoo.com. Condiții de rezervare și întrebări frecvente.",
+    "eticheta": "Rezervare & contact",
+    "titlu": "Rezervați-vă *locul în cuib*",
+    "subtitlu": "Spuneți-ne când veniți și câte persoane sunteți, pe WhatsApp sau pe email. Vă răspundem cu disponibilitatea și oferta.",
+    "poza": "exterior/06"
+  },
+  "formular": {
+    "eticheta": "Cerere de rezervare",
+    "titlu": "Trimiteți-ne *cererea*",
+    "text": "Completați formularul și alegeți cum ne trimiteți cererea: pe WhatsApp sau pe email. Vă răspundem cu disponibilitatea și oferta.",
+    "mesajSucces": "Am primit cererea dumneavoastră. Vă răspundem în cel mai scurt timp."
+  },
+  "procedura": {
+    "eticheta": "Procedura de rezervare",
+    "titlu": "Patru pași pentru o *rezervare fermă*",
+    "text": "Avansul este o garanție pentru ambele părți: dumneavoastră știți că aveți camerele, iar noi știm că veți onora rezervarea.",
+    "pasi": [
+      {
+        "titlu": "Trimiteți cererea în scris",
+        "text": "Scrieți-ne pe WhatsApp sau pe email perioada, numărul de persoane și camera dorită. Astfel, toate detaliile rezervării rămân scrise."
+      },
+      {
+        "titlu": "Achitați avansul",
+        "text": "Pentru blocarea camerelor vă solicităm un avans de minimum 50% din valoarea sejurului. Avansul este o garanție pentru ambele părți: știți sigur că aveți camerele, iar noi știm că veți veni."
+      },
+      {
+        "titlu": "Trimiteți dovada plății",
+        "text": "Trimiteți-ne pe WhatsApp sau pe email dovada plății avansului (ordinul de plată). După ce primim avansul, camerele sunt rezervate pentru dumneavoastră."
+      },
+      {
+        "titlu": "Restul, la sosire",
+        "text": "Diferența se achită la recepția pensiunii, la sosire. Păstrați chitanța avansului, cu numele pensiunii, perioada sejurului și numărul de camere."
+      }
+    ]
+  },
+  "reguli": [
+    "Avansul pentru rezervare este de minimum 50% din valoarea sejurului.",
+    "Dacă avansul nu este achitat în termen de 3 zile, rezervarea nu mai este valabilă.",
+    "Avansul nu se returnează dacă renunțarea la rezervare nu este anunțată cu cel puțin 21 de zile înainte de începerea sejurului.",
+    "Restul sumei se achită la sosire, la recepția pensiunii."
+  ],
+  "politici": [
+    { "titlu": "Check-in", "text": "Între 16:00 și 20:00. Vă rugăm să ne anunțați în avans ora sosirii. La check-in se prezintă un act de identitate cu fotografie." },
+    { "titlu": "Check-out", "text": "Între 08:00 și 10:30." },
+    { "titlu": "Copii", "text": "Copiii de orice vârstă sunt bineveniți. Nu sunt disponibile pătuțuri sau paturi suplimentare." },
+    { "titlu": "Animale de companie", "text": "Sunt acceptate la cerere. Se pot percepe taxe." },
+    { "titlu": "Fumat", "text": "Fumatul nu este permis. Toate camerele sunt pentru nefumători." },
+    { "titlu": "Petreceri", "text": "Pensiunea nu găzduiește petreceri, evenimente private sau petreceri de burlaci." }
+  ],
+  "intrebari": [
+    { "intrebare": "Există parcare la pensiune?", "raspuns": "Da. Pensiunea are parcare privată, iluminată pe timpul nopții." },
+    { "intrebare": "Se servește mic dejun?", "raspuns": "Da, în restaurantul La Johnny al pensiunii, unde se servesc micul dejun, prânzul și cina. Serviciul este à la carte: comandați din meniu ce doriți, iar bucătăria pregătește la comandă. Prețurile le găsiți în meniul de la restaurant." },
+    { "intrebare": "Există spa?", "raspuns": "Da. Pensiunea are mini-piscină, spa și hidromasaj. Serviciile spa se taxează separat: 50 RON pe oră, de persoană." },
+    { "intrebare": "Pot plăti cu tichete de vacanță?", "raspuns": "Da. Acceptăm tichete de vacanță și card de vacanță. În acest caz, suma totală pentru cazare și masă se achită integral cu acestea." },
+    { "intrebare": "Sunt acceptate animalele de companie?", "raspuns": "Da, la cerere. Se pot percepe taxe suplimentare." },
+    { "intrebare": "Care este programul de check-in și check-out?", "raspuns": "Check-in între 16:00 și 20:00, check-out între 08:00 și 10:30." },
+    { "intrebare": "Există WiFi?", "raspuns": "Da, WiFi gratuit în toată pensiunea." },
+    { "intrebare": "Ce limbi se vorbesc la recepție?", "raspuns": "Română, engleză și germană." },
+    { "intrebare": "Cum rezerv?", "raspuns": "Pe WhatsApp, la 0756 06 33 77, sau pe email, la cuibulviselor@yahoo.com. Ne spuneți perioada, numărul de persoane și camera dorită, iar noi revenim cu disponibilitatea și oferta." }
+  ]
+}

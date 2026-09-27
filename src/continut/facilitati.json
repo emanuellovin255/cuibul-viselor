@@ -1,0 +1,64 @@
+{
+  "pagina": {
+    "titluSeo": "Facilități și spa",
+    "descriereSeo": "Facilitățile Pensiunii Cuibul Viselor: spa cu hidromasaj, grădină, plajă pe malul Cernei, loc de pescuit, loc de joacă, parcare privată.",
+    "eticheta": "Facilități",
+    "titlu": "Spa, grădină și *râul la doi pași*",
+    "subtitlu": "Tot ce vă trebuie pentru un sejur liniștit găsiți chiar în curtea pensiunii.",
+    "poza": "gradina/01",
+    "titluLista": "Toate *facilitățile*",
+    "pozaFinal": "exterior/11"
+  },
+  "spa": {
+    "eticheta": "Relaxare",
+    "titlu": "Mini-piscină, spa *& hidromasaj*",
+    "text": "După o zi pe Valea Cernei, spa-ul pensiunii e locul potrivit pentru relaxare. Pentru cine vrea hidromasaj chiar în cameră, Camera Royal are jacuzzi propriu.",
+    "pret": "50",
+    "unitate": "RON / oră",
+    "detaliu": "de persoană"
+  },
+  "gradina": {
+    "eticheta": "Grădina",
+    "titlu": "Magic *Garden*",
+    "textMare": "Grădina e locul în care vă veți petrece multe ore. Are bănci-leagăn, peluze îngrijite și colțuri umbrite de salcii.",
+    "text": "În grădină găsiți o bucătărie comună bine echipată, cu cuptor cu microunde și ceai și cafea, iar alături este grătarul. Pentru serile petrecute afară, cu familia sau cu prietenii.",
+    "poza1": "gradina/04",
+    "poza2": "gradina/02",
+    "poza3": "gradina/05"
+  },
+  "rau": {
+    "eticheta": "Pe malul Cernei",
+    "titlu": "Plajă și *loc de pescuit*",
+    "text": "La câțiva metri de grădină trece râul Cerna. Pensiunea are pe mal o zonă de plajă cu șezlonguri și un loc de pescuit.",
+    "puncte": ["Zonă de plajă pe râu", "Loc de pescuit"],
+    "poza1": "rau/03",
+    "poza2": "rau/02"
+  },
+  "facilitati": [
+    { "icon": "Utensils", "titlu": "Restaurant La Johnny", "text": "Mic dejun, prânz și cină, în restaurantul pensiunii." },
+    { "icon": "Sparkles", "titlu": "Mini-piscină și spa", "text": "Spa cu hidromasaj, pentru relaxare după o zi de drumeții." },
+    { "icon": "Flower2", "titlu": "Magic Garden", "text": "Grădină îngrijită, cu bănci-leagăn și peluze umbrite." },
+    { "icon": "WavesHorizontal", "titlu": "Plajă pe malul Cernei", "text": "Zonă de plajă pe râul care trece la câțiva metri de grădină." },
+    { "icon": "Fish", "titlu": "Loc de pescuit", "text": "Pe malul râului Cerna, chiar lângă pensiune." },
+    { "icon": "Flame", "titlu": "Grătar și bucătărie comună", "text": "Bucătărie echipată, cu cuptor cu microunde și ceai și cafea, plus grătar în grădină." },
+    { "icon": "Wine", "titlu": "Bar", "text": "Pentru o seară liniștită, după cină." },
+    { "icon": "Presentation", "titlu": "Sală de conferințe", "text": "Pentru întâlniri de lucru și prezentări." },
+    { "icon": "HeartPulse", "titlu": "Bază de tratament", "text": "Chiar în Băile Herculane, una dintre cele mai vechi stațiuni balneare ale lumii." },
+    { "icon": "Baby", "titlu": "Loc de joacă", "text": "Spațiu de joacă pentru copii, iar copiii de orice vârstă sunt bineveniți." },
+    { "icon": "SquareParking", "titlu": "Parcare privată", "text": "Parcare proprie, iluminată pe timpul nopții." },
+    { "icon": "ConciergeBell", "titlu": "Recepție nonstop", "text": "Vorbim română, engleză și germană." },
+    { "icon": "Wifi", "titlu": "WiFi gratuit", "text": "Internet gratuit în toată pensiunea." },
+    { "icon": "CigaretteOff", "titlu": "Camere pentru nefumători", "text": "Aer curat, în toate camerele." }
+  ],
+  "practic": {
+    "titlu": "Pentru un sejur *fără griji*",
+    "lista": [
+      { "icon": "Baby", "titlu": "Familii cu copii", "text": "Copiii de orice vârstă sunt bineveniți, iar pensiunea are un loc de joacă și camere de familie." },
+      { "icon": "SquareParking", "titlu": "Parcare privată", "text": "Parcare proprie, iluminată pe timpul nopții." },
+      { "icon": "ConciergeBell", "titlu": "Recepție nonstop", "text": "La recepție vorbim română, engleză și germană." },
+      { "icon": "Wifi", "titlu": "WiFi gratuit", "text": "Internet wireless gratuit în toată pensiunea." },
+      { "icon": "PawPrint", "titlu": "Animale de companie", "text": "Sunt acceptate la cerere. Se pot percepe taxe." },
+      { "icon": "CigaretteOff", "titlu": "Nefumători", "text": "Fumatul nu este permis. Toate camerele sunt pentru nefumători." }
+    ]
+  }
+}

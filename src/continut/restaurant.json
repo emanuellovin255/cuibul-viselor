@@ -1,0 +1,51 @@
+{
+  "pagina": {
+    "titluSeo": "Restaurant La Johnny",
+    "descriereSeo": "Restaurantul La Johnny al Pensiunii Cuibul Viselor din Băile Herculane: bucătărie românească de casă, à la carte. Ciorbe în vas de lut, păstrăv, grătar și preparate la ceaun, gătite la comandă.",
+    "eticheta": "Restaurant & bar",
+    "titlu": "Restaurantul *La Johnny*",
+    "subtitlu": "Micul dejun, prânzul și cina se servesc à la carte, în restaurantul pensiunii: alegeți din meniu, iar noi gătim pe loc.",
+    "poza": "restaurant/02",
+    "etichetaMese": "Mesele zilei",
+    "titluMese": "Trei mese, *fără grija gătitului*",
+    "textMese": "Luați masa la pensiune, fără să mai căutați un restaurant în stațiune. Dimineața, la prânz sau seara, vă așteaptă o masă pusă.",
+    "citat": "Mâncarea delicioasă.",
+    "autorCitat": "Valentina, România",
+    "pozaLata": "restaurant/05",
+    "etichetaBucatarie": "Din bucătărie",
+    "titluBucatarie": "Bucătărie *românească, de casă*",
+    "textBucatarie": "Ciorbe în vase de lut, mămăligă cu brânză și smântână, păstrăv de munte și tocănițe gătite pe loc. Preparate așa cum se gătesc în Valea Cernei.",
+    "notaBucatarie": "Comandați din meniu ce vă poftește, iar bucătăria pregătește la comandă. Spuneți-ne din timp dacă aveți preferințe sau restricții alimentare și gătim pe măsură.",
+    "titluExtra": "Bar, conferințe și *grătar în grădină*",
+    "titluGalerie": "Sala și *barul*",
+    "titluFinal": "Luați masa *la noi*",
+    "textFinal": "Menționați în cererea de rezervare dacă doriți să luați masa la pensiune, ca să știm să vă așteptăm. Comandați apoi din meniu, iar bucătăria pregătește la comandă.",
+    "pozaFinal": "restaurant/03"
+  },
+  "serviciu": "à la carte",
+  "serviciuDetaliat": "Alegeți din meniu ce vă poftește, iar bucătăria pregătește la comandă. Nu servim meniu fix.",
+  "mese": [
+    { "nume": "Mic dejun", "text": "Ouă, brânzeturi și legume proaspete, la început de zi." },
+    { "nume": "Prânz", "text": "Ciorbe în vas de lut și feluri principale, gătite pe loc." },
+    { "nume": "Cină", "text": "Grătar, păstrăv sau preparate la ceaun, după poftă." }
+  ],
+  "specialitati": ["Ciorbe în vas de lut", "Mămăligă cu brânză", "Păstrăv de munte", "Grătar", "Preparate la ceaun", "Deserturi de casă"],
+  "preparate": [
+    { "poza": "preparate/01", "nume": "Mic dejun cu ochiuri, cașcaval și legume" },
+    { "poza": "preparate/02", "nume": "Ciorbă de burtă, în castron de lut" },
+    { "poza": "preparate/03", "nume": "Ciorbă servită în vas de lut, cu pâine de casă" },
+    { "poza": "preparate/04", "nume": "Cârnați la cuptor în vas de lut, cu murături" },
+    { "poza": "preparate/05", "nume": "Tocăniță cu mămăligă, ou și brânză" },
+    { "poza": "preparate/06", "nume": "Tocăniță cu mămăligă, ou și cașcaval ras" },
+    { "poza": "preparate/07", "nume": "Gulaș cu mămăligă și cașcaval" },
+    { "poza": "preparate/08", "nume": "Pui la tigaie cu legume și mămăligă" },
+    { "poza": "preparate/09", "nume": "File cu sos alb și cartofi natur" },
+    { "poza": "preparate/10", "nume": "Păstrăv la grătar cu mămăligă" },
+    { "poza": "preparate/11", "nume": "Desert de casă, cu frișcă și caramel" }
+  ],
+  "extra": [
+    { "icon": "Wine", "titlu": "Bar", "text": "Barul pensiunii, pentru o băutură după cină, la final de zi." },
+    { "icon": "Presentation", "titlu": "Sală de conferințe", "text": "Pensiunea are și o sală de conferințe, pentru întâlniri de lucru." },
+    { "icon": "Flame", "titlu": "Grătar și bucătărie comună", "text": "În grădină aveți grătar și o bucătărie comună echipată, cu cuptor cu microunde și ceai și cafea." }
+  ]
+}

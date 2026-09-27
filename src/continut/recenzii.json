@@ -1,0 +1,32 @@
+{
+  "afiseaza": true,
+  "scor": 9.0,
+  "calificativ": "Superb",
+  "numarEvaluari": 9,
+  "sursa": "oaspeții noștri",
+  "categorii": [
+    { "nume": "Curățenie", "scor": 9.5 },
+    { "nume": "Confort", "scor": 9.5 },
+    { "nume": "Personal", "scor": 9.0 },
+    { "nume": "Facilități", "scor": 8.5 },
+    { "nume": "Raport calitate/preț", "scor": 8.5 },
+    { "nume": "Locație", "scor": 8.5 }
+  ],
+  "recenzii": [
+    {
+      "nume": "Valentina",
+      "tara": "România",
+      "text": "A fost totul la superlativ! Camera super curată, lenjeriile de pat și prosoapele sunt impecabile! Mâncarea delicioasă. Grădina, curtea foarte îngrijite. Sigur mai revenim."
+    },
+    {
+      "nume": "Buze",
+      "tara": "România",
+      "text": "Camera ireproșabilă, personalul foarte competent și profesionist, atmosfera foarte prietenoasă și totul foarte curat și ordonat."
+    },
+    {
+      "nume": "Teodora",
+      "tara": "România",
+      "text": "Foarte frumoasă locația, liniște, iar domnul Johnny un om extraordinar."
+    }
+  ]
+}

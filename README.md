@@ -28,13 +28,19 @@ npm run fetch-images # re-descarcă pozele originale în src/assets/photos/_raw
 
 ```
 src/
-  data/          # conținutul site-ului: contact, camere, tarife, facilități, recenzii, împrejurimi
+  continut/      # conținutul editabil din panou (JSON, câte un fișier pe pagină)
+  data/          # adaptoare care transformă conținutul pentru pagini
   assets/photos/ # pozele, pe categorii (camere/<cameră>, exterior, gradina, rau, restaurant, imprejurimi…)
   components/    # componente reutilizabile (Header, Footer, RoomCard, Gallery…)
   layouts/       # layout-ul de bază (SEO, meta, JSON-LD)
   pages/         # paginile site-ului
   scripts/       # animații și logica formularelor
   styles/        # design system (culori, tipografie, componente CSS)
+api/
+  admin.js       # funcția Vercel a panoului /admin (parolă + commit prin API-ul GitHub)
+public/
+  admin/         # interfața panoului
+  video/         # videoul din hero
 supabase/
   migrations/    # schema bazei de date (SQL)
   functions/     # Edge Functions (rezervare)
@@ -42,12 +48,18 @@ supabase/
 
 ### Actualizarea conținutului
 
-- **Tarife, camere, dotări:** `src/data/rooms.ts`
-- **Telefon, email, adresă, prețuri masă, politici, întrebări frecvente:** `src/data/site.ts`
-- **Facilități:** `src/data/facilities.ts`
-- **Recenzii:** `src/data/reviews.ts`
-- **Preparatele din restaurant:** pozele în `src/assets/photos/preparate/` (`01.jpg`, `02.jpg`…), iar denumirile lor, în aceeași ordine, în `src/data/dishes.ts`
-- **Poze:** puneți fișierele `.jpg` în folderul potrivit din `src/assets/photos/`. Ordinea este dată de numele fișierului (`01.jpg`, `02.jpg`…), iar prima poză dintr-un folder de cameră devine coperta camerei.
+Totul se editează din panoul de la **`/admin`** (parolă, fiecare salvare = un commit, Vercel republică singur).
+Activarea panoului și cum e construit: [`ADMIN.md`](ADMIN.md). Pașii pentru Google: [`GOOGLE-SEARCH-CONSOLE.md`](GOOGLE-SEARCH-CONSOLE.md).
+
+De mână, conținutul stă în:
+
+- **Texte, prețuri, camere, preparate, facilități, recenzii, întrebări:** `src/continut/*.json` (câte un fișier pe pagină)
+- **Poze:** `src/assets/photos/<folder>/01.jpg, 02.jpg…` – ordinea e dată de nume; prima poză a unei camere e coperta
+- **Videoul din hero:** `public/video/hero.mp4` (calea se schimbă în `src/continut/acasa.json` → `hero.video`)
+
+Titlurile folosesc `*steluțe*` pentru partea scrisă cursiv, ex. `Cuibul *Viselor*`.
+
+Rezervările se fac doar pe WhatsApp sau pe email (formularul de pe `/rezervare` are câte un buton pentru fiecare).
 
 ## Formularul de contact și baza de date
 

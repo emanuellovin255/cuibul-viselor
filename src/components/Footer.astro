@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, ArrowUpRight, Ticket } from '@lucide/astro';
 import Logo from './Logo.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
 import { nav, site, meals, mealNote, mapsLink } from '../data/site';
+import { general, em } from '../lib/continut';
 import { url } from '../lib/url';
 
 const year = new Date().getFullYear();
@@ -14,11 +15,11 @@ const year = new Date().getFullYear();
       <div class="lg:col-span-4">
         <Logo id="logo-footer" class="text-cream-50" />
         <p class="mt-7 max-w-sm text-[0.95rem] leading-relaxed text-cream-100/65">
-          Pensiune de trei stele pe malul Cernei, în Băile Herculane. Camere și apartamente, restaurant propriu, spa și o grădină în care timpul trece altfel.
+          {general.subsol.text}
         </p>
         <div class="mt-8 inline-flex items-start gap-3 rounded-2xl border border-cream-100/10 bg-cream-100/[0.04] p-4 text-sm text-cream-100/80">
           <Ticket size={20} stroke-width={1.5} class="mt-0.5 shrink-0 text-brass-400" />
-          <span>Acceptăm plata cu tichete de vacanță și card de vacanță.</span>
+          <span>{general.subsol.tichete}</span>
         </div>
       </div>
 
@@ -94,9 +95,10 @@ const year = new Date().getFullYear();
     <div class="mt-20 flex flex-col items-start justify-between gap-6 border-t border-cream-100/10 py-8 text-xs text-cream-100/65 md:flex-row md:items-center">
       <p>© {year} {site.name} – {site.alias}. Toate drepturile rezervate.</p>
       <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-        <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:text-cream-50">
-          Booking.com <ArrowUpRight size={13} />
+        <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:text-cream-50">
+          Rezervări pe WhatsApp <ArrowUpRight size={13} />
         </a>
+        <a href={`mailto:${site.email}`} class="hover:text-cream-50">Rezervări pe email</a>
         <a href={url('/rezervare')} class="hover:text-cream-50">Condiții de rezervare</a>
       </div>
     </div>
@@ -104,7 +106,7 @@ const year = new Date().getFullYear();
 
   <div aria-hidden="true" class="pointer-events-none select-none overflow-hidden">
     <p class="whitespace-nowrap text-center font-serif text-[17vw] leading-[0.8] tracking-[-0.05em] text-cream-100/[0.05] soft-serif">
-      Cuibul <span class="italic-serif">Viselor</span>
+      <Fragment set:html={em(general.numeScurt.replace(/^(\S+)\s+(.+)$/, '$1 *$2*'))} />
     </p>
   </div>
 </footer>

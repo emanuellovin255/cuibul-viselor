@@ -1,7 +1,5 @@
 ---
-import { rating, ratingCategories, reviews, formatScore } from '../data/reviews';
-import { site } from '../data/site';
-import { ArrowUpRight } from '@lucide/astro';
+import { rating, ratingCategories, reviews, formatScore, showReviews } from '../data/reviews';
 
 // Clase statice (Tailwind nu vede clase construite dinamic)
 const barWidth: Record<number, string> = {
@@ -15,6 +13,7 @@ const barWidth: Record<number, string> = {
 };
 ---
 
+{showReviews && (
 <section class="relative overflow-hidden bg-cream-50 py-28 md:py-40">
   <div class="container-x">
     <div class="grid gap-16 lg:grid-cols-12 lg:gap-12">
@@ -26,7 +25,7 @@ const barWidth: Record<number, string> = {
           </span>
           <span class="pb-3">
             <span class="block font-serif text-3xl italic text-brass-600">{rating.label}</span>
-            <span class="mt-1 block text-sm text-muted">{rating.count} evaluări pe {rating.source}</span>
+            <span class="mt-1 block text-sm text-muted">{rating.count} evaluări de la {rating.source}</span>
           </span>
         </div>
 
@@ -39,16 +38,13 @@ const barWidth: Record<number, string> = {
                   <span class="font-serif text-lg">{formatScore(c.score)}</span>
                 </div>
                 <div class="mt-2 h-[3px] overflow-hidden rounded-full bg-forest-900/10">
-                  <div class:list={['h-full rounded-full bg-gradient-to-r from-river-500 to-brass-400', barWidth[c.score] ?? 'w-full']} data-bar />
+                  <div class:list={['h-full rounded-full bg-gradient-to-r from-river-500 to-brass-400', barWidth[Math.round(c.score * 2) / 2] ?? 'w-full']} data-bar />
                 </div>
               </li>
             ))
           }
         </ul>
 
-        <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer" class="arrow-link mt-10 text-forest-800" data-reveal>
-          Toate evaluările pe Booking.com <ArrowUpRight size={16} />
-        </a>
       </div>
 
       <div class="flex flex-col gap-6 lg:col-span-7 lg:pl-8">
@@ -75,7 +71,7 @@ const barWidth: Record<number, string> = {
                 </span>
                 <span>
                   <span class="block font-semibold">{r.name}</span>
-                  <span class="block text-xs uppercase tracking-[0.16em] text-muted">{r.country} · via Booking.com</span>
+                  <span class="block text-xs uppercase tracking-[0.16em] text-muted">{r.country}</span>
                 </span>
               </figcaption>
             </figure>
@@ -85,3 +81,4 @@ const barWidth: Record<number, string> = {
     </div>
   </div>
 </section>
+)}

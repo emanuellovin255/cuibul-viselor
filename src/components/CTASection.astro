@@ -1,10 +1,12 @@
 ---
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
-import { ArrowUpRight, Phone } from '@lucide/astro';
+import { Mail, Phone } from '@lucide/astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
 import { site } from '../data/site';
 import { url } from '../lib/url';
 import { photo } from '../lib/photos';
+import { general, em } from '../lib/continut';
 
 interface Props {
   image?: ImageMetadata;
@@ -12,10 +14,11 @@ interface Props {
   text?: string;
 }
 
+const c = general.chemareFinala;
 const {
-  image = photo('exterior/04'),
-  title = 'Vă așteptăm în <em class="italic-serif">Cuibul Viselor</em>',
-  text = 'Trimiteți-ne perioada dorită și numărul de persoane și revenim cu disponibilitatea și oferta.',
+  image = photo(c.poza),
+  title = em(c.titlu),
+  text = c.text,
 } = Astro.props;
 ---
 
@@ -25,12 +28,15 @@ const {
   </div>
   <div class="absolute inset-0 bg-forest-950/60"></div>
   <div class="container-x relative flex min-h-[80svh] flex-col items-center justify-center py-32 text-center">
-    <p class="eyebrow eyebrow-light justify-center" data-reveal>Rezervări</p>
+    <p class="eyebrow eyebrow-light justify-center" data-reveal>{c.eticheta}</p>
     <h2 class="display-lg mt-7 max-w-4xl" data-split set:html={title} />
     <p class="mt-8 max-w-xl text-lg text-white/80" data-reveal>{text}</p>
     <div class="mt-12 flex flex-col items-center gap-4 sm:flex-row" data-reveal>
-      <a href={url('/rezervare')} class="btn btn-brass">
-        Cere o ofertă <ArrowUpRight size={16} />
+      <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" class="btn btn-brass">
+        <WhatsAppIcon size={16} /> {c.buton} pe WhatsApp
+      </a>
+      <a href={`mailto:${site.email}`} class="btn btn-ghost-light">
+        <Mail size={15} /> Scrieți-ne pe email
       </a>
       <a href={site.phoneHref} class="btn btn-ghost-light">
         <Phone size={15} /> {site.phone}

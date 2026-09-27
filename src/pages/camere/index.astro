@@ -7,30 +7,31 @@ import SectionHeading from '../../components/SectionHeading.astro';
 import VoucherBand from '../../components/VoucherBand.astro';
 import CTASection from '../../components/CTASection.astro';
 import { rooms, commonAmenities } from '../../data/rooms';
-import { bookingRules } from '../../data/site';
-import { photos, photo } from '../../lib/photos';
+import { bookingRules, site } from '../../data/site';
+const plainName = site.name;
+import { photos, photo, cover } from '../../lib/photos';
+import { camere, em } from '../../lib/continut';
+
+const p = camere.pagina;
 import { url } from '../../lib/url';
 ---
 
-<BaseLayout
-  title="Camere și tarife"
-  description="Camere și apartamente la Pensiunea Cuibul Viselor, Băile Herculane: Royal cu jacuzzi, Deluxe, familie, apartamente cu 2 și 3 camere. De la 300 RON / noapte."
-  image={photo('camere/royal/01')}
->
+<BaseLayout title={p.titluSeo} description={p.descriereSeo} image={photo(p.poza)}>
   <PageHero
-    eyebrow="Camere & tarife"
+    eyebrow={p.eticheta}
     crumb="Camere"
-    title='Camere în care <em class="italic-serif text-brass-300">visele</em> au loc'
-    subtitle="Șase tipuri de camere și apartamente, pentru cupluri, familii și grupuri de prieteni. Toate au baie proprie, aer condiționat și WiFi gratuit."
-    image={photo('camere/royal/01')}
-    alt="Camera Royal a pensiunii Cuibul Viselor"
+    title={em(p.titlu, 'text-brass-300')}
+    subtitle={p.subtitlu}
+    image={photo(p.poza)}
+    alt={`Camere la ${plainName}`}
   />
 
   <section class="bg-cream-100 py-24 md:py-36">
     <div class="container-x space-y-24 md:space-y-40">
       {
         rooms.map((room, i) => {
-          const imgs = photos(room.folder);
+          const found = photos(room.folder);
+          const imgs = found.length ? found : [cover(room.folder)];
           const reverse = i % 2 === 1;
           return (
             <article class="grid items-center gap-10 lg:grid-cols-12 lg:gap-16" id={room.slug}>
@@ -118,10 +119,10 @@ import { url } from '../../lib/url';
   <section id="tarife" class="bg-forest-900 py-24 text-cream-50 md:py-36">
     <div class="container-x grid gap-16 lg:grid-cols-12">
       <div class="lg:col-span-4">
-        <SectionHeading eyebrow="Tarife" title='Prețuri <em class="italic-serif text-brass-300">pe noapte</em>' light size="md" />
+        <SectionHeading eyebrow="Tarife" title={em(p.titluTarife, 'text-brass-300')} light size="md" />
         <p class="mt-8 flex gap-3 text-sm leading-relaxed text-cream-100/70" data-reveal>
           <Info size={18} stroke-width={1.5} class="mt-0.5 shrink-0 text-brass-400" />
-          Tarifele sunt pe cameră sau apartament, pentru o noapte, și sunt orientative. Vă rugăm să le confirmați la rezervare.
+          {p.notaTarife}
         </p>
       </div>
       <div class="lg:col-span-8">
@@ -189,5 +190,5 @@ import { url } from '../../lib/url';
   </section>
 
   <VoucherBand />
-  <CTASection image={photo('exterior/11')} />
+  <CTASection image={photo(p.pozaFinal)} />
 </BaseLayout>

@@ -1,0 +1,18 @@
+{
+  "pagina": {
+    "titluSeo": "Galerie foto a pensiunii",
+    "descriereSeo": "Galerie foto Pensiunea Cuibul Viselor din Băile Herculane: camere, restaurant, grădina Magic Garden, râul Cerna și împrejurimi.",
+    "eticheta": "Galerie",
+    "titlu": "Priviți *înainte să veniți*",
+    "subtitlu": "fotografii cu pensiunea, camerele, grădina și împrejurimile Băilor Herculane.",
+    "poza": "exterior/02",
+    "pozaFinal": "exterior/14"
+  },
+  "categorii": [
+    { "id": "exterior", "eticheta": "Pensiunea", "foldere": ["exterior", "terasa"], "descriere": "Pensiunea Cuibul Viselor, la poalele munților" },
+    { "id": "camere", "eticheta": "Camere", "foldere": ["camere/altele"], "descriere": "Cameră la Pensiunea Cuibul Viselor" },
+    { "id": "gradina", "eticheta": "Grădina & râul", "foldere": ["gradina", "rau"], "descriere": "Grădina Magic Garden și râul Cerna" },
+    { "id": "restaurant", "eticheta": "Restaurant", "foldere": ["restaurant"], "descriere": "Restaurantul La Johnny" },
+    { "id": "imprejurimi", "eticheta": "Împrejurimi", "foldere": ["imprejurimi"], "descriere": "Împrejurimile Băilor Herculane" }
+  ]
+}

@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { Users, Maximize, ArrowUpRight } from '@lucide/astro';
 import type { Room } from '../data/rooms';
-import { photos } from '../lib/photos';
+import { cover as coverOf } from '../lib/photos';
 import { url } from '../lib/url';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { room, index, class: className = '' } = Astro.props;
-const cover = photos(room.folder)[0];
+const cover = coverOf(room.folder);
 ---
 
 <a

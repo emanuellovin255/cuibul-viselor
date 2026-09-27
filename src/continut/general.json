@@ -1,0 +1,57 @@
+{
+  "nume": "Pensiunea Cuibul Viselor",
+  "numeScurt": "Cuibul Viselor",
+  "alias": "La Johnny",
+  "stele": 3,
+  "descriere": "Pensiune de 3 stele pe malul Cernei, în Băile Herculane: camere și apartamente, restaurant La Johnny, spa, grădină și plajă pe râu.",
+  "telefon": "0756 06 33 77",
+  "whatsapp": "0756 06 33 77",
+  "email": "cuibulviselor@yahoo.com",
+  "adresa": {
+    "strada": "Strada Pecinisca nr. 2",
+    "oras": "Băile Herculane",
+    "judet": "Caraș-Severin",
+    "codPostal": "325200",
+    "tara": "România"
+  },
+  "cautareHarta": "Pensiunea Cuibul Viselor, Strada Pecinisca 2, Băile Herculane",
+  "limbi": ["Română", "Engleză", "Germană"],
+  "checkIn": "16:00 – 20:00",
+  "checkOut": "08:00 – 10:30",
+  "subtitluLogo": "La Johnny · Băile Herculane",
+  "meniu": [
+    { "link": "/camere", "eticheta": "Camere" },
+    { "link": "/restaurant", "eticheta": "Restaurant" },
+    { "link": "/facilitati", "eticheta": "Facilități" },
+    { "link": "/imprejurimi", "eticheta": "Împrejurimi" },
+    { "link": "/galerie", "eticheta": "Galerie" },
+    { "link": "/rezervare", "eticheta": "Contact" }
+  ],
+  "subsol": {
+    "text": "Pensiune de trei stele pe malul Cernei, în Băile Herculane. Camere și apartamente, restaurant propriu, spa și o grădină în care timpul trece altfel.",
+    "tichete": "Acceptăm plata cu tichete de vacanță și card de vacanță."
+  },
+  "benzaTichete": {
+    "afiseaza": true,
+    "titlu": "Acceptăm tichete de vacanță",
+    "subtitlu": "și card de vacanță, pentru cazare și masă.",
+    "text": "Dacă plătiți cu tichete sau card de vacanță, suma totală pentru cazare și masă se achită integral cu acestea."
+  },
+  "chemareFinala": {
+    "eticheta": "Rezervări",
+    "titlu": "Vă așteptăm în *Cuibul Viselor*",
+    "text": "Scrieți-ne pe WhatsApp sau pe email perioada dorită și numărul de persoane și revenim cu disponibilitatea și oferta.",
+    "buton": "Cere o ofertă",
+    "poza": "exterior/04"
+  },
+  "pagina404": {
+    "titlu": "Pagina *s-a rătăcit*",
+    "text": "Pagina căutată nu există sau a fost mutată. Întoarceți-vă acasă, în cuib.",
+    "poza": "gradina/09"
+  },
+  "seo": {
+    "adresaSite": "https://cuibul-viselor.vercel.app",
+    "pozaDistribuire": "exterior/02",
+    "codVerificareGoogle": ""
+  }
+}

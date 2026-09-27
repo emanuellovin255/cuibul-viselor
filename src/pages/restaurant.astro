@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { Coffee, Soup, UtensilsCrossed, Wine, Presentation, Flame } from '@lucide/astro';
+import { Coffee, Soup, UtensilsCrossed } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
@@ -8,51 +8,44 @@ import Gallery from '../components/Gallery.astro';
 import VoucherBand from '../components/VoucherBand.astro';
 import CTASection from '../components/CTASection.astro';
 import { meals, mealNoteLong } from '../data/site';
-import { reviews } from '../data/reviews';
 import { dishes } from '../data/dishes';
 import { photos, photo } from '../lib/photos';
+import { restaurant as r, em } from '../lib/continut';
+import { icon } from '../lib/icons';
+
+const p = r.pagina;
 
 const mealIcons = [Coffee, Soup, UtensilsCrossed];
-const valentina = reviews.find((r) => r.name === 'Valentina');
 const gallery = photos('restaurant').map((src, i) => ({ src, alt: `Restaurantul La Johnny – fotografia ${i + 1}` }));
 const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }));
 ---
 
-<BaseLayout
-  title="Restaurant La Johnny"
-  description="Restaurantul La Johnny al Pensiunii Cuibul Viselor din Băile Herculane: bucătărie românească de casă, à la carte. Ciorbe în vas de lut, păstrăv, grătar și preparate la ceaun, gătite la comandă."
-  image={photo('restaurant/02')}
->
+<BaseLayout title={p.titluSeo} description={p.descriereSeo} image={photo(p.poza)}>
   <PageHero
-    eyebrow="Restaurant & bar"
+    eyebrow={p.eticheta}
     crumb="Restaurant"
-    title='Restaurantul <em class="italic-serif text-brass-300">La Johnny</em>'
-    subtitle="Micul dejun, prânzul și cina se servesc à la carte, în restaurantul pensiunii: alegeți din meniu, iar noi gătim pe loc."
-    image={photo('restaurant/02')}
-    alt="Sala restaurantului La Johnny, cu barul în fundal"
+    title={em(p.titlu, 'text-brass-300')}
+    subtitle={p.subtitlu}
+    image={photo(p.poza)}
+    alt="Sala restaurantului La Johnny"
   />
 
   <!-- INTRO -->
   <section class="bg-cream-100 py-24 md:py-36">
     <div class="container-x grid items-center gap-16 lg:grid-cols-12">
       <div class="lg:col-span-6">
-        <SectionHeading
-          eyebrow="Mesele zilei"
-          title='Trei mese, <em class="italic-serif">fără grija gătitului</em>'
-          text="Luați masa la pensiune, fără să mai căutați un restaurant în stațiune. Dimineața, la prânz sau seara, vă așteaptă o masă pusă."
-          size="md"
-        />
+        <SectionHeading eyebrow={p.etichetaMese} title={em(p.titluMese)} text={p.textMese} size="md" />
 
         <p class="mt-8 inline-flex items-center gap-3 rounded-full border border-brass-500/40 bg-brass-300/15 px-5 py-2.5 text-sm font-semibold text-brass-600" data-reveal>
-          <UtensilsCrossed size={16} stroke-width={1.6} /> Serviciu à la carte
+          <UtensilsCrossed size={16} stroke-width={1.6} /> Serviciu {r.serviciu}
         </p>
         <p class="mt-5 max-w-md text-muted" data-reveal>{mealNoteLong}</p>
         {
-          valentina && (
+          p.citat && (
             <figure class="mt-12 border-l-2 border-brass-400 pl-6" data-reveal>
-              <blockquote class="font-serif text-2xl italic leading-snug text-forest-900">„Mâncarea delicioasă.”</blockquote>
+              <blockquote class="font-serif text-2xl italic leading-snug text-forest-900">„{p.citat}”</blockquote>
               <figcaption class="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-muted">
-                {valentina.name}, {valentina.country} · via Booking.com
+                {p.autorCitat}
               </figcaption>
             </figure>
           )
@@ -61,7 +54,7 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
       <div class="grid gap-4 lg:col-span-6">
         {
           meals.map((m, i) => {
-            const Icon = mealIcons[i];
+            const Icon = mealIcons[i % mealIcons.length];
             return (
               <div
                 class:list={[
@@ -94,7 +87,7 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
   <!-- IMAGINE LATĂ -->
   <section class="relative h-[80svh] min-h-[480px] overflow-hidden bg-forest-900">
     <div class="absolute inset-x-0 -top-[12%] h-[124%]" data-parallax="10">
-      <Image src={photo('restaurant/05')} alt="Mese aranjate în restaurantul La Johnny, seara" widths={[768, 1280, 1920]} sizes="100vw" class="img-cover" />
+      <Image src={photo(p.pozaLata)} alt="Mese aranjate în restaurantul La Johnny" widths={[768, 1280, 1920]} sizes="100vw" class="img-cover" />
     </div>
     <div class="absolute inset-0 bg-forest-950/35"></div>
   </section>
@@ -102,16 +95,11 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
   <!-- PREPARATE -->
   <section class="bg-cream-100 py-24 md:py-36">
     <div class="container-x">
-      <SectionHeading
-        eyebrow="Din bucătărie"
-        title='Bucătărie <em class="italic-serif">românească, de casă</em>'
-        text="Ciorbe în vase de lut, mămăligă cu brânză și smântână, păstrăv de munte și tocănițe gătite pe loc. Preparate așa cum se gătesc în Valea Cernei."
-        size="md"
-      />
+      <SectionHeading eyebrow={p.etichetaBucatarie} title={em(p.titluBucatarie)} text={p.textBucatarie} size="md" />
 
       <ul class="mt-14 grid gap-3 sm:grid-cols-3 lg:grid-cols-6" data-reveal>
         {
-          ['Ciorbe în vas de lut', 'Mămăligă cu brânză', 'Păstrăv de munte', 'Grătar', 'Preparate la ceaun', 'Deserturi de casă'].map((t) => (
+          r.specialitati.filter(Boolean).map((t) => (
             <li class="rounded-full border border-forest-900/12 bg-cream-50 px-5 py-3 text-center text-[0.8rem] font-semibold text-forest-800">
               {t}
             </li>
@@ -124,8 +112,7 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
       </div>
 
       <p class="mt-10 max-w-2xl text-sm text-muted" data-reveal>
-        Comandați din meniu ce vă poftește, iar bucătăria pregătește la comandă. Spuneți-ne din timp dacă aveți
-        preferințe sau restricții alimentare și gătim pe măsură.
+        {p.notaBucatarie}
       </p>
     </div>
   </section>
@@ -133,14 +120,10 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
   <!-- BAR / CONFERINȚE / GRĂTAR -->
   <section class="grain relative bg-forest-900 py-24 text-cream-50 md:py-36">
     <div class="container-x">
-      <SectionHeading eyebrow="Și mai mult" title='Bar, conferințe și <em class="italic-serif text-brass-300">grătar în grădină</em>' light size="md" />
+      <SectionHeading eyebrow="Și mai mult" title={em(p.titluExtra, 'text-brass-300')} light size="md" />
       <div class="mt-16 grid gap-px overflow-hidden rounded-[1.75rem] bg-cream-100/10 md:grid-cols-3">
         {
-          [
-            { icon: Wine, title: 'Bar', text: 'Barul pensiunii, pentru o băutură după cină, la final de zi.' },
-            { icon: Presentation, title: 'Sală de conferințe', text: 'Pensiunea are și o sală de conferințe, pentru întâlniri de lucru.' },
-            { icon: Flame, title: 'Grătar și bucătărie comună', text: 'În grădină aveți grătar și o bucătărie comună echipată, cu cuptor cu microunde și ceai și cafea.' },
-          ].map((f, i) => (
+          r.extra.map((x) => ({ icon: icon(x.icon), title: x.titlu, text: x.text })).map((f, i) => (
             <div class="bg-forest-900 p-8 md:p-10" data-reveal data-delay={i * 0.08}>
               <f.icon size={30} stroke-width={1.2} class="text-brass-300" />
               <h3 class="mt-10 font-serif text-3xl">{f.title}</h3>
@@ -156,7 +139,7 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
   <section class="bg-cream-100 py-24 md:py-36">
     <div class="container-x">
       <div class="mb-14 flex items-end justify-between gap-6">
-        <h2 class="display-md" data-split>Sala și <em class="italic-serif">barul</em></h2>
+        <h2 class="display-md" data-split set:html={em(p.titluGalerie)} />
         <p class="text-sm text-muted" data-reveal>{gallery.length} fotografii</p>
       </div>
       <Gallery items={gallery} />
@@ -164,5 +147,5 @@ const dishItems = dishes.map((d) => ({ src: d.src, alt: d.alt, caption: d.name }
   </section>
 
   <VoucherBand />
-  <CTASection image={photo('restaurant/03')} title='Luați masa <em class="italic-serif">la noi</em>' text="Menționați în cererea de rezervare dacă doriți să luați masa la pensiune, ca să știm să vă așteptăm. Comandați apoi din meniu, iar bucătăria pregătește la comandă." />
+  <CTASection image={photo(p.pozaFinal)} title={em(p.titluFinal)} text={p.textFinal} />
 </BaseLayout>
