@@ -73,7 +73,7 @@
     pozaDistribuire: ['Poza de distribuire', 'Apare când cineva trimite linkul site-ului pe WhatsApp sau Facebook.'],
     codVerificareGoogle: ['Cod de verificare Google Search Console', 'Lipiți aici codul din Search Console (metoda „Etichetă HTML”). Puteți lipi toată eticheta <meta …>, se ia singur codul.'],
     hero: ['Partea de sus (video)'], oferta: ['Oferta de sub titlu'],
-    video: ['Videoul de fundal', 'Calea videoului, ex. /video/hero.mp4. Videouri noi se încarcă din „Video”.'],
+    video: ['Videoul de fundal', 'Calea videoului, ex. /video/cuibul-viselor.mp4. Videouri noi se încarcă din „Video”.'],
     posterVideo: ['Imaginea afișată până pornește videoul'], textPret: ['Textul de sub preț'],
     despre: ['Secțiunea „Bine ați venit”'], citat: ['Citat mare'], text1: ['Primul paragraf'], text2: ['Al doilea paragraf'],
     pozaMare: ['Poza mare'], pozaMica: ['Poza mică'], cifre: ['Cifre'], valoare: ['Valoare'], sufix: ['După cifră', 'Ex. „ km” sau „/7”'],

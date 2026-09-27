@@ -55,7 +55,7 @@ De mână, conținutul stă în:
 
 - **Texte, prețuri, camere, preparate, facilități, recenzii, întrebări:** `src/continut/*.json` (câte un fișier pe pagină)
 - **Poze:** `src/assets/photos/<folder>/01.jpg, 02.jpg…` – ordinea e dată de nume; prima poză a unei camere e coperta
-- **Videoul din hero:** `public/video/hero.mp4` (calea se schimbă în `src/continut/acasa.json` → `hero.video`)
+- **Videoul din hero:** `public/video/cuibul-viselor.mp4` (calea se schimbă în `src/continut/acasa.json` → `hero.video`)
 
 Titlurile folosesc `*steluțe*` pentru partea scrisă cursiv, ex. `Cuibul *Viselor*`.
 
