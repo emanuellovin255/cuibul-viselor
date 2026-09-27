@@ -4,17 +4,16 @@ Site-ul e deja pregătit: are `sitemap.xml`, `robots.txt` care arată spre sitem
 descrieri pe fiecare pagină, date structurate (LodgingBusiness) și un câmp în panou pentru codul
 de verificare Google. Panoul `/admin` și `/api/` sunt excluse din indexare.
 
-**Adresa site-ului:** https://cuibul-viselor.vercel.app
-**Sitemap:** https://cuibul-viselor.vercel.app/sitemap.xml
+**Adresa site-ului:** https://cuibulviselor.ro
+**Sitemap:** https://cuibulviselor.ro/sitemap.xml
 
-> Dacă mutați site-ul pe un domeniu propriu (ex. cuibulviselor.ro), schimbați întâi adresa în
-> panou: **Setări generale → SEO și Google → Adresa site-ului**, salvați, apoi faceți pașii de mai
-> jos cu domeniul nou.
+> Dacă schimbați vreodată domeniul, schimbați întâi adresa în panou: **Setări generale → SEO și
+> Google → Adresa site-ului**, salvați, apoi refaceți pașii de mai jos cu domeniul nou.
 
 ## 1. Adăugați proprietatea
 
 1. Intrați pe https://search.google.com/search-console cu contul Google al pensiunii.
-2. **Adăugați o proprietate → Prefix URL** și scrieți `https://cuibul-viselor.vercel.app/`
+2. **Adăugați o proprietate → Prefix URL** și scrieți `https://cuibulviselor.ro/`
    (cu `https://` și cu `/` la final). Apăsați **Continuați**.
 
 ## 2. Verificați că site-ul e al dumneavoastră
@@ -22,7 +21,7 @@ de verificare Google. Panoul `/admin` și `/api/` sunt excluse din indexare.
 1. Din metodele de verificare, alegeți **Etichetă HTML**.
 2. Google arată o linie de forma `<meta name="google-site-verification" content="ABC123…" />`.
    Copiați-o toată.
-3. Deschideți https://cuibul-viselor.vercel.app/admin → **Setări generale** → secțiunea
+3. Deschideți https://cuibulviselor.ro/admin → **Setări generale** → secțiunea
    **SEO și Google** → câmpul **Cod de verificare Google Search Console**. Lipiți linia
    (se ia singur doar codul) și apăsați **Salvează și publică**.
 4. Așteptați 2 minute (până se republică site-ul), apoi în Search Console apăsați **Verificați**.
@@ -39,13 +38,13 @@ de verificare Google. Panoul `/admin` și `/api/` sunt excluse din indexare.
 
 ## 4. Cereți indexarea paginii principale (opțional, grăbește lucrurile)
 
-1. Sus, în bara **Inspectați orice adresă URL**, lipiți `https://cuibul-viselor.vercel.app/`.
+1. Sus, în bara **Inspectați orice adresă URL**, lipiți `https://cuibulviselor.ro/`.
 2. Apăsați **Solicitați indexarea**. Repetați pentru `/camere/` și `/rezervare/` dacă vreți.
 
 ## 5. Google Business Profile (recomandat)
 
 Pe https://business.google.com, la profilul pensiunii, puneți la **Site web** adresa
-`https://cuibul-viselor.vercel.app`. Așa apare site-ul și în Google Maps.
+`https://cuibulviselor.ro`. Așa apare site-ul și în Google Maps.
 
 ## Ce urmăriți după 1–2 săptămâni
 

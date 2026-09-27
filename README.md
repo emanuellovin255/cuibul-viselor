@@ -2,7 +2,7 @@
 
 Site-ul Pensiunii Cuibul Viselor din Băile Herculane, pe malul Cernei.
 
-**Live:** https://emanuellovin255.github.io/cuibul-viselor/
+**Live:** https://cuibulviselor.ro
 
 ## Tehnologii
 

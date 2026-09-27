@@ -15,17 +15,39 @@
     "tara": "România"
   },
   "cautareHarta": "Pensiunea Cuibul Viselor, Strada Pecinisca 2, Băile Herculane",
-  "limbi": ["Română", "Engleză", "Germană"],
+  "limbi": [
+    "Română",
+    "Engleză",
+    "Germană"
+  ],
   "checkIn": "16:00 – 20:00",
   "checkOut": "08:00 – 10:30",
   "subtitluLogo": "La Johnny · Băile Herculane",
   "meniu": [
-    { "link": "/camere", "eticheta": "Camere" },
-    { "link": "/restaurant", "eticheta": "Restaurant" },
-    { "link": "/facilitati", "eticheta": "Facilități" },
-    { "link": "/imprejurimi", "eticheta": "Împrejurimi" },
-    { "link": "/galerie", "eticheta": "Galerie" },
-    { "link": "/rezervare", "eticheta": "Contact" }
+    {
+      "link": "/camere",
+      "eticheta": "Camere"
+    },
+    {
+      "link": "/restaurant",
+      "eticheta": "Restaurant"
+    },
+    {
+      "link": "/facilitati",
+      "eticheta": "Facilități"
+    },
+    {
+      "link": "/imprejurimi",
+      "eticheta": "Împrejurimi"
+    },
+    {
+      "link": "/galerie",
+      "eticheta": "Galerie"
+    },
+    {
+      "link": "/rezervare",
+      "eticheta": "Contact"
+    }
   ],
   "subsol": {
     "text": "Pensiune de trei stele pe malul Cernei, în Băile Herculane. Camere și apartamente, restaurant propriu, spa și o grădină în care timpul trece altfel.",
@@ -50,7 +72,7 @@
     "poza": "gradina/09"
   },
   "seo": {
-    "adresaSite": "https://cuibul-viselor.vercel.app",
+    "adresaSite": "https://cuibulviselor.ro",
     "pozaDistribuire": "exterior/02",
     "codVerificareGoogle": ""
   }

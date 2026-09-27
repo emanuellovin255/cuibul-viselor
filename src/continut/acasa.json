@@ -11,7 +11,7 @@
     },
     "subtitlu": "Pe malul Cernei, la poalele munților, un loc în care vă liniștiți din prima seară. Cazare, restaurant și grădină, la La Johnny.",
     "video": "/video/hero.mp4",
-    "posterVideo": "/video/hero-poster.jpg",
+    "posterVideo": "",
     "textPret": "Pe noapte, pe cameră"
   },
   "despre": {
@@ -24,12 +24,34 @@
     "pozaMica": "exterior/09"
   },
   "cifre": [
-    { "valoare": "9,0", "sufix": "", "text": "Scor Superb din recenziile oaspeților" },
-    { "valoare": "6", "sufix": "", "text": "Tipuri de camere și apartamente" },
-    { "valoare": "24", "sufix": "/7", "text": "Recepție deschisă nonstop" },
-    { "valoare": "5", "sufix": " km", "text": "Până la Parcul Național Domogled – Valea Cernei" }
+    {
+      "valoare": "9,0",
+      "sufix": "",
+      "text": "Scor Superb din recenziile oaspeților"
+    },
+    {
+      "valoare": "6",
+      "sufix": "",
+      "text": "Tipuri de camere și apartamente"
+    },
+    {
+      "valoare": "24",
+      "sufix": "/7",
+      "text": "Recepție deschisă nonstop"
+    },
+    {
+      "valoare": "5",
+      "sufix": " km",
+      "text": "Până la Parcul Național Domogled – Valea Cernei"
+    }
   ],
-  "cuvinteBanda": ["Munți", "Râul Cerna", "Liniște", "Magic Garden", "Izvoare termale"],
+  "cuvinteBanda": [
+    "Munți",
+    "Râul Cerna",
+    "Liniște",
+    "Magic Garden",
+    "Izvoare termale"
+  ],
   "camere": {
     "eticheta": "Cazare",
     "titlu": "Camere & *apartamente*",
@@ -54,7 +76,11 @@
     "titlu": "La masă, *la Johnny*",
     "text": "Restaurantul pensiunii vă așteaptă la micul dejun, la prânz și la cină, cu bucătărie românească de casă. Mai aveți un bar și o sală de conferințe, toate sub același acoperiș.",
     "poza": "restaurant/01",
-    "preparate": ["preparate/02", "preparate/10", "preparate/11"]
+    "preparate": [
+      "preparate/02",
+      "preparate/10",
+      "preparate/11"
+    ]
   },
   "imprejurimi": {
     "eticheta": "Împrejurimi",

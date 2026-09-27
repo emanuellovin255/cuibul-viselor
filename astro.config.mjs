@@ -9,7 +9,7 @@ const onVercel = !!process.env.VERCEL;
 
 // Adresa publică a site-ului se schimbă din panou (Setări generale → SEO → Adresa site-ului).
 const general = JSON.parse(readFileSync(new URL('./src/continut/general.json', import.meta.url), 'utf8'));
-const siteUrl = (general.seo?.adresaSite || 'https://cuibul-viselor.vercel.app').replace(/\/+$/, '');
+const siteUrl = (general.seo?.adresaSite || 'https://cuibulviselor.ro').replace(/\/+$/, '');
 
 export default defineConfig({
   site: onVercel ? siteUrl : 'https://emanuellovin255.github.io',

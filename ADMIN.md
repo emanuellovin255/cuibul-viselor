@@ -1,6 +1,6 @@
 # Panoul de administrare
 
-Adresa: **https://cuibul-viselor.vercel.app/admin**
+Adresa: **https://cuibulviselor.ro/admin**
 
 Gazda intră cu o parolă și schimbă tot ce e pe site: textele tuturor paginilor, prețurile,
 camerele (adaugă / șterge / reordonează), preparatele, facilitățile, recenziile, întrebările
