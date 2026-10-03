@@ -13,17 +13,24 @@
   },
   "camere": [
     {
-      "slug": "camera-royal-jacuzzi",
-      "nume": "Camera Royal cu jacuzzi",
-      "numeScurt": "Royal cu jacuzzi",
+      "slug": "VIP Camera cu jacuzzi",
+      "nume": "VIP Camera  cu jacuzzi",
+      "numeScurt": "APT Camera cu jacuzzi",
       "pret": 550,
       "persoane": 2,
       "suprafata": 30,
-      "paturi": ["1 pat dublu mare"],
+      "paturi": [
+        "1 pat dublu mare"
+      ],
       "evidentiere": "Jacuzzi în cameră",
       "intro": "Cea mai răsfățată cameră a casei, cu jacuzzi chiar în cameră.",
-      "descriere": "Camera Royal are 30 m², un pat dublu mare și cadă cu hidromasaj chiar în cameră. Are intrare privată și terasă cu vedere spre grădină. Din cameră vedeți munții, râul și curtea interioară, iar izolarea fonică vă asigură liniștea.",
-      "vedere": ["Grădină", "Munte", "Râu", "Curte interioară"],
+      "descriere": "Camera VIP  are 30 m², un pat dublu mare și cadă cu hidromasaj chiar în cameră. Are intrare privată și terasă cu vedere spre grădină. Din cameră vedeți munții, râul și curtea interioară, iar izolarea fonică vă asigură liniștea.",
+      "vedere": [
+        "Grădină",
+        "Munte",
+        "Râu",
+        "Curte interioară"
+      ],
       "dotari": [
         "Cadă cu hidromasaj",
         "Balcon și terasă",
@@ -37,7 +44,7 @@
         "Uscător de păr"
       ],
       "nota": "",
-      "folderPoze": "camere/royal"
+      "folderPoze": "Camere/VIP"
     },
     {
       "slug": "camera-dubla-deluxe",
@@ -46,11 +53,18 @@
       "pret": 300,
       "persoane": 2,
       "suprafata": 20,
-      "paturi": ["1 pat dublu extra-large"],
+      "paturi": [
+        "1 pat dublu extra-large"
+      ],
       "evidentiere": "Ideală pentru cupluri",
       "intro": "O cameră caldă, luminoasă, pentru două persoane.",
       "descriere": "Camera dublă Deluxe are 20 m², un pat dublu extra-large și baie proprie. Are acces la balcon și terasă, iar din cameră vedeți grădina, munții și râul. Are și birou, zonă de relaxare și canale TV prin satelit.",
-      "vedere": ["Grădină", "Munte", "Râu", "Curte interioară"],
+      "vedere": [
+        "Grădină",
+        "Munte",
+        "Râu",
+        "Curte interioară"
+      ],
       "dotari": [
         "Balcon și terasă",
         "Aer condiționat",
@@ -71,11 +85,18 @@
       "pret": 450,
       "persoane": 3,
       "suprafata": 25,
-      "paturi": ["1 pat dublu", "1 canapea extensibilă"],
+      "paturi": [
+        "1 pat dublu",
+        "1 canapea extensibilă"
+      ],
       "evidentiere": "Loc pentru trei",
       "intro": "Spațiu pentru doi adulți și un copil, cu terasă spre grădină.",
       "descriere": "Camera de familie are 25 m², un pat dublu și o canapea extensibilă. Are baie proprie, balcon și terasă spre grădină și munți. Este gândită pentru familiile cu un copil.",
-      "vedere": ["Grădină", "Munte", "Curte interioară"],
+      "vedere": [
+        "Grădină",
+        "Munte",
+        "Curte interioară"
+      ],
       "dotari": [
         "Balcon și terasă",
         "Canapea extensibilă",
@@ -96,11 +117,17 @@
       "pret": 550,
       "persoane": 4,
       "suprafata": 40,
-      "paturi": ["Dormitorul 1: pat dublu mare", "Dormitorul 2: pat dublu mare"],
+      "paturi": [
+        "Dormitorul 1: pat dublu mare",
+        "Dormitorul 2: pat dublu mare"
+      ],
       "evidentiere": "Două dormitoare",
       "intro": "Două dormitoare separate, pentru familii sau prieteni.",
       "descriere": "Apartamentul are 40 m² și două dormitoare separate, fiecare cu pat dublu mare. Are zonă de relaxare, balcon și terasă cu vedere spre grădină și munți. Este potrivit pentru o familie sau pentru doi prieteni care vin cu partenerii.",
-      "vedere": ["Grădină", "Munte"],
+      "vedere": [
+        "Grădină",
+        "Munte"
+      ],
       "dotari": [
         "Două dormitoare separate",
         "Balcon și terasă",
@@ -121,11 +148,18 @@
       "pret": 600,
       "persoane": 4,
       "suprafata": 40,
-      "paturi": ["2 paturi duble"],
+      "paturi": [
+        "2 paturi duble"
+      ],
       "evidentiere": "Vedere spre Cerna",
       "intro": "Balcon deschis spre salcii și spre râul Cerna.",
       "descriere": "Apartamentul are 40 m², două camere, balcon și terasă. Din el vedeți râul, munții și grădina, printre salcii. Pentru cei înalți, paturile au peste 2 metri lungime.",
-      "vedere": ["Râu", "Munte", "Grădină", "Curte interioară"],
+      "vedere": [
+        "Râu",
+        "Munte",
+        "Grădină",
+        "Curte interioară"
+      ],
       "dotari": [
         "Vedere la râu",
         "Balcon și terasă",
@@ -146,11 +180,18 @@
       "pret": 700,
       "persoane": 6,
       "suprafata": 45,
-      "paturi": ["Dormitorul 1: pat dublu", "Dormitorul 2: pat dublu mare", "Dormitorul 3: pat dublu"],
+      "paturi": [
+        "Dormitorul 1: pat dublu",
+        "Dormitorul 2: pat dublu mare",
+        "Dormitorul 3: pat dublu"
+      ],
       "evidentiere": "Până la 6 persoane",
       "intro": "Trei dormitoare, pentru grupuri și familii mari.",
       "descriere": "Cel mai mare apartament al pensiunii are 45 m² și trei dormitoare. Are intrare privată, terasă cu vedere spre grădină, zonă de relaxare și baie cu duș și uscător de păr. Aici stați împreună, dar fiecare are dormitorul lui.",
-      "vedere": ["Grădină", "Munte"],
+      "vedere": [
+        "Grădină",
+        "Munte"
+      ],
       "dotari": [
         "Trei dormitoare",
         "Intrare privată",
