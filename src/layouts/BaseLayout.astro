@@ -5,6 +5,7 @@ import { getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileCTA from '../components/MobileCTA.astro';
+import OfferPopup from '../components/OfferPopup.astro';
 import { site } from '../data/site';
 import { general, em } from '../lib/continut';
 import { minPrice } from '../data/rooms';
@@ -127,6 +128,7 @@ const jsonLd = {
     </main>
     <Footer />
     <MobileCTA />
+    <OfferPopup />
 
     <script>
       import '../scripts/motion.ts';

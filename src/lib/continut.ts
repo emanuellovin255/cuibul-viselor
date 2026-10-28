@@ -12,8 +12,10 @@ import imprejurimi from '../continut/imprejurimi.json';
 import recenzii from '../continut/recenzii.json';
 import rezervare from '../continut/rezervare.json';
 import galerie from '../continut/galerie.json';
+import oferte from '../continut/oferte.json';
 
-export { general, acasa, camere, restaurant, facilitati, imprejurimi, recenzii, rezervare, galerie };
+export { general, acasa, camere, restaurant, facilitati, imprejurimi, recenzii, rezervare, galerie, oferte };
+export { ofertaActiva } from './oferta';
 
 const escape = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

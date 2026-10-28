@@ -1,38 +1,27 @@
 ---
 import { url } from '../lib/url';
-import { general, em } from '../lib/continut';
+import { general } from '../lib/continut';
 
-const word = em(general.numeScurt.replace(/^(\S+)\s+(.+)$/, '$1 *$2*'));
-
+/**
+ * Logoul pensiunii (public/logo.svg), desenat vectorial după logoul original, mereu în culorile lui.
+ * badge: îl așază pe o insignă crem, ca să se vadă peste video, poze și fundaluri închise.
+ */
 interface Props {
   class?: string;
-  compact?: boolean;
-  id?: string;
+  badge?: boolean;
+  link?: boolean;
 }
 
-const { class: className = '', compact = false, id = 'logo' } = Astro.props;
+const { class: className = '', badge = false, link = true } = Astro.props;
+const Tag = link ? 'a' : 'span';
 ---
 
-<a href={url('/')} class:list={['group inline-flex items-center gap-3', className]} aria-label={`${general.numeScurt} – pagina principală`}>
-  <svg viewBox="0 0 40 40" class="h-10 w-10 shrink-0 transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:rotate-[-8deg]" fill="none" aria-hidden="true">
-    <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-opacity="0.45" />
-    <mask id={`${id}-moon`}>
-      <rect width="40" height="40" fill="#fff" />
-      <circle cx="23.4" cy="11.4" r="4.6" fill="#000" />
-    </mask>
-    <circle cx="20.5" cy="13.5" r="5.4" fill="var(--color-brass-400)" mask={`url(#${id}-moon)`} />
-    <circle cx="28.6" cy="9.4" r="0.95" fill="var(--color-brass-400)" />
-    <path d="M8.5 22.5h23" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
-    <path d="M9 22.5c2.2 6.6 19.8 6.6 22 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" />
-    <path d="M12 26.6c4.6 3.3 11.4 3.3 16 0" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-opacity="0.7" />
-    <path d="M14.5 22.6c1.5 1.4 3.4 1.8 5.5 1.8s4-.4 5.5-1.8" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-opacity="0.55" />
+<Tag
+  href={link ? url('/') : undefined}
+  class:list={['brand-logo inline-flex shrink-0', badge && 'brand-logo-badge', className]}
+  aria-label={link ? `${general.nume} – ${general.alias}, pagina principală` : undefined}
+>
+  <svg viewBox="9 9 1536 930" class="h-full w-auto" role="img" aria-label={`${general.numeScurt} – ${general.alias}`}>
+    <use href={url('/logo.svg#logo')}></use>
   </svg>
-  <span class="flex flex-col leading-none">
-    <span class="logo-word font-serif text-[1.4rem] tracking-[-0.02em]" set:html={word} />
-    {
-      !compact && (
-        <span class="mt-1.5 text-[0.56rem] font-semibold uppercase tracking-[0.32em] opacity-70">{general.subtitluLogo}</span>
-      )
-    }
-  </span>
-</a>
+</Tag>

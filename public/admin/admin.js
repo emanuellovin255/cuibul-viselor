@@ -18,6 +18,7 @@
     map: '<path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3Z"/><path d="M9 3v15M15 6v15"/>',
     star: '<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1Z"/>',
     calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+    tag: '<path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
     image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/>',
     film: '<rect x="2" y="2" width="20" height="20" rx="2.2"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"/>',
     grid: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
@@ -44,6 +45,7 @@
   var PAGINI = [
     { id: 'general', titlu: 'Setări generale', desc: 'Nume, telefon, WhatsApp, email, adresă, meniu, subsol, SEO și Google', ico: 'settings' },
     { id: 'acasa', titlu: 'Pagina principală', desc: 'Video, oferta de sub titlu, texte, cifre și poze', ico: 'home' },
+    { id: 'oferte', titlu: 'Ofertă specială', desc: 'Oferta de extrasezon pentru camere și restaurant, cu popup pe site', ico: 'tag' },
     { id: 'camere', titlu: 'Camere & tarife', desc: 'Adăugați, ștergeți camere, schimbați prețuri și dotări', ico: 'bed' },
     { id: 'restaurant', titlu: 'Restaurant', desc: 'Mese, preparate cu poze, specialități', ico: 'utensils' },
     { id: 'facilitati', titlu: 'Facilități', desc: 'Lista de facilități, spa, grădină, râu', ico: 'sparkles' },
@@ -64,7 +66,7 @@
     whatsapp: ['Număr WhatsApp', 'Toate butoanele „Rezervă pe WhatsApp” deschid o conversație cu acest număr.'],
     email: ['Email', 'Cererile de rezervare pe email ajung aici.'], adresa: ['Adresă'], strada: ['Stradă și număr'], oras: ['Oraș'], judet: ['Județ'],
     codPostal: ['Cod poștal'], tara: ['Țară'], cautareHarta: ['Căutare pe hartă', 'Textul după care Google Maps găsește pensiunea.'],
-    limbi: ['Limbi vorbite'], checkIn: ['Check-in'], checkOut: ['Check-out'], subtitluLogo: ['Textul mic de sub logo'],
+    limbi: ['Limbi vorbite'], checkIn: ['Check-in'], checkOut: ['Check-out'],
     meniu: ['Meniul de sus'], link: ['Adresa paginii', 'Ex. /camere'], eticheta: ['Etichetă'], subsol: ['Subsolul paginii'],
     text: ['Text'], tichete: ['Text despre tichete'], benzaTichete: ['Banda galbenă cu tichete de vacanță'], afiseaza: ['Afișează pe site'],
     titlu: ['Titlu', HINT_ITALIC], subtitlu: ['Subtitlu'], chemareFinala: ['Secțiunea „Rezervări” de la finalul paginilor'], buton: ['Textul butonului'],
@@ -103,17 +105,35 @@
     titluBucatarie: ['Titlul secțiunii „Bucătărie”', HINT_ITALIC], textBucatarie: ['Textul secțiunii „Bucătărie”'], notaBucatarie: ['Nota de sub preparate'],
     titluExtra: ['Titlul secțiunii „Și mai mult”', HINT_ITALIC], titluGalerie: ['Titlul galeriei', HINT_ITALIC], titluFinal: ['Titlul de la final', HINT_ITALIC],
     textFinal: ['Textul de la final'], titluLista: ['Titlul listei', HINT_ITALIC],
+    perioada: ['Perioada ofertei', 'Așa cum apare pe site, ex. 15 octombrie – 15 decembrie'],
+    valabilPanaLa: ['Oferta se oprește singură după', 'Din ziua următoare, popup-ul nu mai apare, iar pagina /oferte spune că nu e o ofertă activă. Lăsați gol ca să nu expire.'],
+    reducere: ['Reducerea', 'Apare mare pe poză, ex. -10% sau -50 lei/noapte. Lăsați gol dacă nu vreți să apară.'],
+    beneficii: ['Ce include'], conditii: ['Condițiile ofertei'],
+    popup: ['Fereastra care apare pe site (popup)', 'Apare când cineva intră pe site, o dată la fiecare vizită (nu și pe paginile /oferte și /rezervare).'],
+    dupaSecunde: ['După câte secunde apare', '0 = imediat. Pe prima pagină se adaugă singur timpul animației de intrare.'],
+    mesajWhatsApp: ['Mesajul pregătit pe WhatsApp', 'Textul cu care se deschide conversația când oaspetele apasă „Rezervă pe WhatsApp” din pagina ofertei.'],
   };
   var LONG = /^(text|descriere|textMare|raspuns|citat|text1|text2|intro|subtitlu|notaTarife|serviciuDetaliat|textMese|textBucatarie|notaBucatarie|textFinal|tratamente|descriereSeo|mesajSucces)$/;
   var SUMMARY_KEYS = ['nume', 'titlu', 'intrebare', 'loc', 'eticheta', 'text', 'an', 'valoare', 'poza'];
 
+  /* Etichete care diferă doar într-un anumit fișier, ex. „camere” din oferte.json */
+  var L_FISIER = {
+    oferte: {
+      camere: ['Oferta pentru camere', 'Debifați „Afișează pe site” dacă oferta nu include cazarea.'],
+      restaurant: ['Oferta pentru restaurant', 'Debifați „Afișează pe site” dacă oferta nu include restaurantul.'],
+    },
+  };
+  function eticheta(key) {
+    var f = S.fisier && L_FISIER[S.fisier.id];
+    return (f && f[key]) || L[key];
+  }
   function label(key) {
-    if (L[key]) return L[key][0];
+    if (eticheta(key)) return eticheta(key)[0];
     var s = String(key).replace(/([A-Z])/g, ' $1').replace(/(\d+)/g, ' $1').toLowerCase().trim();
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
   function hint(key) {
-    if (L[key] && L[key][1]) return L[key][1];
+    if (eticheta(key) && eticheta(key)[1]) return eticheta(key)[1];
     if (/^titlu/.test(key) && key !== 'titluSeo') return HINT_ITALIC;
     return '';
   }
@@ -451,6 +471,8 @@
       input = h('input', { type: 'number', step: 'any', value: String(v), oninput: function () { set(input.value === '' ? 0 : Number(input.value)); } });
     } else if (isPhoto(displayKey, parentKey, v)) {
       return h('div', { class: 'f', style: 'grid-column:1/-1' }, h('span', { class: 'f-label', text: lab }), photoField(v, set), hn ? h('p', { class: 'f-hint', text: hn }) : null);
+    } else if (displayKey === 'valabilPanaLa') {
+      input = h('input', { type: 'date', value: v || '', oninput: function () { set(input.value); } });
     } else if (displayKey === 'icon') {
       input = h('select', { onchange: function () { set(input.value); } }, ICONS.map(function (n) { return h('option', { value: n, text: n, selected: n === v }); }));
     } else if (displayKey === 'folderPoze' || parentKey === 'foldere') {

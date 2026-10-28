@@ -22,7 +22,6 @@
   ],
   "checkIn": "16:00 – 20:00",
   "checkOut": "08:00 – 10:30",
-  "subtitluLogo": "La Johnny · Băile Herculane",
   "meniu": [
     {
       "link": "/camere",
@@ -43,6 +42,10 @@
     {
       "link": "/galerie",
       "eticheta": "Galerie"
+    },
+    {
+      "link": "/oferte",
+      "eticheta": "Oferte"
     },
     {
       "link": "/rezervare",

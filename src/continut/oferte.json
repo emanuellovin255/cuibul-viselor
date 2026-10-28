@@ -1,0 +1,52 @@
+{
+  "afiseaza": true,
+  "perioada": "15 octombrie – 15 decembrie",
+  "valabilPanaLa": "2026-12-15",
+  "pagina": {
+    "titluSeo": "Ofertă extrasezon",
+    "descriereSeo": "Ofertă de extrasezon la Pensiunea Cuibul Viselor din Băile Herculane: reducere la cazare și la restaurantul La Johnny, în lunile mai liniștite ale anului.",
+    "eticheta": "Ofertă extrasezon",
+    "titlu": "Liniștea *din extrasezon*",
+    "subtitlu": "Toamna și iarna, Valea Cernei e mai liniștită și mai frumoasă. Vă așteptăm cu prețuri mai mici la cazare și la masă.",
+    "poza": "exterior/04"
+  },
+  "camere": {
+    "afiseaza": true,
+    "reducere": "-10%",
+    "eticheta": "Cazare",
+    "titlu": "Reducere la *toate camerele*",
+    "text": "Reducerea se aplică la tarifele de pe site, pentru toate camerele și apartamentele, pe toată durata ofertei.",
+    "beneficii": [
+      "Valabil pentru toate camerele și apartamentele",
+      "Se aplică la orice număr de nopți",
+      "Plata se poate face și cu tichete sau card de vacanță"
+    ],
+    "poza": "camere/royal/01"
+  },
+  "restaurant": {
+    "afiseaza": true,
+    "reducere": "-10%",
+    "eticheta": "Restaurant La Johnny",
+    "titlu": "Reducere *la masă*",
+    "text": "Pentru oaspeții cazați în perioada ofertei, reducere la consumația din restaurantul pensiunii, la micul dejun, prânz și cină.",
+    "beneficii": [
+      "Bucătărie românească de casă, gătită la comandă",
+      "Valabil la mic dejun, prânz și cină",
+      "Spuneți-ne din timp dacă aveți restricții alimentare"
+    ],
+    "poza": "restaurant/01"
+  },
+  "conditii": [
+    "Oferta este valabilă pentru sejururile din perioada afișată, în limita locurilor disponibile.",
+    "Reducerile nu se cumulează cu alte oferte.",
+    "Menționați oferta când ne scrieți pe WhatsApp sau pe email."
+  ],
+  "popup": {
+    "afiseaza": true,
+    "titlu": "Ofertă de *extrasezon*",
+    "text": "Reducere la cazare și la restaurantul La Johnny, în perioada 15 octombrie – 15 decembrie.",
+    "buton": "Vezi oferta",
+    "dupaSecunde": 1
+  },
+  "mesajWhatsApp": "Bună ziua! Aș dori detalii despre oferta de extrasezon."
+}

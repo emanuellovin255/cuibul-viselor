@@ -1,0 +1,160 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowRight, CalendarDays, Check, Mail, BedDouble, UtensilsCrossed } from '@lucide/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import VoucherBand from '../components/VoucherBand.astro';
+import CTASection from '../components/CTASection.astro';
+import WhatsAppIcon from '../components/WhatsAppIcon.astro';
+import Logo from '../components/Logo.astro';
+import { site } from '../data/site';
+import { oferte as o, em, plain, ofertaActiva } from '../lib/continut';
+import { photo } from '../lib/photos';
+import { url } from '../lib/url';
+
+const p = o.pagina;
+const activa = ofertaActiva();
+
+const oferte = [
+  { ...o.camere, icon: BedDouble, link: '/camere', linkText: 'Vezi camerele' },
+  { ...o.restaurant, icon: UtensilsCrossed, link: '/restaurant', linkText: 'Vezi restaurantul' },
+].filter((x) => x.afiseaza !== false);
+const conditii = (o.conditii ?? []).filter(Boolean);
+
+const whatsapp = `${site.whatsappHref}?text=${encodeURIComponent(o.mesajWhatsApp || plain(p.titlu))}`;
+const email = `mailto:${site.email}?subject=${encodeURIComponent(plain(p.eticheta || p.titlu))}`;
+---
+
+<BaseLayout title={p.titluSeo} description={p.descriereSeo} image={photo(p.poza)}>
+  <PageHero
+    eyebrow={p.eticheta}
+    crumb="Oferte"
+    title={em(p.titlu, 'text-brass-300')}
+    subtitle={p.subtitlu}
+    image={photo(p.poza)}
+    alt="Pensiunea Cuibul Viselor, în Băile Herculane"
+  />
+
+  <div class:list={[!activa && 'hidden']} data-offer-active>
+    <!-- PERIOADA -->
+    <section class="bg-brass-400 text-forest-900">
+      <div class="container-x flex flex-col items-start gap-6 py-10 md:flex-row md:items-center md:justify-between">
+        <p class="flex items-center gap-4" data-reveal>
+          <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-forest-900/25">
+            <CalendarDays size={24} stroke-width={1.4} />
+          </span>
+          <span>
+            <span class="block text-[0.7rem] font-bold uppercase tracking-[0.22em] text-forest-900/70">Perioada ofertei</span>
+            <span class="font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-tight">{o.perioada}</span>
+          </span>
+        </p>
+        <div class="flex flex-wrap gap-3" data-reveal>
+          <a href={whatsapp} target="_blank" rel="noopener noreferrer" class="btn btn-dark">
+            <WhatsAppIcon size={16} /> Rezervă pe WhatsApp
+          </a>
+          <a href={email} class="btn btn-ghost-dark">
+            <Mail size={15} /> Pe email
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAZARE ȘI RESTAURANT -->
+    <section class="bg-cream-100 py-24 md:py-32">
+      <div class="container-x grid gap-8 lg:grid-cols-2">
+        {
+          oferte.map((x, i) => (
+            <article class="group flex flex-col overflow-hidden rounded-[1.75rem] border border-forest-900/10 bg-cream-50" data-reveal data-delay={i * 0.1}>
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <Image
+                  src={photo(x.poza)}
+                  alt=""
+                  widths={[640, 960, 1280]}
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  class="img-cover transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-forest-950/55 via-transparent to-transparent" />
+                {x.reducere && (
+                  <p class="absolute bottom-5 left-5 rounded-full bg-brass-400 px-5 py-2 font-serif text-[clamp(2rem,4vw,3rem)] leading-none text-forest-900 shadow-xl shadow-forest-950/30">
+                    {x.reducere}
+                  </p>
+                )}
+              </div>
+              <div class="flex flex-1 flex-col p-7 md:p-10">
+                <p class="eyebrow">
+                  <x.icon size={15} stroke-width={1.8} /> {x.eticheta}
+                </p>
+                <h2 class="display-sm mt-4" set:html={em(x.titlu)} />
+                <p class="mt-4 text-muted">{x.text}</p>
+                {(x.beneficii ?? []).filter(Boolean).length > 0 && (
+                  <ul class="mt-7 space-y-3 text-[0.95rem]">
+                    {x.beneficii.filter(Boolean).map((b) => (
+                      <li class="flex items-start gap-3">
+                        <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-forest-800 text-cream-50">
+                          <Check size={13} stroke-width={2.4} />
+                        </span>
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <a href={url(x.link)} class="arrow-link mt-auto self-start pt-9">
+                  {x.linkText} <ArrowRight size={16} />
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      {
+        conditii.length > 0 && (
+          <div class="container-x mt-8">
+            <div class="grid gap-8 rounded-[1.75rem] bg-forest-900 p-8 text-cream-50 md:p-12 lg:grid-cols-12 lg:items-center" data-reveal>
+              <div class="lg:col-span-4">
+                <Logo badge link={false} class="h-20 px-3 py-2" />
+                <p class="mt-6 font-serif text-3xl leading-tight">Condițiile ofertei</p>
+              </div>
+              <ul class="space-y-3 text-cream-100/75 lg:col-span-8">
+                {conditii.map((c) => (
+                  <li class="flex items-start gap-3">
+                    <Check size={16} stroke-width={2} class="mt-1.5 shrink-0 text-brass-300" />
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )
+      }
+    </section>
+  </div>
+
+  <section class:list={['bg-cream-100 py-24 md:py-36', activa && 'hidden']} data-offer-none>
+    <div class="container-x">
+      <SectionHeading
+        eyebrow="Oferte"
+        title={em('Momentan nu avem *o ofertă activă*')}
+        text="Scrieți-ne pe WhatsApp sau pe email perioada dorită și revenim cu cel mai bun tarif disponibil."
+        size="md"
+      />
+      <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" class="btn btn-dark mt-10">
+        <WhatsAppIcon size={16} /> Scrieți-ne pe WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <VoucherBand />
+  <CTASection />
+</BaseLayout>
+
+<script>
+  // Site-ul nu se reconstruiește zilnic: după data de final, oferta dispare singură și din pagină.
+  import { ofertaActiva } from '../lib/oferta';
+
+  if (!ofertaActiva()) {
+    document.querySelector('[data-offer-active]')?.classList.add('hidden');
+    document.querySelector('[data-offer-none]')?.classList.remove('hidden');
+  }
+</script>

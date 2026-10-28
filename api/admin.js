@@ -23,7 +23,7 @@ const SECRET = process.env.ADMIN_SECRET || '';
 const COOKIE = 'cv_admin';
 const DURATA = 60 * 60 * 12; // 12 ore
 
-const FISIERE = ['general', 'acasa', 'camere', 'restaurant', 'facilitati', 'imprejurimi', 'recenzii', 'rezervare', 'galerie'];
+const FISIERE = ['general', 'acasa', 'oferte', 'camere', 'restaurant', 'facilitati', 'imprejurimi', 'recenzii', 'rezervare', 'galerie'];
 const DIR_POZE = 'src/assets/photos/';
 const DIR_VIDEO = 'public/video/';
 const POZA_OK = /^[a-z0-9-]+(\/[a-z0-9-]+)?\/[a-z0-9-]+\.jpe?g$/;

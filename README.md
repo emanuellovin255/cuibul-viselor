@@ -57,6 +57,8 @@ De mână, conținutul stă în:
 - **Poze:** `src/assets/photos/<folder>/01.jpg, 02.jpg…` – ordinea e dată de nume; prima poză a unei camere e coperta
 - **Videoul din hero:** `public/video/cuibul-viselor.mp4` (calea se schimbă în `src/continut/acasa.json` → `hero.video`)
 - **Videoul de prezentare (sub citatul de la „Bine ați venit”):** `public/video/prezentare.mp4`, originalul cu sonor, neretușat (se schimbă în `acasa.json` → `film`)
+- **Oferta specială (pagina `/oferte` și popup-ul):** `src/continut/oferte.json`. După data din `valabilPanaLa`, popup-ul și oferta dispar singure, fără republicare. Popup-ul apare la intrarea pe site, o dată la fiecare vizită.
+- **Logoul:** `public/logo.svg` (vectorizat după logoul original, culorile se schimbă din CSS: alb peste video, color pe fundal deschis) și `public/favicon.svg`
 
 Titlurile folosesc `*steluțe*` pentru partea scrisă cursiv, ex. `Cuibul *Viselor*`.
 

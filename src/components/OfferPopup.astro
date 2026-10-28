@@ -1,0 +1,140 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowRight, X } from '@lucide/astro';
+import Logo from './Logo.astro';
+import { oferte as o, em, ofertaActiva } from '../lib/continut';
+import { photo } from '../lib/photos';
+import { url, isActive } from '../lib/url';
+
+const pop = o.popup;
+const path = Astro.url.pathname;
+// Nu deranjăm pe paginile unde oaspetele e deja la ofertă sau la rezervare.
+const skip = ['/oferte', '/rezervare'].some((p) => isActive(path, url(p)));
+const show = ofertaActiva() && pop?.afiseaza !== false && !skip;
+
+const reduceri = [o.camere, o.restaurant].filter((x) => x.afiseaza !== false && x.reducere);
+// La o ofertă nouă (alt titlu sau altă perioadă), popup-ul apare din nou și celor care l-au închis.
+const key = `cv-oferta:${[pop?.titlu, o.perioada].join('|')}`;
+---
+
+{
+  show && (
+    <dialog class="offer-popup" aria-labelledby="offer-title" data-offer-popup data-key={key} data-delay={Number(pop.dupaSecunde) || 0}>
+      <div class="grid overflow-hidden rounded-[1.75rem] bg-cream-50 text-ink shadow-2xl shadow-forest-950/40 sm:grid-cols-[0.9fr_1.1fr]">
+        <div class="relative h-40 sm:h-auto">
+          <Image src={photo(o.pagina.poza)} alt="" widths={[480, 800]} sizes="(min-width: 640px) 320px, 100vw" class="img-cover" />
+          <div class="absolute inset-0 bg-forest-950/25" />
+          {reduceri.length > 0 && (
+            <div class="absolute bottom-4 left-4 flex flex-col items-start gap-2">
+              {reduceri.map((x) => (
+                <p class="rounded-full bg-brass-400 px-4 py-1.5 text-sm font-bold text-forest-900 shadow-lg shadow-forest-950/30">
+                  <span class="font-serif text-xl">{x.reducere}</span> {x.eticheta}
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
+        <div class="relative p-7 sm:p-9">
+          <button type="button" class="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full text-forest-900/60 transition-colors hover:bg-forest-900/5 hover:text-forest-900" aria-label="Închide" data-offer-close>
+            <X size={20} stroke-width={1.6} />
+          </button>
+          <Logo link={false} class="h-14" />
+          <h2 id="offer-title" class="display-sm mt-6" set:html={em(pop.titlu)} />
+          <p class="mt-4 text-[0.95rem] leading-relaxed text-muted">{pop.text}</p>
+          <div class="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <a href={url('/oferte')} class="btn btn-dark">
+              {pop.buton || 'Vezi oferta'} <ArrowRight size={15} />
+            </a>
+            <button type="button" class="text-sm font-semibold text-muted underline-offset-4 hover:text-forest-900 hover:underline" data-offer-close>
+              Nu acum
+            </button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+  )
+}
+
+<style is:global>
+  .offer-popup {
+    width: min(46rem, calc(100% - 2rem));
+    max-width: none;
+    margin: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: visible;
+  }
+  .offer-popup::backdrop {
+    background: rgb(15 23 19 / 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .offer-popup[open] {
+    animation: offer-in 0.7s var(--ease-out-expo) both;
+  }
+  .offer-popup[open]::backdrop {
+    animation: offer-fade 0.5s ease both;
+  }
+  @keyframes offer-in {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  }
+  @keyframes offer-fade {
+    from { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .offer-popup[open],
+    .offer-popup[open]::backdrop {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import { ofertaActiva } from '../lib/oferta';
+
+  const dialog = document.querySelector<HTMLDialogElement>('[data-offer-popup]');
+  const root = document.documentElement;
+
+  // Apare o dată la fiecare vizită: la intrarea pe site, nu la fiecare pagină deschisă după aceea.
+  function seenThisVisit(key: string) {
+    try {
+      return sessionStorage.getItem(key) === '1';
+    } catch {
+      return false;
+    }
+  }
+
+  function close() {
+    if (!dialog?.open) return;
+    dialog.close();
+  }
+
+  if (dialog && ofertaActiva() && !seenThisVisit(dialog.dataset.key!)) {
+    const key = dialog.dataset.key!;
+    const lenis = () => (window as any).__lenis;
+
+    dialog.addEventListener('close', () => lenis()?.start());
+    dialog.querySelectorAll('[data-offer-close]').forEach((b) => b.addEventListener('click', close));
+    // Click pe fundalul întunecat închide popup-ul
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) close();
+    });
+
+    // Pe prima pagină, întâi se ridică cortina cu numele pensiunii, apoi apare oferta.
+    const intro = !!document.querySelector('.intro-curtain') && !root.classList.contains('no-intro');
+    const delay = Number(dialog.dataset.delay ?? 1);
+    setTimeout(
+      () => {
+        // Nu peste meniul de pe mobil deschis
+        if (root.classList.contains('menu-open')) return;
+        dialog.showModal();
+        lenis()?.stop();
+        try {
+          sessionStorage.setItem(key, '1');
+        } catch {}
+      },
+      (Math.max(0, delay) + (intro ? 1.6 : 0)) * 1000,
+    );
+  }
+</script>

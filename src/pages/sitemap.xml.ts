@@ -6,6 +6,7 @@ const routes = [
   { path: '/camere', priority: '0.9' },
   ...rooms.map((r) => ({ path: `/camere/${r.slug}`, priority: '0.8' })),
   { path: '/rezervare', priority: '0.9' },
+  { path: '/oferte', priority: '0.8' },
   { path: '/restaurant', priority: '0.7' },
   { path: '/facilitati', priority: '0.7' },
   { path: '/imprejurimi', priority: '0.6' },

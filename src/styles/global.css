@@ -150,8 +150,11 @@
     font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
   }
 
-  .logo-word {
-    font-variation-settings: 'opsz' 72, 'SOFT' 50;
+  /* Logoul își păstrează mereu culorile; peste poze și fundaluri închise stă pe o insignă crem */
+  .brand-logo-badge {
+    border-radius: 1rem;
+    background: var(--color-cream-50);
+    box-shadow: 0 10px 30px -12px rgb(15 23 19 / 0.45);
   }
   .soft-serif {
     font-variation-settings: 'opsz' 144, 'SOFT' 100;

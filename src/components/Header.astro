@@ -11,9 +11,9 @@ const path = Astro.url.pathname;
 <header data-header class="site-header fixed inset-x-0 top-0 z-50 text-white">
   <div class="header-bg absolute inset-0 -z-10"></div>
   <div class="container-x flex h-[var(--header-h)] items-center justify-between gap-6">
-    <Logo id="logo-header" />
+    <Logo badge class="h-[3.5rem] px-2.5 py-1.5 md:h-[4rem] md:px-3" />
 
-    <nav class="hidden items-center gap-9 text-[0.74rem] font-semibold uppercase tracking-[0.18em] lg:flex" aria-label="Meniu principal">
+    <nav class="hidden items-center gap-6 text-[0.74rem] font-semibold uppercase tracking-[0.16em] lg:flex xl:gap-9 xl:tracking-[0.18em]" aria-label="Meniu principal">
       {
         nav.map((item) => (
           <a

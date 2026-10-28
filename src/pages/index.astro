@@ -14,7 +14,7 @@ import { rooms, minPrice } from '../data/rooms';
 import { meals, mealNote, site } from '../data/site';
 import { nearby } from '../data/nearby';
 import { rating, formatScore, showReviews } from '../data/reviews';
-import { acasa as a, restaurant, em } from '../lib/continut';
+import { acasa as a, restaurant, em, ofertaActiva } from '../lib/continut';
 import { photo } from '../lib/photos';
 import { url } from '../lib/url';
 
@@ -64,10 +64,11 @@ const stats = a.cifre.map((s) => {
 
       {
         hero.oferta?.afiseaza && hero.oferta.text && (
-          <p class="offer-badge mt-6 inline-flex max-w-full items-center gap-3 self-start rounded-full bg-brass-400 px-5 py-3 text-[0.78rem] font-extrabold uppercase leading-snug tracking-[0.14em] text-forest-900 shadow-2xl shadow-forest-950/40 md:text-[0.9rem]" data-reveal>
+          <a href={url(ofertaActiva() ? '/oferte' : '/rezervare')} class="offer-badge group mt-6 inline-flex max-w-full items-center gap-3 self-start rounded-full bg-brass-400 px-5 py-3 text-[0.78rem] font-extrabold uppercase leading-snug tracking-[0.14em] text-forest-900 shadow-2xl shadow-forest-950/40 transition-colors hover:bg-brass-300 md:text-[0.9rem]" data-reveal>
             <BadgePercent size={20} stroke-width={2} class="shrink-0" />
             <span>{hero.oferta.text}</span>
-          </p>
+            <ArrowRight size={18} stroke-width={2} class="shrink-0 transition-transform duration-500 group-hover:translate-x-1" />
+          </a>
         )
       }
 
